@@ -1,8 +1,7 @@
 package charter.charter_safe.domain;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;
@@ -45,4 +44,17 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<HostReview> hostReviews;
+
+    @Builder
+    public void updateMemberInfo(String password, String name, String email, String phone_number) {
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.phone_number = phone_number;
+    }
+
+    @Builder
+    public void updateMemberInfo(String name) {
+        this.name = name;
+    }
 }
