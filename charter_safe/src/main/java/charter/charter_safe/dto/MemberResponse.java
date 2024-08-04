@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class MemberResponse {
 
-    private String id;
+    private String member_id;
     private String password;
     private String name;
     private String address;
@@ -15,7 +15,7 @@ public class MemberResponse {
     private LocalDateTime create_day;
 
     public MemberResponse(Member member) {
-        this.id = member.getId();
+        this.member_id = member.getMember_id();
         this.password = member.getPassword();
         this.name = member.getName();
         this.address = member.getAddress();

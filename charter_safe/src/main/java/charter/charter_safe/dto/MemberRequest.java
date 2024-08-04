@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class MemberRequest {
 
-    private String id;
+    private String member_id;
     private String password;
     private String name;
     private String address;

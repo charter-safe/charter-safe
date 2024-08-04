@@ -1,6 +1,7 @@
 package charter.charter_safe.service;
 
 import charter.charter_safe.domain.Member;
+import charter.charter_safe.dto.MemberResponse;
 import charter.charter_safe.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cglib.core.Local;
@@ -17,7 +18,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public String join(Member member) {
+    public Long join(Member member) {
         validateDuplicateMember(member);
         memberRepository.save(member);
         return member.getId();
@@ -32,10 +33,10 @@ public class MemberService {
 
     public List<Member> findMembers() {return memberRepository.findAll();}
 
-    public Member findOne(String memberId) {return memberRepository.findOne(memberId);}
+    public Member findOne(Long id) {return memberRepository.findOne(id);}
 
     @Transactional
-    public void update(String id, String name) {
+    public void update(Long id, String name) {
         Member member = memberRepository.findOne(id);
         member.updateMemberInfo(name);
     }

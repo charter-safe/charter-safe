@@ -13,7 +13,9 @@ public class Member {
 
     @Id @GeneratedValue
     @Column(name = "m_id")
-    private String Id;
+    private Long Id;
+
+    private String member_id;
 
     private String password;
 
@@ -51,6 +53,19 @@ public class Member {
         this.name = name;
         this.email = email;
         this.phone_number = phone_number;
+    }
+
+    @Builder
+    public void createMemberInfo(String member_id, String password, String name, String email, String phone_number,
+                                 LocalDateTime birthday, LocalDateTime create_day)
+    {
+        this.member_id = member_id;
+        this.password = password;
+        this.name = name;
+        this.email = email;
+        this.phone_number = phone_number;
+        this.birthday = birthday;
+        this.create_day = create_day;
     }
 
     @Builder
