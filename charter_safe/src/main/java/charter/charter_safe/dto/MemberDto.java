@@ -1,19 +1,19 @@
 package charter.charter_safe.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
-@Data
-@AllArgsConstructor
-public class MemberRequest {
+@Getter @Setter
+public class MemberDto {
 
-    private String member_id;
+    private String email;
     private String password;
-    private String name;
     private String address;
+    private String name;
     private String phone_number;
-    private String birthday;
     private LocalDateTime create_day;
+    private Date birthday;
 }

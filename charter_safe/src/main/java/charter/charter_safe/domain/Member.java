@@ -1,33 +1,37 @@
 package charter.charter_safe.domain;
 
+import charter.charter_safe.dto.MemberDto;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import org.springframework.cglib.core.Local;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Entity
-@Getter
+@Getter @Setter
+@NoArgsConstructor
 public class Member {
 
     @Id @GeneratedValue
     @Column(name = "m_id")
     private Long Id;
 
-    private String member_id;
+    @Column(unique = true) // 동일한 값x
+    private String email;
 
     private String password;
 
     private String name;
 
-    private String email;
-
     private String phone_number;
 
     private String Address;
 
-    private LocalDateTime birthday;
+    private Date birthday;
 
     @Column(name = "regdate")
     private LocalDateTime create_day;
@@ -47,29 +51,17 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<HostReview> hostReviews;
 
-    @Builder
-    public void updateMemberInfo(String password, String name, String email, String phone_number) {
-        this.password = password;
-        this.name = name;
-        this.email = email;
-        this.phone_number = phone_number;
-    }
+   public static Member createMember(MemberDto memberDto, PasswordEncoder passwordEncoder) {
+       Member member = new Member();
+       member.setEmail(memberDto.getEmail());
+       String password = passwordEncoder.encode(member.getPassword());
+       member.setPassword(password);
+       member.setName(memberDto.getName());
+       member.setPhone_number(memberDto.getPhone_number());
+       member.setAddress(memberDto.getAddress());
+       member.setBirthday(memberDto.getBirthday());
+       member.setCreate_day(memberDto.getCreate_day());
 
-    @Builder
-    public void createMemberInfo(String member_id, String password, String name, String email, String phone_number,
-                                 LocalDateTime birthday, LocalDateTime create_day)
-    {
-        this.member_id = member_id;
-        this.password = password;
-        this.name = name;
-        this.email = email;
-        this.phone_number = phone_number;
-        this.birthday = birthday;
-        this.create_day = create_day;
-    }
-
-    @Builder
-    public void updateMemberInfo(String name) {
-        this.name = name;
-    }
+       return member;
+   }
 }
