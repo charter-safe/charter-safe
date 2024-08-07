@@ -13,7 +13,7 @@ public class Building {
     @Column(name = "b_no")
     private Long building_number;
 
-    private String address;
+    private String b_address;
 
     private Long price; // 전세가격
 

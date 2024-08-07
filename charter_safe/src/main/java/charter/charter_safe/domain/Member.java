@@ -1,40 +1,54 @@
 package charter.charter_safe.domain;
 
-import charter.charter_safe.dto.MemberDto;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
-import org.springframework.cglib.core.Local;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Getter @Setter
-@NoArgsConstructor
+@Data // Getter, Setter
+@NoArgsConstructor // 기본 생성자
+@AllArgsConstructor
+@Builder
+@EntityListeners(AuditingEntityListener.class)
 public class Member {
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "m_id")
-    private Long Id;
+    private Long id;
 
-    @Column(unique = true) // 동일한 값x
+    @Column(nullable = false, unique = true, length = 100) // 동일한 값x
     private String email;
 
+    @Column(nullable = false, length = 20)
     private String password;
 
+    @Column(nullable = false, length = 20)
     private String name;
 
+    @Column(nullable = false, length = 20)
     private String phone_number;
 
-    private String Address;
+    @Column(nullable = false, length = 30)
+    private String address;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = false)
     private Date birthday;
 
     @Column(name = "regdate")
+    @CreatedDate
     private LocalDateTime create_day;
+
+    @Column(nullable = false)
+    private Role role;
+
 
     @OneToMany(mappedBy = "member")
     private List<Community> communities;
@@ -51,17 +65,4 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<HostReview> hostReviews;
 
-   public static Member createMember(MemberDto memberDto, PasswordEncoder passwordEncoder) {
-       Member member = new Member();
-       member.setEmail(memberDto.getEmail());
-       String password = passwordEncoder.encode(member.getPassword());
-       member.setPassword(password);
-       member.setName(memberDto.getName());
-       member.setPhone_number(memberDto.getPhone_number());
-       member.setAddress(memberDto.getAddress());
-       member.setBirthday(memberDto.getBirthday());
-       member.setCreate_day(memberDto.getCreate_day());
-
-       return member;
-   }
 }
