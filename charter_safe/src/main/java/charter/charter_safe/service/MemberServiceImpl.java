@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
@@ -15,7 +17,12 @@ public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
 
     @Override
-    public Long join(MemberDto memberDto) {
+    public String join(MemberDto memberDto) {
+
+        Optional<Member> findMember = memberRepository.findByEmail(memberDto.getEmail());
+        if(findMember.isPresent()) {
+            return "중복된 이메일입니다.";
+        }
         Member member = Member.builder()
                 .email(memberDto.getEmail())
                 .password(memberDto.getPassword())
@@ -26,6 +33,7 @@ public class MemberServiceImpl implements MemberService{
                 .role(Role.ADMIN)
                 .build();
 
-        return memberRepository.save(member).getId();
+        memberRepository.save(member);
+        return "가입이 완료되었습니다!";
     }
 }

@@ -1,5 +1,7 @@
 package charter.charter_safe.domain;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -39,8 +41,9 @@ public class Member {
     private String address;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = false)
-    private Date birthday;
+    private LocalDate birthday;
 
     @Column(name = "regdate")
     @CreatedDate

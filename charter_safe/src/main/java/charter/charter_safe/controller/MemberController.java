@@ -2,6 +2,7 @@ package charter.charter_safe.controller;
 
 import charter.charter_safe.dto.MemberDto;
 import charter.charter_safe.service.MemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/signup")
-    public Long signup(@RequestBody MemberDto memberDto) {
+    public String signup(@RequestBody @Valid MemberDto memberDto) {
         return memberService.join(memberDto);
     }
 }
