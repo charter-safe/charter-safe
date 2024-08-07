@@ -27,8 +27,8 @@ public class MemberServiceImpl implements MemberService{
                 .email(memberDto.getEmail())
                 .password(memberDto.getPassword())
                 .name(memberDto.getName())
-                .phone_number(memberDto.getPhone_number())
                 .address(memberDto.getAddress())
+                .phone_number(memberDto.getPhone_number())
                 .birthday(memberDto.getBirthday())
                 .role(Role.ADMIN)
                 .build();

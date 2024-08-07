@@ -40,11 +40,11 @@ public class MemberDto {
         message = "올바른 이름을 입력해주세요")
     private String name;
 
-    @NotBlank(message = "핸드폰 번호를 입력해주세요")
-    private String phone_number;
-
     @NotBlank(message = "주소를 입력해주세요")
     private String address;
+
+    @NotBlank(message = "핸드폰 번호를 입력해주세요")
+    private String phone_number;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd")
