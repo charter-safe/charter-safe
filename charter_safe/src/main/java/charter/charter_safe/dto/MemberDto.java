@@ -56,4 +56,16 @@ public class MemberDto {
 
     private Role role;
 
+    public Member toEntity() {
+        return Member.builder()
+                .email(this.getEmail())
+                .password(this.getPassword())
+                .name(this.getName())
+                .address(this.getAddress())
+                .phone_number(this.getPhone_number())
+                .birthday(this.getBirthday())
+                .role(Role.ADMIN)
+                .build();
+    }
+
 }

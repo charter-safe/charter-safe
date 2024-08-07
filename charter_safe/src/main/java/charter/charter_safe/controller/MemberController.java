@@ -1,6 +1,7 @@
 package charter.charter_safe.controller;
 
 import charter.charter_safe.dto.MemberDto;
+import charter.charter_safe.response.ApiResponse;
 import charter.charter_safe.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class MemberController {
 
     @PostMapping("/signup")
     @Transactional // 일관성 유지
-    public String signup(@RequestBody @Valid MemberDto memberDto) {
-        return memberService.join(memberDto);
+    public ApiResponse<?> join(@RequestBody @Valid MemberDto memberDto) {
+        return ApiResponse.ok(memberService.join(memberDto));
     }
 }
