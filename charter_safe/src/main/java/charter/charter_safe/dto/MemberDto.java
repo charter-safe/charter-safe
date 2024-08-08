@@ -1,12 +1,8 @@
 package charter.charter_safe.dto;
 
 import charter.charter_safe.domain.Member;
-import charter.charter_safe.domain.Role;
+import charter.charter_safe.domain.MemberRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -16,8 +12,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -32,7 +26,7 @@ public class MemberDto {
 
     @NotBlank(message = "비밀번호를 입력해주세요")
     @Pattern(regexp = "^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@$%^&*])[a-zA-Z0-9!@$%^&*]{8,20}",
-        message = "영문, 숫자, 특수문자를 포함한 10~20 자리로 입력해주세요")
+        message = "영문, 숫자, 특수문자를 포함한 8~20 자리로 입력해주세요")
     private String password;
 
     @NotBlank(message = "이름을 입력해주세요")
@@ -54,9 +48,9 @@ public class MemberDto {
     @CreatedDate
     private LocalDate create_day;
 
-    private Role role;
+    private MemberRole memberRole;
 
-    public Member toEntity() {
+    public Member toEntity(String encode) {
         return Member.builder()
                 .email(this.getEmail())
                 .password(this.getPassword())
@@ -64,8 +58,8 @@ public class MemberDto {
                 .address(this.getAddress())
                 .phone_number(this.getPhone_number())
                 .birthday(this.getBirthday())
-                .role(Role.ADMIN)
                 .build();
+
     }
 
 }

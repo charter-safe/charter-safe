@@ -1,6 +1,7 @@
 package charter.charter_safe.authority;
 
 import lombok.Data;
+import lombok.Value;
 
 @Data
 public class TokenInfo {

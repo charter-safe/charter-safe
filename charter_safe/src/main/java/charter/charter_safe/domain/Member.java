@@ -49,8 +49,8 @@ public class Member {
     @CreatedDate
     private LocalDateTime create_day;
 
-    @Column(nullable = false)
-    private Role role;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    private List<MemberRole> memberRoles;
 
 
     @OneToMany(mappedBy = "member")
@@ -68,4 +68,16 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<HostReview> hostReviews;
 
+    @Builder
+    private Member(Long id, String email, String password, String name, String phone_number, String address, LocalDate birthday, LocalDateTime create_day, List<MemberRole> memberRoles) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.phone_number = phone_number;
+        this.address = address;
+        this.birthday = birthday;
+        this.create_day = create_day;
+        this.memberRoles = null;
+    }
 }
