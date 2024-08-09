@@ -5,6 +5,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,12 +22,13 @@ import java.util.stream.Collectors;
 
 @Slf4j
 @Component
+@PropertySource("classpath:application.yml")
 public class JwtTokenProvider {
 
     private final String secretKey;
     private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24;
 
-    public JwtTokenProvider(@Value("$(jwt.secret)") String secretKey) {
+    public JwtTokenProvider(@Value("${jwt.secret}") String secretKey) {
         this.secretKey = secretKey;
     }
 
@@ -47,7 +49,6 @@ public class JwtTokenProvider {
                 .issuedAt(now)
                 .expiration(accessExpiration)
                 .signWith(getKey(), Jwts.SIG.HS256)
-                .signWith(SignatureAlgorithm.HS512, "123123")
                 .compact();
 
         return new TokenInfo("Bearer", jwt);

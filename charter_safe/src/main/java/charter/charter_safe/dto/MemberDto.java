@@ -50,7 +50,7 @@ public class MemberDto {
 
     private MemberRole memberRole;
 
-    public Member toEntity(String encode) {
+    public Member toEntity() {
         return Member.builder()
                 .email(this.getEmail())
                 .password(this.getPassword())

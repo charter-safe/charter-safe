@@ -28,7 +28,7 @@ public class Member {
     @Column(nullable = false, unique = true, length = 100) // 동일한 값x
     private String email;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 100)
     private String password;
 
     @Column(nullable = false, length = 20)

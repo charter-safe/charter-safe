@@ -39,8 +39,8 @@ public class MemberServiceImpl implements MemberService{
                 ifPresent(m -> {throw new InvalidInputException("email", "중복된 이메일 입니다.");
                 });
 
-        Member member = memberDto.toEntity(passwordEncoder.encode(memberDto.getPassword()));
-
+        Member member = memberDto.toEntity();
+        member.setPassword(passwordEncoder.encode(memberDto.getPassword()));
         memberRepository.save(member);
 
         MemberRole memberRole = MemberRole.builder()

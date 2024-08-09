@@ -2,6 +2,7 @@ package charter.charter_safe.authority;
 
 import lombok.Data;
 import lombok.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Data
 public class TokenInfo {
