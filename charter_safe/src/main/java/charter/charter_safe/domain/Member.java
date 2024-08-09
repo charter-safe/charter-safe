@@ -52,7 +52,6 @@ public class Member {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     private List<MemberRole> memberRoles;
 
-
     @OneToMany(mappedBy = "member")
     private List<Community> communities;
 

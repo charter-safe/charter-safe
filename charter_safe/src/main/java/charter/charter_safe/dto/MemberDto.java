@@ -59,7 +59,5 @@ public class MemberDto {
                 .phone_number(this.getPhone_number())
                 .birthday(this.getBirthday())
                 .build();
-
     }
-
 }

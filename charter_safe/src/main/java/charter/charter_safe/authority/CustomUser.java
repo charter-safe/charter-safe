@@ -21,4 +21,6 @@ public class CustomUser extends User {
     public Long getUserId() {
         return userId;
     }
+
+    public String getEmail() {return email;}
 }
