@@ -28,7 +28,7 @@ public class Member {
     @Column(nullable = false, unique = true, length = 100) // 동일한 값x
     private String email;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = false, length = 100)
     private String password;
 
     @Column(nullable = false, length = 20)
@@ -49,9 +49,8 @@ public class Member {
     @CreatedDate
     private LocalDateTime create_day;
 
-    @Column(nullable = false)
-    private Role role;
-
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    private List<MemberRole> memberRoles;
 
     @OneToMany(mappedBy = "member")
     private List<Community> communities;
@@ -68,4 +67,16 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<HostReview> hostReviews;
 
+    @Builder
+    private Member(Long id, String email, String password, String name, String phone_number, String address, LocalDate birthday, LocalDateTime create_day, List<MemberRole> memberRoles) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.phone_number = phone_number;
+        this.address = address;
+        this.birthday = birthday;
+        this.create_day = create_day;
+        this.memberRoles = null;
+    }
 }
