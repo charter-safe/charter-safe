@@ -46,10 +46,11 @@ class MyApp extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 50),
                 child: TextField(
-                    decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: '아이디',
-                )),
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: '아이디',
+                  ),
+                ),
               ),
 
               Padding(
@@ -82,12 +83,63 @@ class MyApp extends StatelessWidget {
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text("로그인"),
+                  child: Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text("로그인"),
+                    ),
                   ),
                 ),
-              )
+              ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                      ),
+                      child: Text("구글 계정으로 로그인",
+                          style: TextStyle(color: Colors.white)),
+                    ),
+                  ),
+                ),
+              ),
+              Center(
+                // child: Padding(
+                //   padding: const EdgeInsets.only(top: 20),
+                child: Container(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green[900],
+                    ),
+                    child: Text("네이버 계정으로 로그인",
+                        style: TextStyle(color: Colors.white)),
+                  ),
+                ),
+              ),
+              // ),
+              Center(
+                // child: Padding(
+                //   padding: const EdgeInsets.only(top: 20),
+                child: Container(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.yellow[800],
+                    ),
+                    child: Text("카카오 계정으로 로그인",
+                        style: TextStyle(color: Colors.white)),
+                  ),
+                ),
+              ),
+              //   ),
             ],
           ),
         ),
