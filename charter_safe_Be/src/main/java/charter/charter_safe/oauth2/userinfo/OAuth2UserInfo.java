@@ -11,7 +11,7 @@ public abstract class OAuth2UserInfo {
         this.attributes = attributes;
     }
 
-    public abstract String gitNickname();
+    public abstract String getNickname();
     public abstract String getId();
 
     public abstract LocalDate getBirthday();
