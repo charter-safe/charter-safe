@@ -10,24 +10,9 @@ public class GoogleOAuth2UserInfo extends OAuth2UserInfo {
         super(attributes);
     }
 
-    @Override
-    public String getId() {
-        return (String) attributes.get("sub");
-    }
-
-    @Override
-    public String getNickname() {
-        return (String) attributes.get("name");
-    }
-
-    @Override
-    public LocalDate getBirthday() {
-        return (LocalDate) attributes.get("birthday");
-    }
-
-    @Override
-    public String getPhone_Number() {
-        return (String) attributes.get("phone_number");
-    }
-
+    @Override public String getId() { return (String) attributes.get("sub");}
+    @Override public String getNickname() { return (String) attributes.get("name");}
+    @Override public String getAddress() { return (String) attributes.get("address");}
+    @Override public LocalDate getBirthday() { return (LocalDate) attributes.get("birthday");}
+    @Override public String getPhone_Number() { return (String) attributes.get("phone_number");}
 }

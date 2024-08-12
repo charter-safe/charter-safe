@@ -28,21 +28,21 @@ public class Member {
     @Column(nullable = false, unique = true, length = 100) // 동일한 값x
     private String email;
 
-    @Column(nullable = false, length = 100)
+    @Column(nullable = true, length = 100)
     private String password;
 
     @Column(nullable = false, length = 20)
     private String name;
 
-    @Column(nullable = false, length = 20)
+    @Column(nullable = true, length = 20)
     private String phone_number;
 
-    @Column(nullable = false, length = 30)
+    @Column(nullable = true, length = 30)
     private String address;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd")
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate birthday;
 
     @Column(name = "regdate")

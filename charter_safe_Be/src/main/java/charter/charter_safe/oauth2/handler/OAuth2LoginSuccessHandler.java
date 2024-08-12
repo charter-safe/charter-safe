@@ -2,6 +2,7 @@ package charter.charter_safe.oauth2.handler;
 
 import charter.charter_safe.authority.JwtTokenProvider;
 import charter.charter_safe.authority.TokenInfo;
+import charter.charter_safe.domain.Member;
 import charter.charter_safe.domain.Role;
 import charter.charter_safe.oauth2.CustomOAuth2User;
 import charter.charter_safe.repository.MemberRepository;
@@ -35,7 +36,10 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
                 TokenInfo tokenInfo = jwtTokenProvider.createToken(authentication);
 
                 String jwt = tokenInfo.getAccessToken();
-                response.sendRedirect("");
+                response.sendRedirect("oauth2/signup");
+
+                Member findMember = memberRepository.findByEmail(oAuth2User.getEmail())
+                        .orElseThrow(() -> new IllegalArgumentException("이메일에 해당하는 유저가 없습니다."));
             }
         } catch (Exception e){
             throw e;

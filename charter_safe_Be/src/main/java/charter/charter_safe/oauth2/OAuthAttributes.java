@@ -51,6 +51,7 @@ public class OAuthAttributes {
                 .socialType(socialType)
                 .socialId(oAuth2UserInfo.getId())
                 .name(oAuth2UserInfo.getNickname())
+                .address(oAuth2UserInfo.getAddress())
                 .email(UUID.randomUUID() + "@socialUser.com")
                 .birthday(oAuth2UserInfo.getBirthday())
                 .phone_number(oAuth2UserInfo.getPhone_Number())
