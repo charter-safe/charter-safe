@@ -45,7 +45,7 @@ public class JwtTokenProvider {
         String jwt = Jwts.builder()
                 .subject(authentication.getName())
                 .claim("auth", authorities)
-                .claim("userId", ((CustomUser) authentication.getPrincipal()).getUserId())
+                //.claim("userId", ((CustomUser) authentication.getPrincipal()).getUserId())
                 .issuedAt(now)
                 .expiration(accessExpiration)
                 .signWith(getKey(), Jwts.SIG.HS256)

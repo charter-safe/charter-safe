@@ -1,5 +1,6 @@
 package charter.charter_safe.authority;
 
+import charter.charter_safe.repository.MemberRepository;
 import charter.charter_safe.response.ApiResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.JwtException;
@@ -21,6 +22,7 @@ public class JwtAuthenticationFilter extends GenericFilter {
 
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final MemberRepository memberRepository;
 
 
     @Override
