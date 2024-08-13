@@ -15,12 +15,11 @@ public class NaverOAuth2UserInfo extends OAuth2UserInfo{
         if(response == null) return null;
         return (String) response.get("id");
     }
-
     @Override
     public String getNickname() {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
         if(response == null) return null;
-        return (String) response.get("nickname");
+        return (String) response.get("name");
     }
     @Override
     public String getAddress() {
@@ -28,14 +27,18 @@ public class NaverOAuth2UserInfo extends OAuth2UserInfo{
         if(response == null) return null;
         return (String) response.get("address");
     }
-
     @Override
-    public LocalDate getBirthday() {
+    public String  getYear() {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
         if(response == null) return null;
-        return (LocalDate) response.get("birthday");
+        return (String) response.get("year");
     }
-
+    @Override
+    public String  getBirthday() {
+        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+        if(response == null) return null;
+        return (String) response.get("birthday");
+    }
     @Override
     public String getPhone_Number() {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");

@@ -8,7 +8,12 @@ import charter.charter_safe.oauth2.userinfo.NaverOAuth2UserInfo;
 import charter.charter_safe.oauth2.userinfo.OAuth2UserInfo;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
+import java.time.MonthDay;
+import java.time.Year;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.UUID;
 
@@ -47,12 +52,18 @@ public class OAuthAttributes {
     }
 
     public Member toEntity(SocialType socialType, OAuth2UserInfo oAuth2UserInfo) {
+
+//        MonthDay monthDay = MonthDay.parse(oAuth2UserInfo.getBirthday(), DateTimeFormatter.ofPattern("MM-dd"));
+//        Year year = Year.parse(oAuth2UserInfo.getYear());
+//        LocalDate day = monthDay.atYear(year.getValue());
+
         return Member.builder()
                 .socialType(socialType)
                 .socialId(oAuth2UserInfo.getId())
                 .name(oAuth2UserInfo.getNickname())
                 .address(oAuth2UserInfo.getAddress())
                 .email(UUID.randomUUID() + "@socialUser.com")
+                .year(oAuth2UserInfo.getYear())
                 .birthday(oAuth2UserInfo.getBirthday())
                 .phone_number(oAuth2UserInfo.getPhone_Number())
                 .role(Role.GUEST)

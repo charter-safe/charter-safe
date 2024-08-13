@@ -40,10 +40,13 @@ public class Member {
     @Column(nullable = true, length = 30)
     private String address;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(nullable = true)
-    private LocalDate birthday;
+    private String year;
+
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(nullable = true)
+    private String birthday;
 
     @Column(name = "regdate")
     @CreatedDate
@@ -75,13 +78,14 @@ public class Member {
     private List<HostReview> hostReviews;
 
     @Builder
-    private Member(Long id, String email, String password, String name, String phone_number, String address, LocalDate birthday, LocalDateTime create_day, List<MemberRole> memberRoles) {
+    private Member(Long id, String email, String password, String name, String phone_number, String address, String year, String birthday, LocalDateTime create_day, List<MemberRole> memberRoles) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.name = name;
         this.phone_number = phone_number;
         this.address = address;
+        this.year = year;
         this.birthday = birthday;
         this.create_day = create_day;
         this.memberRoles = null;

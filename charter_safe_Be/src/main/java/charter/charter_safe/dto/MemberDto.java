@@ -3,6 +3,7 @@ package charter.charter_safe.dto;
 import charter.charter_safe.domain.Member;
 import charter.charter_safe.domain.MemberRole;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -43,10 +44,13 @@ public class MemberDto {
     @NotBlank(message = "핸드폰 번호를 입력해주세요")
     private String phone_number;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Past(message = "날짜를 입력해주세요")
-    private LocalDate birthday;
+    @NotBlank(message = "연도를 입력해주세요")
+    private String year;
+
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+//    @JsonFormat(pattern = "yyyy-MM-dd")
+    @NotBlank(message = "날짜를 입력해주세요")
+    private String birthday;
 
     @CreatedDate
     private LocalDate create_day;
@@ -60,6 +64,7 @@ public class MemberDto {
                 .name(this.getName())
                 .address(this.getAddress())
                 .phone_number(this.getPhone_number())
+                .year(this.getYear())
                 .birthday(this.getBirthday())
                 .build();
     }
