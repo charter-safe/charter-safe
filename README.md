@@ -1,6 +1,6 @@
-# safe_apps
+# safe_app
 
-A new Flutter project.
+safe_apps
 
 ## Getting Started
 
