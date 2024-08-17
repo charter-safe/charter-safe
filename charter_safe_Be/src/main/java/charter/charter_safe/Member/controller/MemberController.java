@@ -12,8 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/member")
 @RequiredArgsConstructor
+@CrossOrigin
 public class MemberController {
 
     private final MemberService memberService;
