@@ -24,7 +24,6 @@ public class Community extends TimeStamp{
     private String title;
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
-    private String author;
     private Long views;
     private Long likes;
 
@@ -39,11 +38,11 @@ public class Community extends TimeStamp{
     private List<Picture> pictures;
 
     @Builder
-    private Community(Long post_id, String title, String content, String author, Long views, Long likes) {
+    private Community(Long post_id, String title, String content, Member member, Long views, Long likes) {
         this.post_id = post_id;
         this.title = title;
         this.content = content;
-        this.author = author;
+        this.member = member;
         this.views = views;
         this.likes = likes;
     }

@@ -8,5 +8,4 @@ import java.util.Optional;
 
 public interface CommunityRepository extends JpaRepository<Community, Long> {
 
-    Optional<Community> findById(String author);
 }
