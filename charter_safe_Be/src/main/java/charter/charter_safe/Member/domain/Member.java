@@ -1,5 +1,8 @@
 package charter.charter_safe.Member.domain;
 
+import charter.charter_safe.Community.com_domain.Comment;
+import charter.charter_safe.Community.com_domain.Community;
+import charter.charter_safe.Community.com_domain.Reply;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

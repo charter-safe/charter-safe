@@ -1,5 +1,6 @@
-package charter.charter_safe.Member.domain;
+package charter.charter_safe.Community.com_domain;
 
+import charter.charter_safe.Member.domain.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,19 +11,13 @@ import java.util.List;
 
 @Entity
 @Getter
-public class Comment {
+public class Comment extends TimeStamp{
 
     @Id @GeneratedValue
     @Column(name = "c_no")
     private Long comment_number;
 
     private String comment_content;
-
-    @CreatedDate
-    private LocalDateTime create_comment_date;
-
-    @LastModifiedDate
-    private LocalDateTime update_comment_date;
 
     private Long likes;
 
