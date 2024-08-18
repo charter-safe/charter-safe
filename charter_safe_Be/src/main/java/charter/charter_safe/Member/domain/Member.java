@@ -26,6 +26,8 @@ public class Member {
     @Column(nullable = true, length = 100)
     private String password;
 
+    private String passwordcheck;
+
     @Column(nullable = false, length = 20)
     private String name;
 

@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService{
                 ifPresent(m -> {throw new InvalidInputException("email", "중복된 이메일 입니다.");
                 });
 
-        if(!memberDto.getPassword().equals(memberDto.getConfirmPassword())) {
+        if(!memberDto.getPassword().equals(memberDto.getPasswordcheck())) {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
         }
 
