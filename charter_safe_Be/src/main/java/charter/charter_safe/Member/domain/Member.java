@@ -88,6 +88,6 @@ public class Member {
         this.year = year;
         this.birthday = birthday;
         this.create_day = create_day;
-        this.memberRoles = null;
+        this.memberRoles = memberRoles;
     }
 }

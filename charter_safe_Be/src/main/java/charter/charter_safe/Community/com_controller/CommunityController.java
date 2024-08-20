@@ -2,10 +2,8 @@ package charter.charter_safe.Community.com_controller;
 
 import charter.charter_safe.Community.com_dto.CommunityWriteRequestDto;
 import charter.charter_safe.Community.com_service.CommunityService;
-import charter.charter_safe.Member.authority.CustomUser;
-import charter.charter_safe.Member.domain.Member;
-import charter.charter_safe.Member.repository.MemberRepository;
 import charter.charter_safe.Member.response.ApiResponse;
+import charter.charter_safe.Member.service.CustomUserDetailService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -19,12 +17,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/community")
 public class CommunityController {
     private final CommunityService communityService;
+    private final CustomUserDetailService customUserDetailService;
 
     @PostMapping("/write")
     @Transactional
-    public ApiResponse<?> write(@RequestBody @Valid CommunityWriteRequestDto communityWriteRequestDto) {
+    public ApiResponse<?> write(@RequestBody CommunityWriteRequestDto communityWriteRequestDto) {
 
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
         return ApiResponse.ok(communityService.saveCom(communityWriteRequestDto, email));
     }
 }

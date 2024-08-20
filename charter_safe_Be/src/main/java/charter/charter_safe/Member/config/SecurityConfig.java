@@ -42,8 +42,9 @@ public class SecurityConfig {
                 .sessionManagement(sessionManagement
                         -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/member/signup","/api/member/login").anonymous()
-                        .requestMatchers("/api/member/**").hasRole("MEMBER")
+                        .requestMatchers("/member/signup","/member/login").anonymous()
+                        .requestMatchers("/member/**").hasRole("MEMBER")
+                        //.requestMatchers("/community/write").authenticated()
                         .anyRequest().permitAll())
                 .addFilterBefore(
                         new JwtAuthenticationFilter(jwtTokenProvider, memberRepository),
