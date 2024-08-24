@@ -8,24 +8,19 @@ import charter.charter_safe.Member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class CommunityServiceImpl implements CommunityService{
 
     private final CommunityRepository communityRepository;
-    private final MemberRepository memberRepository;
 
     @Override
-    public Long saveCom(CommunityWriteRequestDto communityWriteRequestDto, String email) {
-        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("회원이 존재하지 않습니다."));
-        Community result = Community.builder()
-                .title(communityWriteRequestDto.getTitle())
-                .content(communityWriteRequestDto.getContent())
-                .member(member)
-                .build();
-        communityRepository.save(result);
-
-        return result.getPost_id();
+    @Transactional
+    public Long save(final CommunityWriteRequestDto dto) {
+        Community community = dto.toEntity();
+        communityRepository.save(community);
+        return community.getPost_id();
     }
 }

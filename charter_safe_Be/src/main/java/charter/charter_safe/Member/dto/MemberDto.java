@@ -2,6 +2,7 @@ package charter.charter_safe.Member.dto;
 
 import charter.charter_safe.Member.domain.MemberRole;
 import charter.charter_safe.Member.domain.Member;
+import charter.charter_safe.Member.domain.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -51,6 +52,8 @@ public class MemberDto {
     @CreatedDate
     private LocalDate create_day;
 
+    private Role role;
+
     private MemberRole memberRole;
 
     public Member toEntity() {
@@ -63,6 +66,7 @@ public class MemberDto {
                 .phone_number(this.getPhone_number())
                 .year(this.getYear())
                 .birthday(this.getBirthday())
+                .role(Role.MEMBER)
                 .build();
     }
 }

@@ -45,7 +45,7 @@ public class JwtTokenProvider {
         String jwt = Jwts.builder()
                 .subject(authentication.getName())
                 .claim("auth", authorities)
-                //.claim("email", ((CustomUser) authentication.getPrincipal()).getEmail())
+                .claim("email", ((CustomUser) authentication.getPrincipal()).getEmail())
                 //.claim("userId", ((CustomUser) authentication.getPrincipal()).getUserId())
                 .issuedAt(now)
                 .expiration(accessExpiration)

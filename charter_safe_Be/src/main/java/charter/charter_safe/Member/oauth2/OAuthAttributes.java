@@ -61,7 +61,7 @@ public class OAuthAttributes {
                 .year(oAuth2UserInfo.getYear())
                 .birthday(oAuth2UserInfo.getBirthday())
                 .phone_number(oAuth2UserInfo.getPhone_Number())
-                .role(Role.GUEST)
+                .role(Role.MEMBER)
                 .build();
     }
 }

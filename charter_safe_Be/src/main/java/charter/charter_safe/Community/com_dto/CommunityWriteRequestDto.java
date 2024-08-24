@@ -5,9 +5,10 @@ import charter.charter_safe.Member.domain.Member;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommunityWriteRequestDto {
@@ -16,12 +17,13 @@ public class CommunityWriteRequestDto {
     String title;
     @NotBlank(message = "내용을 입력해주세요")
     String content;
-
     Member member;
 
     public Community toEntity() {
         return Community.builder()
-                .member(member)
+                .title(this.getTitle())
+                .content(this.getContent())
+                .member(this.getMember())
                 .build();
     }
 }

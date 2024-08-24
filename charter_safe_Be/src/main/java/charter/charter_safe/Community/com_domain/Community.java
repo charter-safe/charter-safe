@@ -38,7 +38,7 @@ public class Community extends TimeStamp{
     private List<Picture> pictures;
 
     @Builder
-    private Community(Long post_id, String title, String content, Member member, Long views, Long likes) {
+    public Community(Long post_id, String title, String content, Member member, Long views, Long likes) {
         this.post_id = post_id;
         this.title = title;
         this.content = content;

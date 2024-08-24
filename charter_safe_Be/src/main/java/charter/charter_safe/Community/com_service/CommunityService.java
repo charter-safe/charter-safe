@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface CommunityService {
-    Long saveCom(CommunityWriteRequestDto communityWriteRequestDto, String email);
+    Long save(CommunityWriteRequestDto dto);
 }
