@@ -40,15 +40,16 @@ public class SecurityConfig {
         http.httpBasic(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(sessionManagement
-                        -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
+                        -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/api/member/signup","/api/member/login").anonymous()
-                        .requestMatchers("/api/member/**").hasRole("MEMBER")
-                        .anyRequest().permitAll())
+                        .requestMatchers("/member/signup","/member/login", "/community/write").permitAll() // 인증, 인가 없이 접근 허용
+                        .requestMatchers("/community/**").hasRole("MEMBER")
+                        .anyRequest().authenticated()) //다른 요청은 인증, 인가 있어야 접근 허용
                 .addFilterBefore(
                         new JwtAuthenticationFilter(jwtTokenProvider, memberRepository),
                         UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login((oauth2) -> oauth2
+                        .loginPage("/member/login")
                         .successHandler(oAuth2LoginSuccessHandler)
                         .failureHandler(oAuth2LoginFailureHandler)
                         .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint

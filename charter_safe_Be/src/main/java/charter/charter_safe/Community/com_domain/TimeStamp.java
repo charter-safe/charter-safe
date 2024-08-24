@@ -1,0 +1,22 @@
+package charter.charter_safe.Community.com_domain;
+
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import java.time.LocalDateTime;
+
+@Getter
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+public class TimeStamp {
+
+    @CreatedDate
+    private LocalDateTime post_create_date;
+
+    @LastModifiedDate
+    private LocalDateTime post_update_date;
+}

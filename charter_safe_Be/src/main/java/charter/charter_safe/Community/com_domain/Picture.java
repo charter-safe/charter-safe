@@ -1,4 +1,4 @@
-package charter.charter_safe.Member.domain;
+package charter.charter_safe.Community.com_domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,17 +9,11 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-public class Picture {
+public class Picture extends TimeStamp{
 
     @Id @GeneratedValue
     @Column(name = "i_no")
     private Long picture_number;
-
-    @CreatedDate
-    private LocalDateTime create_picture_date;
-
-    @LastModifiedDate
-    private LocalDateTime update_picture_date;
 
     private String link;
 

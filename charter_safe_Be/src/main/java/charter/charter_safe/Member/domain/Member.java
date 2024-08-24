@@ -1,5 +1,8 @@
 package charter.charter_safe.Member.domain;
 
+import charter.charter_safe.Community.com_domain.Comment;
+import charter.charter_safe.Community.com_domain.Community;
+import charter.charter_safe.Community.com_domain.Reply;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -25,6 +28,8 @@ public class Member {
 
     @Column(nullable = true, length = 100)
     private String password;
+
+    private String passwordcheck;
 
     @Column(nullable = false, length = 20)
     private String name;
@@ -83,6 +88,6 @@ public class Member {
         this.year = year;
         this.birthday = birthday;
         this.create_day = create_day;
-        this.memberRoles = null;
+        this.memberRoles = memberRoles;
     }
 }

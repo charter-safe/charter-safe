@@ -2,6 +2,7 @@ package charter.charter_safe.Member.dto;
 
 import charter.charter_safe.Member.domain.MemberRole;
 import charter.charter_safe.Member.domain.Member;
+import charter.charter_safe.Member.domain.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -27,7 +28,7 @@ public class MemberDto {
     private String password;
 
     @NotBlank(message = "비밀번호 확인은 필수 입력 항목입니다.")
-    private String confirmPassword;
+    private String passwordcheck;
 
     @NotBlank(message = "이름을 입력해주세요")
     @Pattern(regexp = "^[ㄱ-힣]{1,10}",
@@ -51,17 +52,21 @@ public class MemberDto {
     @CreatedDate
     private LocalDate create_day;
 
+    private Role role;
+
     private MemberRole memberRole;
 
     public Member toEntity() {
         return Member.builder()
                 .email(this.getEmail())
                 .password(this.getPassword())
+                .passwordcheck(this.getPasswordcheck())
                 .name(this.getName())
                 .address(this.getAddress())
                 .phone_number(this.getPhone_number())
                 .year(this.getYear())
                 .birthday(this.getBirthday())
+                .role(Role.MEMBER)
                 .build();
     }
 }
