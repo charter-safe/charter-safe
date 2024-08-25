@@ -1,6 +1,5 @@
 package charter.charter_safe.Community.com_controller;
 
-import charter.charter_safe.Community.com_domain.Community;
 import charter.charter_safe.Community.com_dto.CommunityDto;
 import charter.charter_safe.Community.com_service.CommunityService;
 import charter.charter_safe.Member.response.ApiResponse;
@@ -28,7 +27,7 @@ public class CommunityController {
         return ApiResponse.ok(communityService.save(dto, userDetails.getUsername()));
     }
 
-    @GetMapping("/")
+    @GetMapping("/community")
     @Transactional
     public List<CommunityDto> findAll() {
         return communityService.findAll();

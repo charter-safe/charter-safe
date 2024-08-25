@@ -21,19 +21,11 @@ public class CommunityDto {
     private Integer likes;
 
     public CommunityDto(Community community) {
-
+        this.post_id = community.getPost_id();
+        this.title = community.getTitle();
+        this.content = community.getContent();
+        this.author = community.getAuthor();
+        this.views = community.getViews();
+        this.likes = community.getLikes();
     }
-
-    public Community toEntity() {
-        return Community.builder()
-                .post_id(getPost_id())
-                .title(getTitle())
-                .content(getContent())
-                .author(getAuthor())
-                .member(getMember())
-                .views(getViews())
-                .likes(getLikes())
-                .build();
-    }
-
 }
