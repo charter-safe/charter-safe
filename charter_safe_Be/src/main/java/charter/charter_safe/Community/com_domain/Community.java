@@ -2,10 +2,7 @@ package charter.charter_safe.Community.com_domain;
 
 import charter.charter_safe.Member.domain.Member;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -15,6 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Community extends TimeStamp{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,4 +55,11 @@ public class Community extends TimeStamp{
         this.content = content;
     }
 
+    public void increaseViews() {
+        this.views++;
+    }
+
+    public void increaseLikes() {
+        this.likes++;
+    }
 }
