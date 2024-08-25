@@ -31,7 +31,7 @@ public class OAuth2LoginSuccessHandler implements AuthenticationSuccessHandler {
         try {
             CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
 
-            if(oAuth2User.getRole() == Role.GUEST) {
+            if(oAuth2User.getRole() == Role.MEMBER) {
                 TokenInfo tokenInfo = jwtTokenProvider.createToken(authentication);
 
                 String jwt = tokenInfo.getAccessToken();

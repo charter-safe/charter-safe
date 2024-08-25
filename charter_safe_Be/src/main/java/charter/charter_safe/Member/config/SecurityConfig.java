@@ -42,16 +42,21 @@ public class SecurityConfig {
                 .sessionManagement(sessionManagement
                         -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/member/signup","/member/login", "/community/write").permitAll() // 인증, 인가 없이 접근 허용
+                        .requestMatchers("/member/signup","/member/login", "/oauth/login", "/oauth/signup").permitAll() // 인증, 인가 없이 접근 허용
                         .requestMatchers("/community/**").hasRole("MEMBER")
                         .anyRequest().authenticated()) //다른 요청은 인증, 인가 있어야 접근 허용
+//                .formLogin(form -> form
+//                        .loginPage("/member/login")
+//                        .defaultSuccessUrl("/member") // 로그인 성공 후 이동 페이지
+//                        .usernameParameter("email")
+//                        .passwordParameter("password"))
                 .addFilterBefore(
                         new JwtAuthenticationFilter(jwtTokenProvider, memberRepository),
                         UsernamePasswordAuthenticationFilter.class)
                 .oauth2Login((oauth2) -> oauth2
-                        .loginPage("/member/login")
-                        .successHandler(oAuth2LoginSuccessHandler)
+                        .loginPage("/oauth/login")
                         .failureHandler(oAuth2LoginFailureHandler)
+                        .successHandler(oAuth2LoginSuccessHandler)
                         .userInfoEndpoint(userInfoEndpoint -> userInfoEndpoint
                         .userService(customOAuth2UserService)));
         return http.build();

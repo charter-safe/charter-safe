@@ -24,8 +24,9 @@ public class Community extends TimeStamp{
     private String title;
     @Column(columnDefinition = "TEXT", nullable = false)
     private String content;
-    private Long views;
-    private Long likes;
+    private String author;
+    private Integer views;
+    private Integer likes;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "m_id")
@@ -38,13 +39,22 @@ public class Community extends TimeStamp{
     private List<Picture> pictures;
 
     @Builder
-    public Community(Long post_id, String title, String content, Member member, Long views, Long likes) {
+    public Community(Long post_id, String title, String content, Member member, String author, Integer views, Integer likes) {
         this.post_id = post_id;
         this.title = title;
         this.content = content;
+        if(member == null) {
+            throw new IllegalArgumentException("null");
+        }
+        this.author = author;
         this.member = member;
         this.views = views;
         this.likes = likes;
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
     }
 
 }

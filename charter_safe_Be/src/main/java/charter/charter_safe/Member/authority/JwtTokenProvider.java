@@ -45,8 +45,8 @@ public class JwtTokenProvider {
         String jwt = Jwts.builder()
                 .subject(authentication.getName())
                 .claim("auth", authorities)
-                .claim("email", ((CustomUser) authentication.getPrincipal()).getEmail())
-                //.claim("userId", ((CustomUser) authentication.getPrincipal()).getUserId())
+                //.claim("email", ((CustomUser) authentication.getPrincipal()).getEmail())
+                .claim("userId", ((CustomUser) authentication.getPrincipal()).getUserId())
                 .issuedAt(now)
                 .expiration(accessExpiration)
                 .signWith(getKey(), Jwts.SIG.HS256)
@@ -59,10 +59,10 @@ public class JwtTokenProvider {
         Claims claims = getClaims(jwt);
 
         String auth = Optional.ofNullable(claims.get("auth", String.class))
-                .orElseThrow(() -> new RuntimeException("잘못된 토큰입니다."));
+                .orElseThrow(() -> new RuntimeException("잘못된 토큰입니다. auth 클레임이 누락되었습니다."));
 
         Long userId = Optional.ofNullable(claims.get("userId", Long.class))
-                .orElseThrow(() -> new RuntimeException("잘못된 토큰입니다."));
+                .orElseThrow(() -> new RuntimeException("잘못된 토큰입니다. userId 클레임이 누락되었습니다."));
 
         Collection<GrantedAuthority> authorities = Arrays.stream(auth.split(","))
                 .map(SimpleGrantedAuthority::new)
