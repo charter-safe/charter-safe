@@ -44,16 +44,6 @@ public class CommunityServiceImpl implements CommunityService{
         return post_id;
     }
 
-//    @Override
-//    @Transactional
-//    public Community communityDetail(Long post_id, CommunityDto dto) {
-//        Community community = communityRepository.findById(post_id).orElseThrow(()
-//                -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
-//        Community result = dto.toEntity();
-//
-//        return result;
-//    }
-
     @Override
     @Transactional
     public List<CommunityDto> findAll() {
@@ -64,18 +54,19 @@ public class CommunityServiceImpl implements CommunityService{
 
     @Override
     @Transactional
+    public CommunityDto find(Long post_id) {
+        Community community = communityRepository.findById(post_id).orElseThrow(()
+                -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
+        community.increaseViews();
+        return new CommunityDto(community);
+    }
+
+    @Override
+    @Transactional
     public Long remove(Long post_id) {
         Community community = communityRepository.findById(post_id).orElseThrow(()
-                -> new IllegalArgumentException("삭제할 수 있는 권한이 없습니다."));
+                -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
         communityRepository.delete(community);
         return post_id;
     }
-
-//    @Override
-//    @Transactional
-//    public void remove(Long post_id) {
-//        Community community = communityRepository.findById(post_id).orElseThrow(()
-//                -> new IllegalArgumentException("존재하지 않는 게시글입니다."));
-//        communityRepository.delete(community);
-//    }
 }

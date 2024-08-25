@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .sessionManagement(sessionManagement
                         -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/member/signup","/member/login", "/oauth/login", "/oauth/signup").permitAll() // 인증, 인가 없이 접근 허용
+                        .requestMatchers("/member/signup","/member/login", "/oauth/login", "/oauth/signup", "/community").permitAll() // 인증, 인가 없이 접근 허용
                         .requestMatchers("/community/**").hasRole("MEMBER")
                         .anyRequest().authenticated()) //다른 요청은 인증, 인가 있어야 접근 허용
 //                .formLogin(form -> form

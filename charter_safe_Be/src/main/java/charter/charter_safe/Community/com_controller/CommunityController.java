@@ -28,20 +28,17 @@ public class CommunityController {
         return ApiResponse.ok(communityService.save(dto, userDetails.getUsername()));
     }
 
-    @GetMapping("/find")
+    @GetMapping("/")
     @Transactional
     public List<CommunityDto> findAll() {
         return communityService.findAll();
     }
 
-//    @GetMapping("/find/{post_id}")
-//    public String communityDetail(@PathVariable Long post_id, CommunityDto dto, Model model) {
-//        Community result = communityService.communityDetail(post_id, dto);
-//        model.addAttribute("dto", result);
-//        model.addAttribute("post_id", post_id);
-//
-//        return "community/detail";
-//    }
+    @GetMapping("/{post_id}")
+    @Transactional
+    public ApiResponse<?> find(@PathVariable Long post_id) {
+        return ApiResponse.ok(communityService.find(post_id));
+    }
 
     @PatchMapping("/write/{post_id}")
     @Transactional
@@ -49,16 +46,10 @@ public class CommunityController {
         return ApiResponse.ok(communityService.update(post_id, dto));
     }
 
-//    @GetMapping("/remove/{post_id}/")
-//    public String communityRemove(@PathVariable Long post_id, Authentication authentication) {
-//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//        CommunityDto result = communityService.remove();
-//    }
-
     @DeleteMapping("/remove/{post_id}")
     @Transactional
-    public Long remove(@PathVariable Long post_id) {
-        return communityService.remove(post_id);
+    public ApiResponse<?> remove(@PathVariable Long post_id) {
+        return ApiResponse.ok(communityService.remove(post_id));
     }
 }
 
