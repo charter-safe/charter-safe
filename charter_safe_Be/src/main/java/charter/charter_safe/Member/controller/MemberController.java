@@ -31,14 +31,9 @@ public class MemberController {
         return ApiResponse.ok(memberService.login(loginDto));
     }
 
-    @GetMapping("")
+    @GetMapping("/info")
     public ApiResponse<?> myInfo() {
         Long id = ((CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUserId();
         return ApiResponse.ok(memberService.memberInfo(id));
-    }
-
-    @GetMapping("/checkPwd")
-    public String checkPwdView() {
-        return "";
     }
 }
