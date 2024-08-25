@@ -25,14 +25,14 @@ public class CommunityWriteRequestDto {
 
     }
 
-    public Community toEntity() {
-        return Community.builder()
-                .title(this.getTitle())
-                .content(this.getContent())
-                .author(this.getAuthor())
-                .member(this.getMember())
-                .views(this.getViews())
-                .likes(this.getLikes())
-                .build();
-    }
+//    public Community toEntity() {
+//        return Community.builder()
+//                .title(this.getTitle())
+//                .content(this.getContent())
+//                .author(this.getAuthor())
+//                .member(this.getMember())
+//                .views(this.getViews())
+//                .likes(this.getLikes())
+//                .build();
+//    }
 }

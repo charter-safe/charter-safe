@@ -34,7 +34,7 @@ public class CommunityController {
         return ApiResponse.ok(communityService.save(dto, userDetails.getUsername()));
     }
 
-    @GetMapping("/")
+    @GetMapping("/find")
     @Transactional
     public List<CommunityWriteRequestDto> findAll() {
         return communityService.findAll();
