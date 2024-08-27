@@ -42,16 +42,9 @@ public class CommentServiceImpl implements CommentService{
 
     @Override
     @Transactional
-    public List<CommentDto> commentList(Long comment_id) {
-        Community community = communityRepository.findById(comment_id).orElseThrow(()
-                -> new IllegalArgumentException("게시물을 찾을 수 없습니다."));
-        List<Comment> comments = commentRepository.findByCommunity(community);
-
-        return comments.stream()
-                .map(comment -> CommentDto.builder()
-                        .comment(comment)
-                        .build())
-                .collect(Collectors.toList());
+    public List<CommentDto> findAll(Long post_id) {
+        List<Comment> comments = commentRepository.findAll();
+        return comments.stream().map(CommentDto::new).collect(Collectors.toList());
     }
 
     @Override

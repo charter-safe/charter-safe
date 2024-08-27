@@ -32,12 +32,6 @@ public class CommunityController {
         return communityService.findAll();
     }
 
-    @GetMapping("/{post_id}")
-    @Transactional
-    public ApiResponse<?> find(@PathVariable Long post_id) {
-        return ApiResponse.ok(communityService.findCommunity(post_id));
-    }
-
     @PatchMapping("/write/{post_id}")
     @Transactional
     public ApiResponse<?> update(@PathVariable Long post_id, @RequestBody @Valid CommunityDto dto) {
