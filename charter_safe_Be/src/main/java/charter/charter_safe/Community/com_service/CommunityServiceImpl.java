@@ -22,8 +22,8 @@ public class CommunityServiceImpl implements CommunityService{
     private final MemberRepository memberRepository;
     @Override
     @Transactional
-    public Long save(final CommunityDto dto, String email) {
-        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("이메일이 존재x"));
+    public Long writeCommunity(final CommunityDto dto, String email) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("이메일이 존재하지 않습니다."));
         Community result = Community.builder()
                 .title(dto.getTitle())
                 .content(dto.getContent())
@@ -38,7 +38,7 @@ public class CommunityServiceImpl implements CommunityService{
     }
     @Override
     @Transactional
-    public Long update(Long post_id, CommunityDto dto) {
+    public Long updateCommunity(Long post_id, CommunityDto dto) {
         Community community = communityRepository.findById(post_id).orElseThrow(() -> new RuntimeException("게시글을 찾을 수 없습니다."));
         community.update(dto.getTitle(), dto.getContent());
         return post_id;
@@ -47,14 +47,13 @@ public class CommunityServiceImpl implements CommunityService{
     @Override
     @Transactional
     public List<CommunityDto> findAll() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "post_id", "post_create_date");
-        List<Community> communities = communityRepository.findAll(sort);
+        List<Community> communities = communityRepository.findAll();
         return communities.stream().map(CommunityDto::new).collect(Collectors.toList());
     }
 
     @Override
     @Transactional
-    public CommunityDto find(Long post_id) {
+    public CommunityDto findCommunity(Long post_id) {
         Community community = communityRepository.findById(post_id).orElseThrow(()
                 -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
         community.increaseViews();
@@ -63,7 +62,7 @@ public class CommunityServiceImpl implements CommunityService{
 
     @Override
     @Transactional
-    public Long remove(Long post_id) {
+    public Long removeCommunity(Long post_id) {
         Community community = communityRepository.findById(post_id).orElseThrow(()
                 -> new IllegalArgumentException("게시글이 존재하지 않습니다."));
         communityRepository.delete(community);
