@@ -31,7 +31,7 @@ public class CommentServiceImpl implements CommentService{
         Community community = communityRepository.findById(post_id).orElseThrow(()
                 -> new IllegalArgumentException("게시물을 찾을 수 없습니다."));
         Comment result = Comment.builder()
-                .content(commentDto.getContent())
+                .comment_content(commentDto.getComment_content())
                 .likes(0)
                 .community(community)
                 .member(member)
@@ -59,7 +59,7 @@ public class CommentServiceImpl implements CommentService{
     public Long updateComment(CommentDto commentDto, Long comment_id) {
         Comment comment = commentRepository.findById(comment_id).orElseThrow(()
                 -> new IllegalArgumentException("존재하지 않는 댓글입니다."));
-        comment.update(commentDto.getContent());
+        comment.update(commentDto.getComment_content());
         return comment_id;
     }
 

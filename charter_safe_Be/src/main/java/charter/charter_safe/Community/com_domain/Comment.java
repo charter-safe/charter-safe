@@ -17,10 +17,11 @@ import java.util.List;
 @Builder
 public class Comment extends TimeStamp{
 
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "c_no")
     private Long comment_id;
-    private String content;
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String comment_content;
     private Integer likes;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,7 +34,7 @@ public class Comment extends TimeStamp{
     @OneToMany(mappedBy = "comment")
     private List<Reply> replies;
 
-    public void update(String content) {
-        this.content = content;
+    public void update(String comment_content) {
+        this.comment_content = comment_content;
     }
 }

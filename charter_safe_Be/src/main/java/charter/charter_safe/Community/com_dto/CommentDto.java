@@ -15,13 +15,13 @@ public class CommentDto {
 
     private Long comment_id;
     @NotBlank(message = "댓글을 입력해주세요.")
-    private String content;
+    private String comment_content;
     private Integer likes;
 
     @Builder
     public CommentDto(Comment comment) {
         this.comment_id = comment.getComment_id();
-        this.content = comment.getContent();
+        this.comment_content = comment.getComment_content();
         this.likes = comment.getLikes();
     }
 
