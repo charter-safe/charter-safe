@@ -1,17 +1,24 @@
 package charter.charter_safe.Community.com_service;
 
 import charter.charter_safe.Community.com_domain.Community;
+import charter.charter_safe.Community.com_domain.Image;
 import charter.charter_safe.Community.com_dto.CommunityDto;
+import charter.charter_safe.Community.com_dto.ImageDto;
 import charter.charter_safe.Community.com_repo.CommunityRepository;
+import charter.charter_safe.Community.com_repo.ImageRepository;
 import charter.charter_safe.Member.domain.Member;
 import charter.charter_safe.Member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,9 +27,14 @@ public class CommunityServiceImpl implements CommunityService{
 
     private final CommunityRepository communityRepository;
     private final MemberRepository memberRepository;
+    private final ImageRepository imageRepository;
+
+    @Value("${file.ImagePath}")
+    private String uploadFolder;
+
     @Override
     @Transactional
-    public Long writeCommunity(final CommunityDto dto, String email) {
+    public Long writeCommunity(final CommunityDto dto, ImageDto imageDto, String email) {
         Member member = memberRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("이메일이 존재하지 않습니다."));
         Community result = Community.builder()
                 .title(dto.getTitle())
@@ -33,6 +45,27 @@ public class CommunityServiceImpl implements CommunityService{
                 .member(member)
                 .build();
         communityRepository.save(result);
+
+        if(imageDto.getFiles() != null && !imageDto.getFiles().isEmpty()) {
+            for (MultipartFile file : imageDto.getFiles()) {
+                UUID uuid = UUID.randomUUID();
+                String imageFileName = uuid + "-" + file.getOriginalFilename();
+
+                File destinationFile = new File(uploadFolder + imageFileName);
+
+                try {
+                    file.transferTo(destinationFile);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                Image image = Image.builder()
+                        .url("/images/" + imageFileName)
+                        .community(result)
+                        .build();
+                imageRepository.save(image);
+            }
+        }
 
         return result.getPost_id();
     }
