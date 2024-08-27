@@ -1,5 +1,6 @@
 package charter.charter_safe.Community.com_controller;
 
+import charter.charter_safe.Community.com_domain.Comment;
 import charter.charter_safe.Community.com_dto.CommentDto;
 import charter.charter_safe.Community.com_service.CommentService;
 import charter.charter_safe.Member.response.ApiResponse;
@@ -23,5 +24,11 @@ public class CommentController {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         return ApiResponse.ok(commentService.writeComment(commentDto, post_id, userDetails.getUsername()));
+    }
+
+    @PatchMapping("/{post_id}/comment/{comment_id}/update")
+    @Transactional
+    public ApiResponse updateComment(@PathVariable Long post_id, @PathVariable Long comment_id, @RequestBody @Valid CommentDto commentDto) {
+        return ApiResponse.ok(commentService.updateComment(commentDto, comment_id));
     }
 }
