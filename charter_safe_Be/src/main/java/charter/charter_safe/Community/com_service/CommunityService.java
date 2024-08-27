@@ -8,9 +8,9 @@ import java.util.List;
 
 @Service
 public interface CommunityService {
-    Long save(CommunityDto dto, String email);
-    Long update(Long post_id, CommunityDto dto);
+    Long writeCommunity(CommunityDto dto, String email);
+    Long updateCommunity(Long post_id, CommunityDto dto);
     List<CommunityDto> findAll();
-    Long remove(Long post_id);
-    CommunityDto find(Long post_id);
+    Long removeCommunity(Long post_id);
+    CommunityDto findCommunity(Long post_id);
 }

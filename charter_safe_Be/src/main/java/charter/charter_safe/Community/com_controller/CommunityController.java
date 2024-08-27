@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,10 +23,10 @@ public class CommunityController {
     @Transactional
     public ApiResponse<?> write(@RequestBody @Valid CommunityDto dto, Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return ApiResponse.ok(communityService.save(dto, userDetails.getUsername()));
+        return ApiResponse.ok(communityService.writeCommunity(dto, userDetails.getUsername()));
     }
 
-    @GetMapping("/community")
+    @GetMapping("/list")
     @Transactional
     public List<CommunityDto> findAll() {
         return communityService.findAll();
@@ -36,19 +35,19 @@ public class CommunityController {
     @GetMapping("/{post_id}")
     @Transactional
     public ApiResponse<?> find(@PathVariable Long post_id) {
-        return ApiResponse.ok(communityService.find(post_id));
+        return ApiResponse.ok(communityService.findCommunity(post_id));
     }
 
     @PatchMapping("/write/{post_id}")
     @Transactional
     public ApiResponse<?> update(@PathVariable Long post_id, @RequestBody @Valid CommunityDto dto) {
-        return ApiResponse.ok(communityService.update(post_id, dto));
+        return ApiResponse.ok(communityService.updateCommunity(post_id, dto));
     }
 
     @DeleteMapping("/remove/{post_id}")
     @Transactional
     public ApiResponse<?> remove(@PathVariable Long post_id) {
-        return ApiResponse.ok(communityService.remove(post_id));
+        return ApiResponse.ok(communityService.removeCommunity(post_id));
     }
 }
 
