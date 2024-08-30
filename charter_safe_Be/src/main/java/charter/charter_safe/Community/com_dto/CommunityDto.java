@@ -23,7 +23,6 @@ public class CommunityDto {
     private Member member;
     private Integer views;
     private Integer likes;
-    private List<String> imageUrls;
 
     public CommunityDto(Community community) {
         this.post_id = community.getPost_id();
@@ -32,8 +31,5 @@ public class CommunityDto {
         this.author = community.getAuthor();
         this.views = community.getViews();
         this.likes = community.getLikes();
-        this.imageUrls = community.getImages().stream()
-                .map(Image::getUrl)
-                .collect(Collectors.toList());
     }
 }

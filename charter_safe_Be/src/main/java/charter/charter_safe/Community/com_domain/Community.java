@@ -30,7 +30,7 @@ public class Community extends TimeStamp{
     @OneToMany(mappedBy = "community")
     private List<Comment> comments;
 
-    @OneToMany(mappedBy = "community")
+    @OneToMany(mappedBy = "community", cascade = CascadeType.ALL, orphanRemoval = true) // 게시글이 삭제되면 이미지도 자동으로 삭제, 고아 객체 관리
     private List<Image> images;
 
     @Builder

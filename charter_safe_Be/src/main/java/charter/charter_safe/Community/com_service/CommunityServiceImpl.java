@@ -30,11 +30,11 @@ public class CommunityServiceImpl implements CommunityService{
     private final ImageRepository imageRepository;
 
     @Value("${file.ImagePath}")
-    private String uploadFolder;
+    private String imageDir;
 
     @Override
     @Transactional
-    public Long writeCommunity(final CommunityDto dto, ImageDto imageDto, String email) {
+    public Long writeCommunity(final CommunityDto dto, MultipartFile files, String email) throws IOException{
         Member member = memberRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("이메일이 존재하지 않습니다."));
         Community result = Community.builder()
                 .title(dto.getTitle())
@@ -46,29 +46,44 @@ public class CommunityServiceImpl implements CommunityService{
                 .build();
         communityRepository.save(result);
 
-        if(imageDto.getFiles() != null && !imageDto.getFiles().isEmpty()) {
-            for (MultipartFile file : imageDto.getFiles()) {
-                UUID uuid = UUID.randomUUID();
-                String imageFileName = uuid + "-" + file.getOriginalFilename();
+        if (files.isEmpty()) {return null;}
+        String origin_name = files.getOriginalFilename();
+        String uuid = UUID.randomUUID().toString();
+        String extension = origin_name.substring(origin_name.lastIndexOf("."));
+        String save_name = uuid + extension;
+        String save_path = imageDir + save_name;
 
-                File destinationFile = new File(uploadFolder + imageFileName);
-
-                try {
-                    file.transferTo(destinationFile);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-
-                Image image = Image.builder()
-                        .url("/images/" + imageFileName)
-                        .community(result)
-                        .build();
-                imageRepository.save(image);
-            }
-        }
+        Image image = Image.builder()
+                .origin_name(origin_name)
+                .save_name(save_name)
+                .url(save_path)
+                .build();
+        files.transferTo(new File(save_path));
+        Image saveFile = imageRepository.save(image);
 
         return result.getPost_id();
     }
+
+//    @Override
+//    @Transactional
+//    public Long saveImage(MultipartFile files) throws IOException {
+//        if (files.isEmpty()) {return null;}
+//        String origin_name = files.getOriginalFilename();
+//        String uuid = UUID.randomUUID().toString();
+//        String extension = origin_name.substring(origin_name.lastIndexOf("."));
+//        String save_name = uuid + extension;
+//        String save_path = imageDir + save_name;
+//
+//        Image image = Image.builder()
+//                .origin_name(origin_name)
+//                .save_name(save_name)
+//                .url(save_path)
+//                .build();
+//        files.transferTo(new File(save_path));
+//        Image saveFile = imageRepository.save(image);
+//        return saveFile.getImage_number();
+//    }
+
     @Override
     @Transactional
     public Long updateCommunity(Long post_id, CommunityDto dto) {
