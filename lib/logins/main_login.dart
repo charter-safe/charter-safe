@@ -124,21 +124,21 @@ class MyApp extends StatelessWidget {
                 ),
               ),
               // ),
-              Center(
-                // child: Padding(
-                //   padding: const EdgeInsets.only(top: 20),
-                child: Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.yellow[800],
-                    ),
-                    child: Text("카카오 계정으로 로그인",
-                        style: TextStyle(color: Colors.white)),
-                  ),
-                ),
-              ),
+              // Center(
+              //   // child: Padding(
+              //   //   padding: const EdgeInsets.only(top: 20),
+              //   child: Container(
+              //     width: double.infinity,
+              //     child: ElevatedButton(
+              //       onPressed: () {},
+              //       style: ElevatedButton.styleFrom(
+              //         backgroundColor: Colors.yellow[800],
+              //       ),
+              //       child: Text("카카오 계정으로 로그인",
+              //           style: TextStyle(color: Colors.white)),
+              //     ),
+              //   ),
+              // ),
               //   ),
             ],
           ),

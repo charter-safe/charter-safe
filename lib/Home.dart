@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
 
-  // This widget is the root of your application.
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,6 +41,21 @@ class MyApp extends StatelessWidget {
           ),
           backgroundColor: Colors.grey,
         ),
+        // drawer: Drawer(
+        //     child: ListView(
+        //   padding: EdgeInsets.zero,
+        //   children: [
+        //     const DrawerHeader(
+        //       decoration: BoxDecoration(
+        //         color: Colors.blue,
+        //       ),
+        //       child: Text("Drawer Header Part"),
+        //     ),
+        //     ListTile(
+        //       title: Text("Menu 1"),
+        //     ),
+        //   ],
+        // )),
         body: Column(
           children: [
             Row(
@@ -109,7 +126,26 @@ class MyApp extends StatelessWidget {
                 ),
               ],
             ),
-            //자동으로 넘어가는 광고 배너 같은 거 넣기
+
+            // //자동으로 넘어가는 광고 배너 같은 거 넣기(outo Swiper)
+            // Container(
+            //   // color: Color(0xFFEDF0F4),
+            //   height: 280,
+            //   child: Padding(
+            //     padding: EdgeInsets.only(top: 50),
+            //     child: Swiper(
+            //       autoplay: true,
+            //       scale: 0.9,
+            //       viewportFraction: 0.8,
+            //       pagination:
+            //       SwiperPagination(alignment: Alignment.bottomRight),
+            //       itemCount: imgList.length,
+            //       itemBuilder: (BuildContext context, int index) {
+            //         return Image.network(imgList[index]);
+            //       },
+            //           ),
+            //         ),
+            //       ),
           ],
         ),
       ),

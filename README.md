@@ -1,6 +1,16 @@
+<<<<<<< HEAD
 # safe_apps_app
+=======
+<<<<<<< HEAD
+# safe_app
+>>>>>>> d28c33569dcd568fdbff45acfaa1bcd0146fe6c9
 
+safe_apps
+=======
+# safe_apps
+d
 A new Flutter project.
+>>>>>>> 0eeece00318ef4388d6c9a6c030c061bc279286c
 
 ## Getting Started
 
