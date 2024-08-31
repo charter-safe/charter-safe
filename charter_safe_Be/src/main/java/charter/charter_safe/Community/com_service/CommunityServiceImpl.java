@@ -3,7 +3,6 @@ package charter.charter_safe.Community.com_service;
 import charter.charter_safe.Community.com_domain.Community;
 import charter.charter_safe.Community.com_domain.Image;
 import charter.charter_safe.Community.com_dto.CommunityDto;
-import charter.charter_safe.Community.com_dto.ImageDto;
 import charter.charter_safe.Community.com_repo.CommunityRepository;
 import charter.charter_safe.Community.com_repo.ImageRepository;
 import charter.charter_safe.Member.domain.Member;
@@ -57,32 +56,13 @@ public class CommunityServiceImpl implements CommunityService{
                 .origin_name(origin_name)
                 .save_name(save_name)
                 .url(save_path)
+                .community(result)
                 .build();
         files.transferTo(new File(save_path));
-        Image saveFile = imageRepository.save(image);
+        imageRepository.save(image);
 
         return result.getPost_id();
     }
-
-//    @Override
-//    @Transactional
-//    public Long saveImage(MultipartFile files) throws IOException {
-//        if (files.isEmpty()) {return null;}
-//        String origin_name = files.getOriginalFilename();
-//        String uuid = UUID.randomUUID().toString();
-//        String extension = origin_name.substring(origin_name.lastIndexOf("."));
-//        String save_name = uuid + extension;
-//        String save_path = imageDir + save_name;
-//
-//        Image image = Image.builder()
-//                .origin_name(origin_name)
-//                .save_name(save_name)
-//                .url(save_path)
-//                .build();
-//        files.transferTo(new File(save_path));
-//        Image saveFile = imageRepository.save(image);
-//        return saveFile.getImage_number();
-//    }
 
     @Override
     @Transactional

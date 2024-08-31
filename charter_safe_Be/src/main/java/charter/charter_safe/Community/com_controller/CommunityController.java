@@ -1,14 +1,10 @@
 package charter.charter_safe.Community.com_controller;
 
 import charter.charter_safe.Community.com_dto.CommunityDto;
-import charter.charter_safe.Community.com_dto.ImageDto;
 import charter.charter_safe.Community.com_service.CommunityService;
 import charter.charter_safe.Member.response.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,10 +26,15 @@ public class CommunityController {
     @Transactional
     public ApiResponse<?> write(@RequestPart("dto") @Valid CommunityDto dto,
                                 @RequestPart("file") MultipartFile file,
+                                @RequestPart("files") List<MultipartFile> files,
                                 Authentication authentication) throws IOException{
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return ApiResponse.ok(communityService.writeCommunity(dto, file, userDetails.getUsername()));
+        Long postId = null;
+        for (MultipartFile multipartFile : files) {
+            postId = communityService.writeCommunity(dto, multipartFile, userDetails.getUsername());
+        }
+        return ApiResponse.ok(postId);
     }
 
 //    @PostMapping(value = "/write/upload")
