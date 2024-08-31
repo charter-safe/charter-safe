@@ -31,7 +31,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	compileOnly 'org.projectlombok:lombok'
+<<<<<<< HEAD
+<<<<<<< HEAD
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+=======
 	//developmentOnly 'org.springframework.boot:spring-boot-devtools'
+>>>>>>> d28c33569dcd568fdbff45acfaa1bcd0146fe6c9
+=======
+	//developmentOnly 'org.springframework.boot:spring-boot-devtools'
+>>>>>>> d28c33569dcd568fdbff45acfaa1bcd0146fe6c9
 	runtimeOnly 'com.mysql:mysql-connector-j'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

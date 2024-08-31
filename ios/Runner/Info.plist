@@ -5,7 +5,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
+<<<<<<< HEAD
+	<string>Safe Apps App</string>
+=======
 	<string>Safe App</string>
+>>>>>>> d28c33569dcd568fdbff45acfaa1bcd0146fe6c9
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +17,11 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
+<<<<<<< HEAD
+	<string>safe_apps_app</string>
+=======
 	<string>safe_app</string>
+>>>>>>> d28c33569dcd568fdbff45acfaa1bcd0146fe6c9
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>

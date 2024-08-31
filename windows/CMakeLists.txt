@@ -1,10 +1,18 @@
 # Project-level configuration.
 cmake_minimum_required(VERSION 3.14)
+<<<<<<< HEAD
+project(safe_apps_app LANGUAGES CXX)
+
+# The name of the executable created for the application. Change this to change
+# the on-disk name of your application.
+set(BINARY_NAME "safe_apps_app")
+=======
 project(safe_app LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
 set(BINARY_NAME "safe_app")
+>>>>>>> d28c33569dcd568fdbff45acfaa1bcd0146fe6c9
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.
