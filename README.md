@@ -1,4 +1,4 @@
-# safe_apps
+# safe_apps_app
 
 A new Flutter project.
 
