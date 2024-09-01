@@ -1,7 +1,6 @@
 package charter.charter_safe.Community.com_service;
 
 import charter.charter_safe.Community.com_dto.CommunityDto;
-import charter.charter_safe.Community.com_dto.ImageDto;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

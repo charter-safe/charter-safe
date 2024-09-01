@@ -1,8 +1,6 @@
 package charter.charter_safe.Community.com_controller;
 
-import charter.charter_safe.Community.com_domain.Comment;
 import charter.charter_safe.Community.com_dto.CommentDto;
-import charter.charter_safe.Community.com_dto.CommunityDto;
 import charter.charter_safe.Community.com_service.CommentService;
 import charter.charter_safe.Member.response.ApiResponse;
 import jakarta.validation.Valid;
