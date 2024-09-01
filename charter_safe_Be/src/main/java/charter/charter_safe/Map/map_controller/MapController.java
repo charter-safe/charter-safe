@@ -20,9 +20,9 @@ public class MapController {
     public String map(Model model) throws IOException, ParseException {
 
         StringBuilder urlBuilder = new StringBuilder("apis.data.go.kr/1613000/RTMSDataSvcOffiRent/getRTMSDataSvcOffiRent");
-        urlBuilder.append("?LAWD_CD=11140");
+        urlBuilder.append("?LAWD_CD=11100");
         urlBuilder.append("&DEAL_YMD=202401");
-        urlBuilder.append("&serviceKey=xnrR9tk0q7+DsId1afT+Duec9dGjb+0GXrryYld0IXzHJ95APU32/5UCEPJts3XlAJpBZ2Bf6LCngMZ+Eekyzw==");
+        urlBuilder.append("&serviceKey=PlVJwa%2FkOxvsuiBIoFCogW1%2FczQ%2FKzKRaDB1HKxvHkzO5%2FuK3QM4MowvjOjW5bydnOm8mvvTCvpb1mCUyViMLA%3D%3D");
 
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();

@@ -1,5 +1,7 @@
-package charter.charter_safe.Member.domain;
+package charter.charter_safe.Building.b_domain;
 
+import charter.charter_safe.Building.b_domain.HostReview;
+import charter.charter_safe.Member.domain.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 
