@@ -8,5 +8,10 @@ import java.util.List;
 @Service
 public interface ReviewService {
     Long writeReview(ReviewDto reviewDto, Long building_number, String email);
+
     List<ReviewDto> findAll(Long host_review_no);
+
+    Long updateReview(ReviewDto reviewDto, Long host_review_no);
+
+    Long deleteReview(Long host_review_no);
 }
