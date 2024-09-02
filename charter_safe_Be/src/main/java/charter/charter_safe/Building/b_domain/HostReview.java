@@ -25,7 +25,6 @@ public class HostReview extends TimeStamp {
     private String content;
 
     private Double rating;
-
     private Integer likes;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -38,5 +37,8 @@ public class HostReview extends TimeStamp {
 
     public void update(String content) {
         this.content = content;
+    }
+    public void increaseLikes() {
+        this.likes++;
     }
 }
