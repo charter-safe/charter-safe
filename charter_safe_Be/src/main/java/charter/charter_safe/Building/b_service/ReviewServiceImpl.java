@@ -26,7 +26,6 @@ public class ReviewServiceImpl implements ReviewService{
     private final MemberRepository memberRepository;
     private final ReviewRepository reviewRepository;
     private final BuildingRepository buildingRepository;
-    private final JPAQueryFactory queryFactory;
 
     @Override
     @Transactional
