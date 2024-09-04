@@ -18,13 +18,12 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-public class CharterInfoApiController {
+public class TradeInfoApiController {
+    private final TradeApiService tradeApiService;
+    String t_url = "https://apis.data.go.kr/1613000/RTMSDataSvcOffiTrade/getRTMSDataSvcOffiTrade"; //매매 데이터
 
-    private final CharterApiService charterApiService; // final(null 예외 방지)
-    String r_url = "https://apis.data.go.kr/1613000/RTMSDataSvcOffiRent/getRTMSDataSvcOffiRent"; //전세 데이터
-
-    @Value("${API-KEY.rent}")
-    String r_serviceKey; // 전세 서비스키
+    @Value("${API-KEY.trade}")
+    String t_serviceKey; // 매매 서비스키
 
     Integer current_year = LocalDate.now().getYear();
     String current_month = "0" + (LocalDate.now().getMonthValue() - 1);
@@ -35,21 +34,20 @@ public class CharterInfoApiController {
             "11500", "11530", "11545", "11560", "11590", "11620",
             "11650", "11680", "11710", "11740");
 
-
-    @GetMapping("/charter")
-    public ApiResponse<?> CharterList() throws Exception {
+    @GetMapping("/trade")
+    public ApiResponse<?> TradeList() throws Exception {
 
         RestTemplate restTemplate = new RestTemplate();
-        List<CharterDto> rentList = new ArrayList<>();
+        List<TradeDto> tradeList = new ArrayList<>();
 
         for(String lawd_cd : LAWD_CD) {
-            String urlStr = r_url + "?LAWD_CD=" + lawd_cd + "&DEAL_YMD=" + current_year + current_month
-                    + "&serviceKey=" + r_serviceKey + "&numOfRows=" + numOfRows;
+            String urlStr = t_url + "?LAWD_CD=" + lawd_cd + "&DEAL_YMD=" + current_year + current_month
+                    + "&serviceKey=" + t_serviceKey + "&numOfRows=" + numOfRows;
             URI uri = new URI(urlStr);
             String jsonData = restTemplate.getForObject(uri, String.class);
-            List<CharterDto> currentRentList = charterApiService.CharterInfoApiParseXml(jsonData);
-            rentList.addAll(currentRentList);
+            List<TradeDto> currentTradeList = tradeApiService.TradeInfoApiParseXml(jsonData);
+            tradeList.addAll(currentTradeList);
         }
-        return ApiResponse.ok(rentList);
+        return ApiResponse.ok(tradeList);
     }
 }
