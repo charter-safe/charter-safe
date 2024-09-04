@@ -4,18 +4,15 @@ import charter.charter_safe.Building.b_dto.CharterDto;
 import charter.charter_safe.Building.b_service.CharterApiService;
 import charter.charter_safe.Member.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URI;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,21 +37,18 @@ public class CharterInfoApiController {
     @GetMapping("/charter")
     public ApiResponse<?> CharterList() throws Exception {
 
-        HttpURLConnection urlConnection = null;
-        InputStream stream = null;
-        String result = null;
         RestTemplate restTemplate = new RestTemplate();
         List<CharterDto> rentList = new ArrayList<>();
 
         for(String lawd_cd : LAWD_CD) {
             String urlStr = url + "?LAWD_CD=" + lawd_cd + "&DEAL_YMD=" + current_year + current_month
                     + "&serviceKey=" + serviceKey + "&numOfRows=" + numOfRows;
-            System.out.println(urlStr);
             URI uri = new URI(urlStr);
-            String xmlData = restTemplate.getForObject(uri, String.class);
-            List<CharterDto> currentRentList = charterApiService.CharterInfoApiParseXml(xmlData);
+            String jsonData = restTemplate.getForObject(uri, String.class);
+            List<CharterDto> currentRentList = charterApiService.CharterInfoApiParseXml(jsonData);
             rentList.addAll(currentRentList);
         }
         return ApiResponse.ok(rentList);
     }
+
 }
