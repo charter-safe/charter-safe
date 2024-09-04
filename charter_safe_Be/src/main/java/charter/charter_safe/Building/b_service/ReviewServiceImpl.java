@@ -1,6 +1,6 @@
 package charter.charter_safe.Building.b_service;
 
-import charter.charter_safe.Building.b_domain.Building;
+import charter.charter_safe.Building.b_domain.Officetel;
 import charter.charter_safe.Building.b_domain.HostReview;
 import charter.charter_safe.Building.b_dto.ReviewDto;
 import charter.charter_safe.Building.b_repo.BuildingRepository;
@@ -28,14 +28,14 @@ public class ReviewServiceImpl implements ReviewService{
     public Long writeReview(ReviewDto reviewDto, Long building_number, String email) {
         Member member = memberRepository.findByEmail(email).orElseThrow(()
                 -> new UsernameNotFoundException("이메일이 존재하지 않습니다."));
-        Building building = buildingRepository.findById(building_number).orElseThrow(()
+        Officetel officetel = buildingRepository.findById(building_number).orElseThrow(()
                 -> new IllegalArgumentException("건물이 존재하지 않습니다."));
 
         HostReview review = HostReview.builder()
                 .content(reviewDto.getContent())
                 .rating(0.0)
                 .likes(0)
-                .building(building)
+                .officetel(officetel)
                 .member(member)
                 .build();
         reviewRepository.save(review);
