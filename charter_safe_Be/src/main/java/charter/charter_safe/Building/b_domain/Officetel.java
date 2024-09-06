@@ -36,6 +36,6 @@ public class Officetel {
     @JoinColumn(name = "m_id")
     private Member member;
 
-    @OneToMany(mappedBy = "building")
+    @OneToMany(mappedBy = "officetel")
     private List<HostReview> hostReviews;
 }

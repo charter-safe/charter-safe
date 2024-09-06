@@ -22,10 +22,8 @@ public class CharterInfoApiController {
 
     private final CharterApiService charterApiService; // final(null 예외 방지)
     String r_url = "https://apis.data.go.kr/1613000/RTMSDataSvcOffiRent/getRTMSDataSvcOffiRent"; //전세 데이터
-
     @Value("${API-KEY.rent}")
     String r_serviceKey; // 전세 서비스키
-
     Integer current_year = LocalDate.now().getYear();
     String current_month = "0" + (LocalDate.now().getMonthValue() - 1);
     Integer numOfRows = 1000;

@@ -34,12 +34,4 @@ public class DataMapper {
         }
         return mappedData;
     }
-
-    public void calculateCharterRate(List<OfficetelDataDto> dataList) {
-        for(OfficetelDataDto data : dataList) {
-            double charterPrice = Double.parseDouble(data.getCharterDto().getDeposit().replace(",", ""));
-            double tradePrice = Double.parseDouble(data.getTradeDto().getDealAmount().replace(",", ""));
-            double charterRate = (charterPrice / tradePrice) * 100;
-        }
-    }
 }
