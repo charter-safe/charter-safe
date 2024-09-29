@@ -27,6 +27,7 @@ jobs:
     - name: Build with Gradle
       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
       with:
+        gradle-version: 8.8
         arguments: build
     - name: gradlew에 실행 권한 부여
       run: chmod +x ./gradlew
