@@ -21,7 +21,7 @@ public class CommentController {
 
     @PostMapping("/{post_id}/comment")
     @Transactional
-    public ApiResponse writeComment(@PathVariable Long post_id, @RequestBody @Valid CommentDto commentDto, Authentication authentication) {
+    public ApiResponse<?> writeComment(@PathVariable Long post_id, @RequestBody @Valid CommentDto commentDto, Authentication authentication) {
 
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         return ApiResponse.ok(commentService.writeComment(commentDto, post_id, userDetails.getUsername()));
@@ -35,13 +35,13 @@ public class CommentController {
 
     @PatchMapping("/{post_id}/comment/{comment_id}/update")
     @Transactional
-    public ApiResponse updateComment(@PathVariable Long post_id, @PathVariable Long comment_id, @RequestBody @Valid CommentDto commentDto) {
+    public ApiResponse<?> updateComment(@PathVariable Long post_id, @PathVariable Long comment_id, @RequestBody @Valid CommentDto commentDto) {
         return ApiResponse.ok(commentService.updateComment(commentDto, comment_id));
     }
 
     @DeleteMapping("/{post_id}/comment/{comment_id}")
     @Transactional
-    public ApiResponse deleteComment(@PathVariable Long post_id, @PathVariable Long comment_id) {
+    public ApiResponse<?> deleteComment(@PathVariable Long post_id, @PathVariable Long comment_id) {
         return ApiResponse.ok(commentService.deleteComment(comment_id));
     }
 }

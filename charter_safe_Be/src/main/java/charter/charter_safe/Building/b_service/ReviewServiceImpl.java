@@ -1,9 +1,9 @@
 package charter.charter_safe.Building.b_service;
 
-import charter.charter_safe.Building.b_domain.Building;
+import charter.charter_safe.Building.b_domain.Officetel;
 import charter.charter_safe.Building.b_domain.HostReview;
 import charter.charter_safe.Building.b_dto.ReviewDto;
-import charter.charter_safe.Building.b_repo.BuildingRepository;
+import charter.charter_safe.Building.b_repo.OfficetelRepository;
 import charter.charter_safe.Building.b_repo.ReviewRepository;
 import charter.charter_safe.Member.domain.Member;
 import charter.charter_safe.Member.repository.MemberRepository;
@@ -21,21 +21,21 @@ public class ReviewServiceImpl implements ReviewService{
 
     private final MemberRepository memberRepository;
     private final ReviewRepository reviewRepository;
-    private final BuildingRepository buildingRepository;
+    private final OfficetelRepository officetelRepository;
 
     @Override
     @Transactional
     public Long writeReview(ReviewDto reviewDto, Long building_number, String email) {
         Member member = memberRepository.findByEmail(email).orElseThrow(()
                 -> new UsernameNotFoundException("이메일이 존재하지 않습니다."));
-        Building building = buildingRepository.findById(building_number).orElseThrow(()
+        Officetel officetel = officetelRepository.findById(building_number).orElseThrow(()
                 -> new IllegalArgumentException("건물이 존재하지 않습니다."));
 
         HostReview review = HostReview.builder()
                 .content(reviewDto.getContent())
                 .rating(0.0)
                 .likes(0)
-                .building(building)
+                .officetel(officetel)
                 .member(member)
                 .build();
         reviewRepository.save(review);
@@ -64,4 +64,15 @@ public class ReviewServiceImpl implements ReviewService{
         reviewRepository.deleteById(host_review_no);
         return host_review_no;
     }
+
+//    @Override
+//    @Transactional
+//    public void calculateRating(ReviewDto reviewDto, Long host_review_no) {
+//
+//        List<HostReview> reviews = reviewRepository.findAll();
+//
+//        double totalRating = (double) reviews.stream().mapToDouble(HostReview::getRating).sum();
+//        double avgRating = totalRating/reviews.size();
+//
+//    }
 }

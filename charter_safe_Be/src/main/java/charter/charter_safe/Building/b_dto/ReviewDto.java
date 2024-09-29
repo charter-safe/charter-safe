@@ -1,6 +1,7 @@
 package charter.charter_safe.Building.b_dto;
 
 import charter.charter_safe.Building.b_domain.HostReview;
+import charter.charter_safe.Member.domain.Member;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,11 +18,13 @@ public class ReviewDto {
     private String content;
     private Double rating;
     private Integer likes;
+    private Member member;
 
     @Builder
     public ReviewDto(HostReview hostReview) {
         this.content = hostReview.getContent();
         this.rating = hostReview.getRating();
         this.likes = hostReview.getLikes();
+        this.member = hostReview.getMember();
     }
 }

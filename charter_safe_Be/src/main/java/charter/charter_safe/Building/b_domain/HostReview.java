@@ -7,10 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -25,7 +21,6 @@ public class HostReview extends TimeStamp {
     private String content;
 
     private Double rating;
-
     private Integer likes;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,10 +28,13 @@ public class HostReview extends TimeStamp {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "b_no")
-    private Building building;
+    @JoinColumn(name = "o_no")
+    private Officetel officetel;
 
     public void update(String content) {
         this.content = content;
+    }
+    public void increaseLikes() {
+        this.likes++;
     }
 }
