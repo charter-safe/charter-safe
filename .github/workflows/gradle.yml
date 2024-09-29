@@ -22,6 +22,9 @@ jobs:
       with:
         ref: main
         path: ./charter_safe_Be
+    - name: List directory contents
+      run: ls -R
+      working-directory: charter_safe_Be
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
