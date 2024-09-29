@@ -18,7 +18,7 @@ public class Officetel {
 
     @Id @GeneratedValue
     @Column(name = "o_no")
-    private Long officetel_number;
+    private Long o_number;
 
     private String o_name;
 

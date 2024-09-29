@@ -29,6 +29,7 @@ public class CommunityDto {
         this.title = community.getTitle();
         this.content = community.getContent();
         this.author = community.getAuthor();
+        this.member = community.getMember();
         this.views = community.getViews();
         this.likes = community.getLikes();
     }

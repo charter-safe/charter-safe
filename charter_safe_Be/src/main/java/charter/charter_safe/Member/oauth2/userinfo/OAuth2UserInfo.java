@@ -17,6 +17,4 @@ public abstract class OAuth2UserInfo {
     public abstract String getYear();
     public abstract String getBirthday();
     public abstract String getPhone_Number();
-
-
 }
