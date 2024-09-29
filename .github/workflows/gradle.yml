@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v4
       with:
         ref: main
-        path: charter_safe_Be
+        path: ./charter_safe_Be
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
@@ -32,7 +32,7 @@ jobs:
         arguments: build
     - name: gradlew에 실행 권한 부여
       run: chmod +x ./gradlew
-      working-directory: charter_safe_Be
+      working-directory: ./charter_safe_Be
     - name: 프로젝트 빌드
       run: ./gradlew clean build -x test
     - name: AWS credential 설정
