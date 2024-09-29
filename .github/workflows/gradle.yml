@@ -31,6 +31,7 @@ jobs:
         arguments: build
     - name: gradlew에 실행 권한 부여
       run: chmod +x ./gradlew
+      working-directory: charter_safe_Be
     - name: 프로젝트 빌드
       run: ./gradlew clean build -x test
     - name: AWS credential 설정
