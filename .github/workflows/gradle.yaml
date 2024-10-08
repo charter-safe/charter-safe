@@ -15,8 +15,8 @@ env:
 jobs:
   build-with-gradle:
     runs-on: ubuntu-22.04
-    env:
-      working-directory: ./charter_safe_Be
+    # env:
+    #   working-directory: ./charter_safe_Be
     steps:
     - uses: actions/checkout@v4
       with:
