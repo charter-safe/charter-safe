@@ -38,6 +38,7 @@ jobs:
       # working-directory: ./charter_safe_Be
     - name: 프로젝트 빌드
       run: ./gradlew clean build -x test
+      working-directory: ./charter_safe_Be
     - name: AWS credential 설정
       uses: aws-actions/configure-aws-credentials@v4
       with:
