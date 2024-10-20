@@ -46,6 +46,7 @@ jobs:
       shell: bash
 
     - name: Build with Gradle Wrapper
+      working-directory: ./charter_safe_Be
       run: ./gradlew build test
 
     - name: Make zip file
