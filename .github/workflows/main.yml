@@ -75,6 +75,7 @@ jobs:
         gradle-version: '8.9'
     
     - name: Build with Gradle 8.9
+      working-directory: ./charter_safe_Be
       run: gradle build
 
     # Generates and submits a dependency graph, enabling Dependabot Alerts for all project dependencies.
