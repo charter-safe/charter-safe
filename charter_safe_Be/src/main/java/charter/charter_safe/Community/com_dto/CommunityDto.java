@@ -24,6 +24,7 @@ public class CommunityDto {
     private Integer views;
     private Integer likes;
 
+    @Builder
     public CommunityDto(Community community) {
         this.post_id = community.getPost_id();
         this.title = community.getTitle();
