@@ -2,8 +2,6 @@ package charter.charter_safe.Building.b_controller;
 
 import charter.charter_safe.Building.b_dto.ReviewDto;
 import charter.charter_safe.Building.b_service.ReviewService;
-import charter.charter_safe.Community.com_dto.CommentDto;
-import charter.charter_safe.Community.com_service.CommentService;
 import charter.charter_safe.Member.response.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

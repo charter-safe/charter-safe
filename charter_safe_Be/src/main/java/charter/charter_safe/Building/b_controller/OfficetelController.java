@@ -3,7 +3,6 @@ package charter.charter_safe.Building.b_controller;
 import charter.charter_safe.Building.b_dto.CharterDto;
 import charter.charter_safe.Building.b_dto.TradeDto;
 import charter.charter_safe.Building.b_service.OfficetelService;
-import charter.charter_safe.Member.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
