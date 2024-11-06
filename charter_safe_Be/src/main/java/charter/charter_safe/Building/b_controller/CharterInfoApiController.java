@@ -1,9 +1,7 @@
 package charter.charter_safe.Building.b_controller;
 
 import charter.charter_safe.Building.b_dto.CharterDto;
-import charter.charter_safe.Building.b_dto.TradeDto;
 import charter.charter_safe.Building.b_service.CharterApiService;
-import charter.charter_safe.Building.b_service.TradeApiService;
 import charter.charter_safe.Member.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,7 +23,7 @@ public class CharterInfoApiController {
     @Value("${API-KEY.rent}")
     String r_serviceKey; // 전세 서비스키
     Integer current_year = LocalDate.now().getYear();
-    String current_month = "0" + (LocalDate.now().getMonthValue() - 1);
+    Integer current_month = LocalDate.now().getMonthValue() - 1;
     Integer numOfRows = 10;
     List<String> LAWD_CD = List.of("11110", "11140", "11170",
             "11200", "11215", "11230", "11260", "11290", "11305",

@@ -3,7 +3,6 @@ package charter.charter_safe.Building.b_service;
 import charter.charter_safe.Building.b_domain.Officetel;
 import charter.charter_safe.Building.b_dto.CharterDto;
 import charter.charter_safe.Building.b_dto.OfficetelDataDto;
-import charter.charter_safe.Building.b_dto.OfficetelDto;
 import charter.charter_safe.Building.b_dto.TradeDto;
 import charter.charter_safe.Building.b_repo.OfficetelRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +32,7 @@ public class OfficetelServiceImpl implements OfficetelService{
                     .o_name(data.getCharterDto().getOffiNm()) // 오피스텔 이름
                     .o_address(data.getCharterDto().getSggNm() + " " + data.getCharterDto().getUmdNm() + " " + data.getCharterDto().getJibun())
                     .price(charterPrice)
+                    .charter_rate(charterRate)
                     .back_texes(0L)
                     .risk(0L)
                     .build();

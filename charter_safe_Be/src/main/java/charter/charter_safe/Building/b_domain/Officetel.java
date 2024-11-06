@@ -26,7 +26,7 @@ public class Officetel {
 
     private Long price; // 전세가격
 
-    private Long charter_rate; // 전세가율
+    private Double charter_rate; // 전세가율
 
     private Long back_texes; // 체납 세금
 

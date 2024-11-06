@@ -1,6 +1,5 @@
 package charter.charter_safe.Building.b_service;
 
-import charter.charter_safe.Building.b_domain.Officetel;
 import charter.charter_safe.Building.b_dto.CharterDto;
 import charter.charter_safe.Building.b_dto.TradeDto;
 import charter.charter_safe.Building.b_dto.OfficetelDataDto;
@@ -11,18 +10,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class DataMapper {
 
     public List<OfficetelDataDto> mapRentAndTrade(List<CharterDto> charterList, List<TradeDto> tradeList) {
-//        Map<String, TradeDto> tradeMap = tradeList.stream()
-//                .collect(Collectors.toMap(
-//                        tradeDto -> tradeDto.getOffiNm() + tradeDto.getJibun(),
-//                        tradeDto -> tradeDto
-//                ));
+
         Map<String, TradeDto> tradeMap = new HashMap<>();
         for(TradeDto tradeDto : tradeList) {
             String key = tradeDto.getOffiNm() + tradeDto.getJibun();
