@@ -3,6 +3,7 @@ package charter.charter_safe.Building.b_service;
 import charter.charter_safe.Building.b_domain.Officetel;
 import charter.charter_safe.Building.b_dto.CharterDto;
 import charter.charter_safe.Building.b_dto.OfficetelDataDto;
+import charter.charter_safe.Building.b_dto.OfficetelDto;
 import charter.charter_safe.Building.b_dto.TradeDto;
 import charter.charter_safe.Building.b_repo.OfficetelRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class OfficetelServiceImpl implements OfficetelService{
 
     @Override
     @Transactional
-    public void saveOfficetelData(List<CharterDto> charterList, List<TradeDto> tradeList) {
+    public List<OfficetelDto> saveOfficetelData(List<CharterDto> charterList, List<TradeDto> tradeList) {
         List<OfficetelDataDto> mappedData = dataMapper.mapRentAndTrade(charterList, tradeList);
 
         for(OfficetelDataDto data : mappedData) {
@@ -38,5 +39,6 @@ public class OfficetelServiceImpl implements OfficetelService{
                     .build();
             officetelRepository.save(officetel);
         }
+        return saveOfficetelData(charterList, tradeList);
     }
 }
