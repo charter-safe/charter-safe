@@ -20,15 +20,17 @@ public class Officetel {
     @Column(name = "o_no")
     private Long o_number;
 
-    private String o_name;
+    private String offiNm;
+    private String address;
+    private String sggNm; // 시군구
+    private String umdNm; // 법정동
+    private String jibun; // 지번
 
-    private String o_address;
-
-    private Long price; // 전세가격
+    private Long deposit; // 전세가격
 
     private Double charter_rate; // 전세가율
 
-    private Long back_texes; // 체납 세금
+    private Long back_taxes; // 체납 세금
 
     private Long risk;
 
@@ -38,4 +40,18 @@ public class Officetel {
 
     @OneToMany(mappedBy = "officetel")
     private List<HostReview> hostReviews;
+
+    public Officetel(String offiNm, String address, String sggNm, String umdNm, String jibun, Long deposit, Double charter_rate, Long back_taxes, Long risk, Member member, List<HostReview> hostReviews) {
+        this.offiNm = offiNm;
+        this.address = address;
+        this.sggNm = sggNm;
+        this.umdNm = umdNm;
+        this.jibun = jibun;
+        this.deposit = deposit;
+        this.charter_rate = charter_rate;
+        this.back_taxes = back_taxes;
+        this.risk = risk;
+        this.member = member;
+        this.hostReviews = hostReviews;
+    }
 }

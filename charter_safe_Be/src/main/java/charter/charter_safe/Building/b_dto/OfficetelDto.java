@@ -9,17 +9,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OfficetelDto {
 
-    private Long officetel_number;
+    private String offiNm;
+    private String address;
+    private String sggNm; // 시군구
+    private String umdNm; // 법정동
+    private String jibun; // 지번
 
-    private String o_name;
+    private Long deposit; // 전세가격
 
-    private String o_address;
+    private Double charter_rate; // 전세가율
 
-    private Long price; // 전세가격
-
-    private Long charter_rate; // 전세가율
-
-    private Long back_texes; // 체납 세금
+    private Long back_taxes; // 체납 세금
 
     private Long risk;
+
 }
+
