@@ -1,7 +1,7 @@
 package charter.charter_safe.Member.domain;
 
-import charter.charter_safe.Building.b_domain.Officetel;
-import charter.charter_safe.Building.b_domain.HostReview;
+import charter.charter_safe.Officetel.o_domain.Officetel;
+import charter.charter_safe.Officetel.o_domain.HostReview;
 import charter.charter_safe.Community.com_domain.Comment;
 import charter.charter_safe.Community.com_domain.Community;
 import charter.charter_safe.Community.com_domain.Reply;
