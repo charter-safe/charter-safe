@@ -31,6 +31,7 @@ public class AptTradeApiServiceImpl implements AptTradeApiService {
 
             String aptNm = itemNode.path("aptNm").asText();
             String sggCd = itemNode.path("sggCd").asText();
+            String sggNm = itemNode.path("estateAgentSggNm").asText();
             String umdNm = itemNode.path("umdNm").asText();
             String jibun = itemNode.path("jibun").asText();
             String floor = itemNode.path("floor").asText();
@@ -39,7 +40,7 @@ public class AptTradeApiServiceImpl implements AptTradeApiService {
             String dealAmount = itemNode.path("dealAmount").asText();
             String rgstDate = itemNode.path("rgstDate").asText();
 
-            AptTradeDto aptTrade = new AptTradeDto(aptNm, sggCd, umdNm, jibun, floor, buildYear, excluUseAr,
+            AptTradeDto aptTrade = new AptTradeDto(aptNm, sggCd, sggNm, umdNm, jibun, floor, buildYear, excluUseAr,
                     dealAmount, rgstDate);
             aptInfoList.add(aptTrade);
         }

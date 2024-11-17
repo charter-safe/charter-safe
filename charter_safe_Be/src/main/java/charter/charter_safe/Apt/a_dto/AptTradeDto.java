@@ -9,6 +9,7 @@ public class AptTradeDto {
 
     private String aptNm; // 아파트이름
     private String sggCd; // 법정코드
+    private String sggNm; // 구이름
     private String umdNm; // 법정동
     private String jibun; // 지번
     private String floor; // 층수

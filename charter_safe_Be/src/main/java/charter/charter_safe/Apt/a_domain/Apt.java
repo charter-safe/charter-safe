@@ -23,10 +23,11 @@ public class Apt {
     private String aptNm;
     private String address;
     private String umdNm; // 법정동
+    private String sggNm;
     private String jibun; // 지번
     private String floor;
     private String buildYear;
-    private Double excluUseAr;
+    private String excluUseAr;
     private String contractTerm;
     private Long deposit; // 전세가격
     private Double charter_rate; // 전세가율

@@ -1,8 +1,10 @@
 package charter.charter_safe.Apt.a_controller;
 
 import charter.charter_safe.Apt.a_dto.AptCharterDto;
+import charter.charter_safe.Apt.a_dto.AptDto;
 import charter.charter_safe.Apt.a_dto.AptTradeDto;
 import charter.charter_safe.Apt.a_service.AptCharterApiService;
+import charter.charter_safe.Apt.a_service.AptService;
 import charter.charter_safe.Apt.a_service.AptTradeApiService;
 import charter.charter_safe.Member.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +22,11 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/apt")
-public class AptCharterInfoApiController {
+public class AptController {
 
     private final AptCharterApiService aptCharterApiService; // final(null 예외 방지)
     private final AptTradeApiService aptTradeApiService;
+    private final AptService aptService;
     String r_url = "https://apis.data.go.kr/1613000/RTMSDataSvcAptRent/getRTMSDataSvcAptRent"; //전세 데이터
     String t_url = "https://apis.data.go.kr/1613000/RTMSDataSvcAptTrade/getRTMSDataSvcAptTrade"; //매매 데이터
 
@@ -41,37 +44,36 @@ public class AptCharterInfoApiController {
             "11650", "11680", "11710", "11740");
 
 
-    @GetMapping("/charter")
-    public ApiResponse<?> CharterList() throws Exception {
+    @GetMapping("")
+    public ApiResponse<?> AptList() throws Exception {
 
-        RestTemplate restTemplate = new RestTemplate();
         List<AptCharterDto> rentList = new ArrayList<>();
-
-        for(String lawd_cd : LAWD_CD) {
-            String urlStr = r_url + "?LAWD_CD=" + lawd_cd + "&DEAL_YMD=" + current_year + current_month
-                    + "&serviceKey=" + r_serviceKey + "&numOfRows=" + numOfRows;
-            URI uri = new URI(urlStr);
-            String jsonData = restTemplate.getForObject(uri, String.class);
-            List<AptCharterDto> currentRentList = aptCharterApiService.AptInfoApiParseXml(jsonData);
-            rentList.addAll(currentRentList);
-        }
-        return ApiResponse.ok(rentList);
-    }
-
-    @GetMapping("/trade")
-    public ApiResponse<?> TradeList() throws Exception {
-
-        RestTemplate restTemplate = new RestTemplate();
         List<AptTradeDto> tradeList = new ArrayList<>();
 
+        RestTemplate restTemplate1 = new RestTemplate();
+        RestTemplate restTemplate2 = new RestTemplate();
+
+
         for(String lawd_cd : LAWD_CD) {
-            String urlStr = t_url + "?LAWD_CD=" + lawd_cd + "&DEAL_YMD=" + current_year + current_month
+            String urlStr1 = r_url + "?LAWD_CD=" + lawd_cd + "&DEAL_YMD=" + current_year + current_month
+                    + "&serviceKey=" + r_serviceKey + "&numOfRows=" + numOfRows;
+
+            String urlStr2 = t_url + "?LAWD_CD=" + lawd_cd + "&DEAL_YMD=" + current_year + current_month
                     + "&serviceKey=" + t_serviceKey + "&numOfRows=" + numOfRows;
-            URI uri = new URI(urlStr);
-            String jsonData = restTemplate.getForObject(uri, String.class);
-            List<AptTradeDto> currentTradeList = aptTradeApiService.AptInfoApiParseXml(jsonData);
+
+            URI uri1 = new URI(urlStr1);
+            URI uri2 = new URI(urlStr2);
+            String jsonData1 = restTemplate1.getForObject(uri1, String.class);
+            String jsonData2 = restTemplate2.getForObject(uri2, String.class);
+
+            List<AptCharterDto> currentRentList = aptCharterApiService.AptInfoApiParseXml(jsonData1);
+            List<AptTradeDto> currentTradeList = aptTradeApiService.AptInfoApiParseXml(jsonData2);
+
+            rentList.addAll(currentRentList);
             tradeList.addAll(currentTradeList);
         }
-        return ApiResponse.ok(tradeList);
+
+        List<AptDto> aptList = aptService.saveAptData(rentList, tradeList);
+        return ApiResponse.ok(aptList);
     }
 }
