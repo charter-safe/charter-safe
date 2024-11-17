@@ -1,6 +1,6 @@
 package charter.charter_safe.Apt.a_service;
 
-import charter.charter_safe.Apt.a_dto.AptCharterDto;
+import charter.charter_safe.Apt.a_dto.AptTradeDto;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -12,12 +12,12 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AptCharterApiServiceImpl implements AptCharterApiService {
+public class AptTradeApiServiceImpl implements AptTradeApiService {
 
     @Override
     @Transactional
-    public List<AptCharterDto> AptInfoApiParseXml(String jsonData) throws Exception {
-        List<AptCharterDto> aptInfoList = new ArrayList<>();
+    public List<AptTradeDto> AptInfoApiParseXml(String jsonData) throws Exception {
+        List<AptTradeDto> aptInfoList = new ArrayList<>();
 
         // JSON 파서 객체 생성
         ObjectMapper objectMapper = new ObjectMapper();
@@ -36,12 +36,12 @@ public class AptCharterApiServiceImpl implements AptCharterApiService {
             String floor = itemNode.path("floor").asText();
             String buildYear = itemNode.path("buildYear").asText();
             String excluUseAr = itemNode.path("excluUseAr").asText();
-            String contractTerm = itemNode.path("contractTerm").asText();
-            String deposit = itemNode.path("deposit").asText();
+            String dealAmount = itemNode.path("dealAmount").asText();
+            String rgstDate = itemNode.path("rgstDate").asText();
 
-
-            AptCharterDto aptCharter = new AptCharterDto(aptNm, sggCd, umdNm, jibun, floor, buildYear, excluUseAr, contractTerm, deposit);
-            aptInfoList.add(aptCharter);
+            AptTradeDto aptTrade = new AptTradeDto(aptNm, sggCd, umdNm, jibun, floor, buildYear, excluUseAr,
+                    dealAmount, rgstDate);
+            aptInfoList.add(aptTrade);
         }
         return aptInfoList;
     }

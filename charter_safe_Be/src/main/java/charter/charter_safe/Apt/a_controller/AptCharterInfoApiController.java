@@ -1,7 +1,9 @@
 package charter.charter_safe.Apt.a_controller;
 
 import charter.charter_safe.Apt.a_dto.AptCharterDto;
+import charter.charter_safe.Apt.a_dto.AptTradeDto;
 import charter.charter_safe.Apt.a_service.AptCharterApiService;
+import charter.charter_safe.Apt.a_service.AptTradeApiService;
 import charter.charter_safe.Member.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,9 +23,14 @@ import java.util.List;
 public class AptCharterInfoApiController {
 
     private final AptCharterApiService aptCharterApiService; // final(null 예외 방지)
+    private final AptTradeApiService aptTradeApiService;
     String r_url = "https://apis.data.go.kr/1613000/RTMSDataSvcAptRent/getRTMSDataSvcAptRent"; //전세 데이터
+    String t_url = "https://apis.data.go.kr/1613000/RTMSDataSvcAptTrade/getRTMSDataSvcAptTrade"; //매매 데이터
+
     @Value("${API-KEY.aptRent}")
     String r_serviceKey; // 전세 서비스키
+    @Value("${API-KEY.aptTrade}")
+    String t_serviceKey;
     Integer current_year = LocalDate.now().getYear();
     Integer current_month = LocalDate.now().getMonthValue() - 1;
     Integer numOfRows = 1000;
@@ -49,5 +56,22 @@ public class AptCharterInfoApiController {
             rentList.addAll(currentRentList);
         }
         return ApiResponse.ok(rentList);
+    }
+
+    @GetMapping("/trade")
+    public ApiResponse<?> TradeList() throws Exception {
+
+        RestTemplate restTemplate = new RestTemplate();
+        List<AptTradeDto> tradeList = new ArrayList<>();
+
+        for(String lawd_cd : LAWD_CD) {
+            String urlStr = t_url + "?LAWD_CD=" + lawd_cd + "&DEAL_YMD=" + current_year + current_month
+                    + "&serviceKey=" + t_serviceKey + "&numOfRows=" + numOfRows;
+            URI uri = new URI(urlStr);
+            String jsonData = restTemplate.getForObject(uri, String.class);
+            List<AptTradeDto> currentTradeList = aptTradeApiService.AptInfoApiParseXml(jsonData);
+            tradeList.addAll(currentTradeList);
+        }
+        return ApiResponse.ok(tradeList);
     }
 }
