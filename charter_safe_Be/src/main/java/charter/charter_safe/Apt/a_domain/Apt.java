@@ -22,8 +22,8 @@ public class Apt {
     private Long a_number;
     private String aptNm;
     private String address;
+    private String sggNm; // 법정구
     private String umdNm; // 법정동
-    private String sggNm;
     private String jibun; // 지번
     private String floor;
     private String buildYear;

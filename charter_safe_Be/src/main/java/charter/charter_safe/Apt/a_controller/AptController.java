@@ -9,7 +9,9 @@ import charter.charter_safe.Apt.a_service.AptTradeApiService;
 import charter.charter_safe.Member.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -36,7 +38,7 @@ public class AptController {
     String t_serviceKey;
     Integer current_year = LocalDate.now().getYear();
     Integer current_month = LocalDate.now().getMonthValue() - 1;
-    Integer numOfRows = 1000;
+    Integer numOfRows = 10;
     List<String> LAWD_CD = List.of("11110", "11140", "11170",
             "11200", "11215", "11230", "11260", "11290", "11305",
             "11320", "11350", "11380", "11410", "11440", "11470",
@@ -75,5 +77,11 @@ public class AptController {
 
         List<AptDto> aptList = aptService.saveAptData(rentList, tradeList);
         return ApiResponse.ok(aptList);
+    }
+
+    @GetMapping("/find/{umdNm}")
+    @Transactional
+    public List<AptDto> find(@PathVariable String umdNm) {
+        return aptService.findApt(umdNm);
     }
 }

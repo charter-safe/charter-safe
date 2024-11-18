@@ -94,7 +94,9 @@ public class OfficetelServiceImpl implements OfficetelService {
 
         // 저장된 데이터를 OfficetelDto 리스트로 변환 후 반환
         return officetelEntities.stream().map(officetel ->
-                new OfficetelDto(officetel.getOffiNm(), officetel.getAddress(), officetel.getSggNm(), officetel.getUmdNm(), officetel.getJibun(), officetel.getDeposit(), officetel.getCharter_rate(), officetel.getBack_taxes(), officetel.getRisk())
+                new OfficetelDto(officetel.getOffiNm(), officetel.getAddress(), officetel.getSggNm(),
+                        officetel.getUmdNm(), officetel.getJibun(), officetel.getDeposit(), officetel.getCharter_rate(),
+                        officetel.getBack_taxes(), officetel.getRisk())
         ).collect(Collectors.toList());
     }
 }

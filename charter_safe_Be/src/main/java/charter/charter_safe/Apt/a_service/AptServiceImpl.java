@@ -6,13 +6,8 @@ import charter.charter_safe.Apt.a_dto.AptDataDto;
 import charter.charter_safe.Apt.a_dto.AptDto;
 import charter.charter_safe.Apt.a_dto.AptTradeDto;
 import charter.charter_safe.Apt.a_repo.AptRepository;
-import charter.charter_safe.Officetel.o_domain.Officetel;
-import charter.charter_safe.Officetel.o_dto.OfficetelCharterDto;
-import charter.charter_safe.Officetel.o_dto.OfficetelDataDto;
-import charter.charter_safe.Officetel.o_dto.OfficetelDto;
-import charter.charter_safe.Officetel.o_dto.OfficetelTradeDto;
-import charter.charter_safe.Officetel.o_repo.OfficetelRepository;
-import charter.charter_safe.Officetel.o_service.DataMapper;
+import charter.charter_safe.Community.com_domain.Community;
+import charter.charter_safe.Community.com_dto.CommunityDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,8 +34,8 @@ public class AptServiceImpl implements AptService{
 
             return Apt.builder()
                     .aptNm(data.getAptCharterDto().getAptNm()) // 오피스텔 이름
-                    .umdNm(data.getAptCharterDto().getUmdNm())
                     .sggNm(data.getAptTradeDto().getSggNm())
+                    .umdNm(data.getAptCharterDto().getUmdNm())
                     .jibun(data.getAptCharterDto().getJibun())
                     .floor(data.getAptCharterDto().getFloor())
                     .buildYear(data.getAptCharterDto().getBuildYear())
@@ -62,5 +57,18 @@ public class AptServiceImpl implements AptService{
                         apt.getFloor(), apt.getBuildYear(), apt.getExcluUseAr(), apt.getContractTerm(), apt.getDeposit(),
                         apt.getCharter_rate(), apt.getBack_taxes(), apt.getRisk())
         ).collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public List<AptDto> findApt(String umdNm) {
+        List<Apt> aptList = aptRepository.findByUmdNm(umdNm);
+
+        if(aptList.isEmpty()) {
+            throw new IllegalArgumentException("존재하지 않는 동입니다");
+        }
+        return aptList.stream()
+                .map(AptDto::new)
+                .collect(Collectors.toList());
     }
 }
