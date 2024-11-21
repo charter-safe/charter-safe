@@ -1,5 +1,6 @@
 package charter.charter_safe.Officetel.o_controller;
 
+import charter.charter_safe.Apt.a_dto.AptDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelCharterDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelTradeDto;
@@ -9,6 +10,7 @@ import charter.charter_safe.Officetel.o_service.TradeApiService;
 import charter.charter_safe.Member.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -19,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/data")
+@RequestMapping("/officetel")
 public class OfficetelController {
 
     String r_url = "https://apis.data.go.kr/1613000/RTMSDataSvcOffiRent/getRTMSDataSvcOffiRent"; //전세 데이터
@@ -31,7 +33,7 @@ public class OfficetelController {
     String t_serviceKey; // 매매 서비스키
 
     Integer current_year = LocalDate.now().getYear();
-    Integer current_month = LocalDate.now().getMonthValue() - 1;
+    Integer current_month = LocalDate.now().getMonthValue();
     Integer numOfRows = 1000;
 
     List<String> LAWD_CD = List.of("11110", "11140", "11170",
@@ -75,5 +77,17 @@ public class OfficetelController {
 
         List<OfficetelDto> officetelList = officetelService.saveOfficetelData(charterList, tradeList);
         return ApiResponse.ok(officetelList);
+    }
+
+    @GetMapping("/find/{umdNm}")
+    @Transactional
+    public List<OfficetelDto> find(@PathVariable String umdNm) {
+        return officetelService.findOfficetelData(umdNm);
+    }
+
+    @GetMapping("/findBySggNm/{sggNm}")
+    @Transactional
+    public List<OfficetelDto> findSggNm(@PathVariable String sggNm) {
+        return officetelService.findOfficetelDataBySggNm(sggNm);
     }
 }

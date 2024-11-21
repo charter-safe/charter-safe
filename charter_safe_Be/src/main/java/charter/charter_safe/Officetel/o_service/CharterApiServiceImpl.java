@@ -33,8 +33,14 @@ public class CharterApiServiceImpl implements CharterApiService{
             String jibun = itemNode.path("jibun").asText();
             String offiNm = itemNode.path("offiNm").asText();
             String sggCd = itemNode.path("sggCd").asText();
+            String floor = itemNode.path("floor").asText();
+            String buildYear = itemNode.path("buildYear").asText();
+            String excluUseAr = itemNode.path("excluUseAr").asText();
+            String contractTerm = itemNode.path("contractTerm").asText();
+            String monthlyRent = itemNode.path("monthlyRent").asText();
 
-            OfficetelCharterDto charter = new OfficetelCharterDto(deposit, sggNm, umdNm, jibun, offiNm, sggCd);
+            OfficetelCharterDto charter = new OfficetelCharterDto(deposit, sggNm, umdNm, jibun, offiNm, sggCd, floor,
+                    buildYear, excluUseAr, contractTerm, monthlyRent);
             charterInfoList.add(charter);
         }
         return charterInfoList;

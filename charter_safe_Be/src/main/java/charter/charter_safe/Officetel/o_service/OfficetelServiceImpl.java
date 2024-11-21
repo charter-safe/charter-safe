@@ -46,6 +46,8 @@
 
 package charter.charter_safe.Officetel.o_service;
 
+import charter.charter_safe.Apt.a_domain.Apt;
+import charter.charter_safe.Apt.a_dto.AptDto;
 import charter.charter_safe.Officetel.o_domain.Officetel;
 import charter.charter_safe.Officetel.o_dto.OfficetelCharterDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelDataDto;
@@ -82,6 +84,11 @@ public class OfficetelServiceImpl implements OfficetelService {
                     .sggNm(data.getOfficetelCharterDto().getSggNm())
                     .umdNm(data.getOfficetelCharterDto().getUmdNm())
                     .jibun(data.getOfficetelCharterDto().getJibun())
+                    .floor(data.getOfficetelCharterDto().getFloor())
+                    .buildYear(data.getOfficetelCharterDto().getBuildYear())
+                    .excluUseAr(data.getOfficetelCharterDto().getExcluUseAr())
+                    .contractTerm(data.getOfficetelCharterDto().getContractTerm())
+                    .monthlyRent(data.getOfficetelCharterDto().getMonthlyRent())
                     .address(data.getOfficetelCharterDto().getSggNm() + " " + data.getOfficetelCharterDto().getUmdNm() + " " + data.getOfficetelCharterDto().getJibun())
                     .deposit(charterPrice)
                     .charter_rate(charterRate)
@@ -95,8 +102,38 @@ public class OfficetelServiceImpl implements OfficetelService {
         // 저장된 데이터를 OfficetelDto 리스트로 변환 후 반환
         return officetelEntities.stream().map(officetel ->
                 new OfficetelDto(officetel.getOffiNm(), officetel.getAddress(), officetel.getSggNm(),
-                        officetel.getUmdNm(), officetel.getJibun(), officetel.getDeposit(), officetel.getCharter_rate(),
+                        officetel.getUmdNm(), officetel.getJibun(), officetel.getFloor(), officetel.getBuildYear(),
+                        officetel.getExcluUseAr(), officetel.getContractTerm(), officetel.getMonthlyRent(),
+                        officetel.getDeposit(), officetel.getCharter_rate(),
                         officetel.getBack_taxes(), officetel.getRisk())
         ).collect(Collectors.toList());
     }
+
+    @Override
+    @Transactional
+    public List<OfficetelDto> findOfficetelData(String umdNm) {
+        List<Officetel> officetelList = officetelRepository.findOfficetelByUmdNm(umdNm);
+
+        if(officetelList.isEmpty()) {
+            throw new IllegalArgumentException("존재하지 않는 동입니다");
+        }
+        return officetelList.stream()
+                .map(OfficetelDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public List<OfficetelDto> findOfficetelDataBySggNm(String sggNm) {
+        List<Officetel> officetelListBySggNm = officetelRepository.findOfficetelBySggNm(sggNm);
+
+        if(officetelListBySggNm.isEmpty()) {
+            throw new IllegalArgumentException("존재하지 않는 구입니다.");
+        }
+
+        return officetelListBySggNm.stream()
+                .map(OfficetelDto::new)
+                .collect(Collectors.toList());
+    }
+
 }

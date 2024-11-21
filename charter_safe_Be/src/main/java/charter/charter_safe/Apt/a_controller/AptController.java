@@ -37,8 +37,8 @@ public class AptController {
     @Value("${API-KEY.aptTrade}")
     String t_serviceKey;
     Integer current_year = LocalDate.now().getYear();
-    Integer current_month = LocalDate.now().getMonthValue() - 1;
-    Integer numOfRows = 10;
+    Integer current_month = LocalDate.now().getMonthValue();
+    Integer numOfRows = 1000;
     List<String> LAWD_CD = List.of("11110", "11140", "11170",
             "11200", "11215", "11230", "11260", "11290", "11305",
             "11320", "11350", "11380", "11410", "11440", "11470",
