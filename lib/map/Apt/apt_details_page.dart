@@ -1,26 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
 
 class DetailsPage extends StatelessWidget {
   final String ImageUrl;
-  final String offiNm;
+  final String aptNm;
   final int deposit;
   final String address;
+  final String floor;
+  final String buildYear;
+  final String excluUseAr;
+  final String contractTerm;
   final double rate;
   final int tax;
   final int risk;
 
   DetailsPage({
-    Key? key,
+    super.key,
     required this.ImageUrl,
-    required this.offiNm,
+    required this.aptNm,
     required this.deposit,
     required this.address,
+    required this.floor,
+    required this.buildYear,
+    required this.excluUseAr,
+    required this.contractTerm,
     required this.rate,
     required this.tax,
     required this.risk,
-  }) : super(key: key);
+  });
 
   final numberFormat = NumberFormat.currency(locale: 'ko_KR', symbol: '');
 
@@ -49,7 +56,7 @@ class DetailsPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Text(
-                offiNm,
+                aptNm,
                 textScaleFactor: 1.5,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
@@ -58,13 +65,19 @@ class DetailsPage extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Text(
-                address,
-                textScaleFactor: 1.5,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: Text(address, textScaleFactor: 1.5),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text(floor, textScaleFactor: 1.5),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text(buildYear, textScaleFactor: 1.5),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text(contractTerm, textScaleFactor: 1.5),
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),

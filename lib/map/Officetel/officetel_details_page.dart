@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:intl/intl.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -7,20 +6,30 @@ class DetailsPage extends StatelessWidget {
   final String offiNm;
   final int deposit;
   final String address;
+  final String floor;
+  final String buildYear;
+  final String excluUseAr;
+  final String contractTerm;
+  final String monthlyRent;
   final double rate;
   final int tax;
   final int risk;
 
   DetailsPage({
-    Key? key,
+    super.key,
     required this.ImageUrl,
     required this.offiNm,
     required this.deposit,
     required this.address,
+    required this.floor,
+    required this.buildYear,
+    required this.excluUseAr,
+    required this.contractTerm,
+    required this.monthlyRent,
     required this.rate,
     required this.tax,
     required this.risk,
-  }) : super(key: key);
+  });
 
   final numberFormat = NumberFormat.currency(locale: 'ko_KR', symbol: '');
 
@@ -69,14 +78,64 @@ class DetailsPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Text(
-                "${numberFormat.format(deposit)}만원",
+                floor,
+                textScaleFactor: 1.5,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text(
+                buildYear,
+                textScaleFactor: 1.5,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text(
+                excluUseAr,
+                textScaleFactor: 1.5,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text(
+                contractTerm,
+                textScaleFactor: 1.5,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text(
+                "월세 : monthlyRent",
+                textScaleFactor: 1.5,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text(
+                "전세 OR 보증금 :${numberFormat.format(deposit)}만원",
                 textScaleFactor: 1.3,
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Text(
-                "전세가율: ${rate.toStringAsFixed(2)}%",
+                "전세가율 : ${rate.toStringAsFixed(2)}%",
                 textScaleFactor: 1.3,
               ),
             ),
