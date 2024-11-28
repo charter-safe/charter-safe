@@ -10,16 +10,16 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.List;
 
-@Entity
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Officetel {
+@Document(indexName = "officetel")
+public class OfficetelDocument {
 
-    @Id @GeneratedValue
-    @Column(name = "o_no")
-    private Long o_number;
+    @Id
+    private Long id;
+
     private String offiNm;
     private String address;
     private String sggNm; // 시군구
@@ -42,23 +42,27 @@ public class Officetel {
     @OneToMany(mappedBy = "officetel")
     private List<HostReview> hostReviews;
 
-    public Officetel(Long o_number, String offiNm, String address, String sggNm, String umdNm, String jibun,
-                     Long deposit, String contractTerm, String buildYear, String excluUseAr, String floor,
-                     String monthlyRent, Double charter_rate, Long back_taxes, Long risk) {
-        this.o_number = o_number;
-        this.offiNm = offiNm;
-        this.address = address;
-        this.sggNm = sggNm;
-        this.umdNm = umdNm;
-        this.jibun = jibun;
-        this.deposit = deposit;
-        this.floor = contractTerm;
-        this.buildYear = buildYear;
-        this.excluUseAr = excluUseAr;
-        this.contractTerm = floor;
-        this.monthlyRent = monthlyRent;
-        this.charter_rate = charter_rate;
-        this.back_taxes = back_taxes;
-        this.risk = risk;
+    public static OfficetelDocument from(Officetel officetel) {
+        return OfficetelDocument.builder()
+                .id(officetel.getO_number())
+                .offiNm(officetel.getOffiNm())
+                .address(officetel.getAddress())
+                .sggNm(officetel.getSggNm())
+                .umdNm(officetel.getUmdNm())
+                .jibun(officetel.getJibun())
+                .deposit(officetel.getDeposit())
+                .floor(officetel.getFloor())
+                .buildYear(officetel.getBuildYear())
+                .excluUseAr(officetel.getExcluUseAr())
+                .contractTerm(officetel.getContractTerm())
+                .monthlyRent(officetel.getMonthlyRent())
+                .charter_rate(officetel.getCharter_rate())
+                .back_taxes(officetel.getBack_taxes())
+                .risk(officetel.getRisk())
+                .build();
     }
+    public OfficetelDocument(OfficetelDocument officetelDocument) {
+        this.sggNm = officetelDocument.getSggNm();
+    }
+
 }

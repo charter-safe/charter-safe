@@ -46,15 +46,17 @@
 
 package charter.charter_safe.Officetel.o_service;
 
-import charter.charter_safe.Apt.a_domain.Apt;
-import charter.charter_safe.Apt.a_dto.AptDto;
 import charter.charter_safe.Officetel.o_domain.Officetel;
+import charter.charter_safe.Officetel.o_domain.OfficetelDocument;
 import charter.charter_safe.Officetel.o_dto.OfficetelCharterDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelDataDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelTradeDto;
 import charter.charter_safe.Officetel.o_repo.OfficetelRepository;
+import charter.charter_safe.Officetel.o_repo.OfficetelSearchRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,6 +69,8 @@ public class OfficetelServiceImpl implements OfficetelService {
 
     private final DataMapper dataMapper;
     private final OfficetelRepository officetelRepository;
+    private final ElasticsearchOperations elasticsearchOperations;
+    private final OfficetelSearchRepository officetelSearchRepository;
 
     @Override
     @Transactional
@@ -130,6 +134,20 @@ public class OfficetelServiceImpl implements OfficetelService {
         if(officetelListBySggNm.isEmpty()) {
             throw new IllegalArgumentException("존재하지 않는 구입니다.");
         }
+
+        return officetelListBySggNm.stream()
+                .map(OfficetelDto::new)
+                .collect(Collectors.toList());
+    }
+
+    public void save(Officetel officetel) {
+        elasticsearchOperations.save(OfficetelDocument.from(officetel));
+    }
+
+    @Override
+    @Transactional
+    public List<OfficetelDto> search(String sggNm) {
+        List<OfficetelDocument> officetelListBySggNm = officetelSearchRepository.findBySggNm(sggNm);
 
         return officetelListBySggNm.stream()
                 .map(OfficetelDto::new)

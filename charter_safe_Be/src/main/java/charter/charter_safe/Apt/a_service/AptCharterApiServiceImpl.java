@@ -38,9 +38,10 @@ public class AptCharterApiServiceImpl implements AptCharterApiService {
             String excluUseAr = itemNode.path("excluUseAr").asText();
             String contractTerm = itemNode.path("contractTerm").asText();
             String deposit = itemNode.path("deposit").asText();
+            String monthlyRent = itemNode.path("monthlyRent").asText();
 
 
-            AptCharterDto aptCharter = new AptCharterDto(aptNm, sggCd, umdNm, jibun, floor, buildYear, excluUseAr, contractTerm, deposit);
+            AptCharterDto aptCharter = new AptCharterDto(aptNm, sggCd, umdNm, jibun, floor, buildYear, excluUseAr, contractTerm, deposit, monthlyRent);
             aptInfoList.add(aptCharter);
         }
         return aptInfoList;

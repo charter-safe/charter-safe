@@ -6,8 +6,6 @@ import charter.charter_safe.Apt.a_dto.AptDataDto;
 import charter.charter_safe.Apt.a_dto.AptDto;
 import charter.charter_safe.Apt.a_dto.AptTradeDto;
 import charter.charter_safe.Apt.a_repo.AptRepository;
-import charter.charter_safe.Community.com_domain.Community;
-import charter.charter_safe.Community.com_dto.CommunityDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,6 +41,7 @@ public class AptServiceImpl implements AptService{
                     .contractTerm(data.getAptCharterDto().getContractTerm())
                     .address(data.getAptTradeDto().getSggNm() + " " + data.getAptCharterDto().getUmdNm() + " " + data.getAptCharterDto().getJibun())
                     .deposit(charterPrice)
+                    .monthlyRent(data.getAptCharterDto().getMonthlyRent())
                     .charter_rate(aptCharterRate)
                     .back_taxes(0L)
                     .risk(0L)
@@ -55,7 +54,7 @@ public class AptServiceImpl implements AptService{
         return aptEntities.stream().map(apt ->
                 new AptDto(apt.getAptNm(), apt.getAddress(), apt.getSggNm(), apt.getUmdNm(), apt.getJibun(),
                         apt.getFloor(), apt.getBuildYear(), apt.getExcluUseAr(), apt.getContractTerm(), apt.getDeposit(),
-                        apt.getCharter_rate(), apt.getBack_taxes(), apt.getRisk())
+                        apt.getMonthlyRent(), apt.getCharter_rate(), apt.getBack_taxes(), apt.getRisk())
         ).collect(Collectors.toList());
     }
 
@@ -68,6 +67,20 @@ public class AptServiceImpl implements AptService{
             throw new IllegalArgumentException("존재하지 않는 동입니다");
         }
         return aptList.stream()
+                .map(AptDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional
+    public List<AptDto> findAptBySggNm(String sggNm) {
+        List<Apt> aptListBySggNm = aptRepository.findBySggNm("서울 " + sggNm);
+
+        if(aptListBySggNm.isEmpty()) {
+            throw new IllegalArgumentException("존재하지 않는 구입니다");
+        }
+
+        return aptListBySggNm.stream()
                 .map(AptDto::new)
                 .collect(Collectors.toList());
     }

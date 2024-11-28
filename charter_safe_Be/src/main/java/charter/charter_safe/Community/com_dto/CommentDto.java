@@ -1,7 +1,6 @@
 package charter.charter_safe.Community.com_dto;
 
 import charter.charter_safe.Community.com_domain.Comment;
-import charter.charter_safe.Community.com_domain.Community;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

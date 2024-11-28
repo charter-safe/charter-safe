@@ -30,6 +30,7 @@ public class Apt {
     private String excluUseAr;
     private String contractTerm;
     private Long deposit; // 전세가격
+    private String monthlyRent; // 월세가격
     private Double charter_rate; // 전세가율
     private Long back_taxes; // 체납 세금
     private Long risk;

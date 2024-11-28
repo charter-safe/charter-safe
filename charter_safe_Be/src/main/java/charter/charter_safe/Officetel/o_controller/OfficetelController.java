@@ -1,6 +1,5 @@
 package charter.charter_safe.Officetel.o_controller;
 
-import charter.charter_safe.Apt.a_dto.AptDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelCharterDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelTradeDto;
@@ -89,5 +88,11 @@ public class OfficetelController {
     @Transactional
     public List<OfficetelDto> findSggNm(@PathVariable String sggNm) {
         return officetelService.findOfficetelDataBySggNm(sggNm);
+    }
+
+    @GetMapping("/search/{sggNm}")
+    @Transactional
+    public List<OfficetelDto> search(@PathVariable String sggNm) {
+        return officetelService.search(sggNm);
     }
 }

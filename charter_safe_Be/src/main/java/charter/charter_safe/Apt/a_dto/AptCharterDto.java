@@ -16,4 +16,5 @@ public class AptCharterDto {
     private String excluUseAr; // 전용면적
     private String contractTerm; // 계약기간
     private String deposit; // 전세가격
+    private String monthlyRent;
 }

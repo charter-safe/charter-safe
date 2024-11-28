@@ -84,4 +84,10 @@ public class AptController {
     public List<AptDto> find(@PathVariable String umdNm) {
         return aptService.findApt(umdNm);
     }
+
+    @GetMapping("/findBySggNm/{sggNm}")
+    @Transactional
+    public List<AptDto> findBySggNm(@PathVariable String sggNm) {
+        return aptService.findAptBySggNm(sggNm);
+    }
 }

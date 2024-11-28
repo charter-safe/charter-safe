@@ -1,6 +1,7 @@
 package charter.charter_safe.Officetel.o_dto;
 
 import charter.charter_safe.Officetel.o_domain.Officetel;
+import charter.charter_safe.Officetel.o_domain.OfficetelDocument;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -45,6 +46,8 @@ public class OfficetelDto {
         this.back_taxes = officetel.getBack_taxes();
         this.risk = officetel.getRisk();
     }
-
+    public OfficetelDto(OfficetelDocument officetelDocument) {
+        this.sggNm = officetelDocument.getSggNm();
+    }
 }
 

@@ -20,6 +20,7 @@ public class AptDto {
     private String excluUseAr;
     private String contractTerm;
     private Long deposit; // 전세가격
+    private String monthlyRent; // 월세
     private Double charter_rate; // 전세가율
     private Long back_taxes; // 체납 세금
     private Long risk;
@@ -35,6 +36,7 @@ public class AptDto {
         this.excluUseAr = apt.getExcluUseAr();
         this.contractTerm = apt.getContractTerm();
         this.deposit = apt.getDeposit();
+        this.monthlyRent = apt.getMonthlyRent();
         this.charter_rate = apt.getCharter_rate();
         this.back_taxes = apt.getBack_taxes();
         this.risk = apt.getRisk();

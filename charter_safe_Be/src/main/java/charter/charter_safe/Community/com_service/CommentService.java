@@ -1,6 +1,5 @@
 package charter.charter_safe.Community.com_service;
 
-import charter.charter_safe.Community.com_domain.Comment;
 import charter.charter_safe.Community.com_dto.CommentDto;
 import org.springframework.stereotype.Service;
 
