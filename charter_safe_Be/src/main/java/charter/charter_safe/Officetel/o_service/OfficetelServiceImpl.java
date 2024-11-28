@@ -139,19 +139,4 @@ public class OfficetelServiceImpl implements OfficetelService {
                 .map(OfficetelDto::new)
                 .collect(Collectors.toList());
     }
-
-    public void save(Officetel officetel) {
-        elasticsearchOperations.save(OfficetelDocument.from(officetel));
-    }
-
-    @Override
-    @Transactional
-    public List<OfficetelDto> search(String sggNm) {
-        List<OfficetelDocument> officetelListBySggNm = officetelSearchRepository.findBySggNm(sggNm);
-
-        return officetelListBySggNm.stream()
-                .map(OfficetelDto::new)
-                .collect(Collectors.toList());
-    }
-
 }

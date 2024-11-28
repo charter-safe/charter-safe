@@ -14,5 +14,4 @@ public interface OfficetelService {
     List<OfficetelDto> saveOfficetelData(List<OfficetelCharterDto> charterList, List<OfficetelTradeDto> tradeList);
     List<OfficetelDto> findOfficetelData(String umdNm);
     List<OfficetelDto> findOfficetelDataBySggNm(String sggNm);
-    List<OfficetelDto> search(String sggNm);
 }

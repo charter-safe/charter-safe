@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface OfficetelSearchRepository extends ElasticsearchRepository<OfficetelDocument, Long> {
-    Optional<OfficetelDocument> findById(Long o_number);
+    List<OfficetelDocument> findByUmdNm(String umdNm);
     List<OfficetelDocument> findBySggNm(String sggNm);
 
 

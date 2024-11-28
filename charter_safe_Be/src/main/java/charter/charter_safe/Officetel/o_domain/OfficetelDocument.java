@@ -18,7 +18,7 @@ import java.util.List;
 public class OfficetelDocument {
 
     @Id
-    private Long id;
+    private String id;
 
     private String offiNm;
     private String address;
@@ -35,16 +35,8 @@ public class OfficetelDocument {
     private Long back_taxes; // 체납 세금
     private Long risk;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "m_id")
-    private Member member;
-
-    @OneToMany(mappedBy = "officetel")
-    private List<HostReview> hostReviews;
-
     public static OfficetelDocument from(Officetel officetel) {
         return OfficetelDocument.builder()
-                .id(officetel.getO_number())
                 .offiNm(officetel.getOffiNm())
                 .address(officetel.getAddress())
                 .sggNm(officetel.getSggNm())
@@ -61,8 +53,21 @@ public class OfficetelDocument {
                 .risk(officetel.getRisk())
                 .build();
     }
-    public OfficetelDocument(OfficetelDocument officetelDocument) {
-        this.sggNm = officetelDocument.getSggNm();
-    }
 
+    public OfficetelDocument(String offiNm, String address, String sggNm, String umdNm, String jibun, Long deposit, String floor, String buildYear, String excluUseAr, String contractTerm, String monthlyRent, Double charter_rate, Long back_taxes, Long risk) {
+        this.offiNm = offiNm;
+        this.address = address;
+        this.sggNm = sggNm;
+        this.umdNm = umdNm;
+        this.jibun = jibun;
+        this.deposit = deposit;
+        this.floor = floor;
+        this.buildYear = buildYear;
+        this.excluUseAr = excluUseAr;
+        this.contractTerm = contractTerm;
+        this.monthlyRent = monthlyRent;
+        this.charter_rate = charter_rate;
+        this.back_taxes = back_taxes;
+        this.risk = risk;
+    }
 }

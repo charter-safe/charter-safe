@@ -1,9 +1,11 @@
 package charter.charter_safe.Officetel.o_controller;
 
+import charter.charter_safe.Officetel.o_domain.OfficetelDocument;
 import charter.charter_safe.Officetel.o_dto.OfficetelCharterDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelTradeDto;
 import charter.charter_safe.Officetel.o_service.CharterApiService;
+import charter.charter_safe.Officetel.o_service.OfficetelSearchService;
 import charter.charter_safe.Officetel.o_service.OfficetelService;
 import charter.charter_safe.Officetel.o_service.TradeApiService;
 import charter.charter_safe.Member.response.ApiResponse;
@@ -44,6 +46,7 @@ public class OfficetelController {
     private final OfficetelService officetelService;
     private final TradeApiService tradeApiService;
     private final CharterApiService charterApiService; // final(null 예외 방지)
+    private final OfficetelSearchService officetelSearchService;
 
 
 
@@ -75,24 +78,31 @@ public class OfficetelController {
         }
 
         List<OfficetelDto> officetelList = officetelService.saveOfficetelData(charterList, tradeList);
-        return ApiResponse.ok(officetelList);
+        List<OfficetelDocument> officetelDocuments = officetelSearchService.saveData(charterList, tradeList);
+        return ApiResponse.ok(officetelDocuments);
     }
 
-    @GetMapping("/find/{umdNm}")
+//    @GetMapping("/find/{umdNm}")
+//    @Transactional
+//    public List<OfficetelDto> find(@PathVariable String umdNm) {
+//        return officetelService.findOfficetelData(umdNm);
+//    }
+//
+//    @GetMapping("/findBySggNm/{sggNm}")
+//    @Transactional
+//    public List<OfficetelDto> findSggNm(@PathVariable String sggNm) {
+//        return officetelService.findOfficetelDataBySggNm(sggNm);
+//    }
+
+    @GetMapping("/search1/{sggNm}")
     @Transactional
-    public List<OfficetelDto> find(@PathVariable String umdNm) {
-        return officetelService.findOfficetelData(umdNm);
+    public List<OfficetelDocument> searchBySggNm(@PathVariable String sggNm) {
+        return officetelSearchService.searchBySggNm(sggNm);
     }
 
-    @GetMapping("/findBySggNm/{sggNm}")
+    @GetMapping("/search2/{umdNm}")
     @Transactional
-    public List<OfficetelDto> findSggNm(@PathVariable String sggNm) {
-        return officetelService.findOfficetelDataBySggNm(sggNm);
-    }
-
-    @GetMapping("/search/{sggNm}")
-    @Transactional
-    public List<OfficetelDto> search(@PathVariable String sggNm) {
-        return officetelService.search(sggNm);
+    public List<OfficetelDocument> searchByUmdNm(@PathVariable String umdNm) {
+        return officetelSearchService.searchByUmdNm(umdNm);
     }
 }
