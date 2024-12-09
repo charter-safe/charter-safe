@@ -12,6 +12,4 @@ import java.util.List;
 @Service
 public interface OfficetelService {
     List<OfficetelDto> saveOfficetelData(List<OfficetelCharterDto> charterList, List<OfficetelTradeDto> tradeList);
-    List<OfficetelDto> findOfficetelData(String umdNm);
-    List<OfficetelDto> findOfficetelDataBySggNm(String sggNm);
 }

@@ -1,5 +1,6 @@
 package charter.charter_safe.Officetel.o_controller;
 
+import charter.charter_safe.Officetel.o_domain.Officetel;
 import charter.charter_safe.Officetel.o_domain.OfficetelDocument;
 import charter.charter_safe.Officetel.o_dto.OfficetelCharterDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelDto;
@@ -10,7 +11,10 @@ import charter.charter_safe.Officetel.o_service.OfficetelService;
 import charter.charter_safe.Officetel.o_service.TradeApiService;
 import charter.charter_safe.Member.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -22,6 +26,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/officetel")
 public class OfficetelController {
 
@@ -34,7 +39,7 @@ public class OfficetelController {
     String t_serviceKey; // 매매 서비스키
 
     Integer current_year = LocalDate.now().getYear();
-    Integer current_month = LocalDate.now().getMonthValue();
+    Integer current_month = LocalDate.now().getMonthValue() - 1;
     Integer numOfRows = 1000;
 
     List<String> LAWD_CD = List.of("11110", "11140", "11170",
@@ -78,31 +83,18 @@ public class OfficetelController {
         }
 
         List<OfficetelDto> officetelList = officetelService.saveOfficetelData(charterList, tradeList);
-        List<OfficetelDocument> officetelDocuments = officetelSearchService.saveData(charterList, tradeList);
-        return ApiResponse.ok(officetelDocuments);
+       // List<OfficetelDocument> officetelDocuments = officetelSearchService.saveData(charterList, tradeList);
+        return ApiResponse.ok(officetelList);
     }
 
-//    @GetMapping("/find/{umdNm}")
+    @GetMapping("/search1")
+    public ApiResponse<?> searchBySggNm(@RequestParam String sggNm, Pageable pageable) {
+        return ApiResponse.ok(officetelSearchService.searchOfficetel(sggNm, pageable));
+    }
+
+//    @GetMapping("/search2/{umdNm}")
 //    @Transactional
-//    public List<OfficetelDto> find(@PathVariable String umdNm) {
-//        return officetelService.findOfficetelData(umdNm);
+//    public List<OfficetelDocument> searchByUmdNm(@PathVariable String umdNm) {
+//        return officetelSearchService.searchByUmdNm(umdNm);
 //    }
-//
-//    @GetMapping("/findBySggNm/{sggNm}")
-//    @Transactional
-//    public List<OfficetelDto> findSggNm(@PathVariable String sggNm) {
-//        return officetelService.findOfficetelDataBySggNm(sggNm);
-//    }
-
-    @GetMapping("/search1/{sggNm}")
-    @Transactional
-    public List<OfficetelDocument> searchBySggNm(@PathVariable String sggNm) {
-        return officetelSearchService.searchBySggNm(sggNm);
-    }
-
-    @GetMapping("/search2/{umdNm}")
-    @Transactional
-    public List<OfficetelDocument> searchByUmdNm(@PathVariable String umdNm) {
-        return officetelSearchService.searchByUmdNm(umdNm);
-    }
 }

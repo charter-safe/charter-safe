@@ -9,6 +9,4 @@ import java.util.List;
 
 @Repository
 public interface OfficetelRepository extends JpaRepository<Officetel, Long> {
-    List<Officetel> findOfficetelByUmdNm(String umdNm);
-    List<Officetel> findOfficetelBySggNm(String sggNm);
 }

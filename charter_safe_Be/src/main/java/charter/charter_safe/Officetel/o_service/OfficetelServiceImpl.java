@@ -112,31 +112,4 @@ public class OfficetelServiceImpl implements OfficetelService {
                         officetel.getBack_taxes(), officetel.getRisk())
         ).collect(Collectors.toList());
     }
-
-    @Override
-    @Transactional
-    public List<OfficetelDto> findOfficetelData(String umdNm) {
-        List<Officetel> officetelList = officetelRepository.findOfficetelByUmdNm(umdNm);
-
-        if(officetelList.isEmpty()) {
-            throw new IllegalArgumentException("존재하지 않는 동입니다");
-        }
-        return officetelList.stream()
-                .map(OfficetelDto::new)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    @Transactional
-    public List<OfficetelDto> findOfficetelDataBySggNm(String sggNm) {
-        List<Officetel> officetelListBySggNm = officetelRepository.findOfficetelBySggNm(sggNm);
-
-        if(officetelListBySggNm.isEmpty()) {
-            throw new IllegalArgumentException("존재하지 않는 구입니다.");
-        }
-
-        return officetelListBySggNm.stream()
-                .map(OfficetelDto::new)
-                .collect(Collectors.toList());
-    }
 }

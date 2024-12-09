@@ -3,12 +3,14 @@ package charter.charter_safe.Officetel.o_dto;
 import charter.charter_safe.Officetel.o_domain.Officetel;
 import charter.charter_safe.Officetel.o_domain.OfficetelDocument;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class OfficetelDto {
 
     private String offiNm;
@@ -46,8 +48,16 @@ public class OfficetelDto {
         this.back_taxes = officetel.getBack_taxes();
         this.risk = officetel.getRisk();
     }
-    public OfficetelDto(OfficetelDocument officetelDocument) {
-        this.sggNm = officetelDocument.getSggNm();
+//    public OfficetelDto(OfficetelDocument officetelDocument) {
+//        this.sggNm = officetelDocument.getSggNm();
+//    }
+
+    public static OfficetelDto of(OfficetelDocument officetelDocument) {
+        return OfficetelDto.builder()
+                .offiNm(officetelDocument.getOffiNm())
+                .address(officetelDocument.getAddress())
+                .sggNm(officetelDocument.getSggNm())
+                .build();
     }
 }
 
