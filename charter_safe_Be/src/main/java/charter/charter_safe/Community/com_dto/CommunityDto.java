@@ -1,13 +1,9 @@
 package charter.charter_safe.Community.com_dto;
 
 import charter.charter_safe.Community.com_domain.Community;
-import charter.charter_safe.Community.com_domain.Image;
 import charter.charter_safe.Member.domain.Member;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor

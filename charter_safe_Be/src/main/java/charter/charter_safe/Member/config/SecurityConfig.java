@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(request -> request
                         .requestMatchers("/member/signup","/member/login", "/oauth/login",
                                 "/oauth/signup", "/community/community", "/community/{post_id}",
-                                "community/{post_id}/comment/list", "/charter", "/trade", "/data").permitAll() // 인증, 인가 없이 접근 허용
+                                "community/{post_id}/comment/list", "/trade", "/officetel/**", "/apt/**").permitAll() // 인증, 인가 없이 접근 허용
                         .requestMatchers("/member/**", "/community/**").hasRole("MEMBER") // 순서대로 적용하므로 permitAll먼저 적용
                         .anyRequest().authenticated()) //다른 요청은 인증, 인가 있어야 접근 허용
 //                .formLogin(form -> form
