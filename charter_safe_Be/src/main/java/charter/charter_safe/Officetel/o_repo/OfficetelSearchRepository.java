@@ -7,15 +7,13 @@ import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface OfficetelSearchRepository extends ElasticsearchRepository<OfficetelDocument, Long> {
     Optional<OfficetelDocument> findById(Long id);
-    //List<OfficetelDocument> findByUmdNm(String umdNm);
 
-    @Query("{\"bool\": { \"must\": [{\"wildcard\": {\"sggNm\": \"*?0*\"}}]}}")
+    @Query("{\"bool\": { \"must\": [{\"match_phrase_prefix\": {\"sggNm\": \"*?0*\"}}]}}")
     Page<OfficetelDocument> findBySggNm(String sggNm, Pageable pageable);
 
 }

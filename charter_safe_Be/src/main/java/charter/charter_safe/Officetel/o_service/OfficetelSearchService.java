@@ -2,22 +2,15 @@ package charter.charter_safe.Officetel.o_service;
 
 import charter.charter_safe.Officetel.o_domain.Officetel;
 import charter.charter_safe.Officetel.o_domain.OfficetelDocument;
-import charter.charter_safe.Officetel.o_dto.OfficetelCharterDto;
-import charter.charter_safe.Officetel.o_dto.OfficetelDataDto;
 import charter.charter_safe.Officetel.o_dto.OfficetelDto;
-import charter.charter_safe.Officetel.o_dto.OfficetelTradeDto;
 import charter.charter_safe.Officetel.o_repo.OfficetelSearchRepository;
-import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +19,6 @@ public class OfficetelSearchService {
 
     private final OfficetelSearchRepository officetelSearchRepository;
     private final ElasticsearchOperations elasticsearchOperations;
-    //private final DataMapper dataMapper;
 
     @Transactional
     public void save(Officetel officetel) {
