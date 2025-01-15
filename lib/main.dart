@@ -27,8 +27,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final token = context.read<AuthService>().token;
     return MaterialApp(
+      theme: ThemeData(
+        fontFamily: '온글잎 박다현체',
+      ),
       debugShowCheckedModeBanner: false,
-      home: token == null ? LoginPage() : HomePage(),
+      home: token == null ? LoginPage() : MyApp(),
     );
   }
 }
@@ -54,34 +57,49 @@ class _LoginPageState extends State<LoginPage> {
     return Consumer<AuthService>(
       builder: (context, authService, child) {
         return Scaffold(
-          // appBar: AppBar(title: Text("로그인")),
+          // appBar: PreferredSize(
+          //   preferredSize: Size.fromHeight(200),
+          //   child: Padding(
+          //     padding: const EdgeInsets.only(top: 30.0),
+          //     child: AppBar(
+          //       title:
+          //           Image.asset('assets/logo(2).png', width: 500, height: 100),
+          //       backgroundColor: Color.fromARGB(255, 28, 100, 38),
+          //     ),
+          //   ),
+          // ),
           resizeToAvoidBottomInset: true,
           body: SingleChildScrollView(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(32),
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                  ),
+                  padding: const EdgeInsets.only(top: 30, left: 25),
+                  child: Container(
+                      child: Image.asset('assets/logo(5).png',
+                          fit: BoxFit.fitHeight),
+                      width: 100,
+                      height: 250
+                      // color: Color.fromARGB(255, 28, 100, 38),
+                      ),
                 ),
 
-                /// 이메일
+                //이메일
                 // TextField(
                 //   controller: emailController,
                 //   decoration: InputDecoration(hintText: "이메일"),
                 // ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 50),
-                  child: TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: '이메일',
-                    ),
+                TextField(
+                  controller: emailController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: '이메일',
                   ),
+                  // style: TextStyle(
+                  //     fontFamily: 'Jalnan2TTF',
+                  //     fontSize: 20,
+                  //     fontWeight: FontWeight.bold),
                 ),
 
                 /// 비밀번호
@@ -121,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                           // HomePage로 이동
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(builder: (context) => MyApp()),
                           );
                         },
                         onError: (err) {
@@ -234,7 +252,7 @@ class _LoginPageState extends State<LoginPage> {
                           // HomePage로 이동
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(builder: (context) => MyApp()),
                           );
                         },
                         onError: (err) {
@@ -269,7 +287,7 @@ class _LoginPageState extends State<LoginPage> {
                           // HomePage로 이동
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(builder: (context) => MyApp()),
                           );
                         },
                         onError: (err) {
@@ -286,190 +304,191 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         );
+        // );
       },
     );
   }
 }
 
-/// 홈페이지
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+// /// 홈페이지
+// class HomePage extends StatefulWidget {
+//   const HomePage({Key? key}) : super(key: key);
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
+//   @override
+//   State<HomePage> createState() => _HomePageState();
+// }
 
-class _HomePageState extends State<HomePage> {
-  TextEditingController jobController = TextEditingController();
-  List<String> bucketList = []; // 버킷 리스트 데이터를 저장할 리스트
+// class _HomePageState extends State<HomePage> {
+//   TextEditingController jobController = TextEditingController();
+//   List<String> bucketList = []; // 버킷 리스트 데이터를 저장할 리스트
 
-  @override
-  void initState() {
-    super.initState();
-    _fetchBucketList(); // 버킷 리스트 데이터를 서버에서 가져옴
-  }
+//   @override
+//   void initState() {
+//     super.initState();
+//     _fetchBucketList(); // 버킷 리스트 데이터를 서버에서 가져옴
+//   }
 
-  Future<void> _fetchBucketList() async {
-    final authService = context.read<AuthService>();
-    try {
-      final response = await http.get(
-        Uri.parse('https://your-spring-server.com/api/bucket'),
-        headers: {
-          'Authorization': 'Bearer ${authService.token}',
-        },
-      );
+//   Future<void> _fetchBucketList() async {
+//     final authService = context.read<AuthService>();
+//     try {
+//       final response = await http.get(
+//         Uri.parse('https://your-spring-server.com/api/bucket'),
+//         headers: {
+//           'Authorization': 'Bearer ${authService.token}',
+//         },
+//       );
 
-      if (response.statusCode == 200) {
-        setState(() {
-          bucketList = List<String>.from(json.decode(response.body));
-        });
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("버킷 리스트를 가져오는데 실패했습니다."),
-        ));
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("에러가 발생했습니다: $e"),
-      ));
-    }
-  }
+//       if (response.statusCode == 200) {
+//         setState(() {
+//           bucketList = List<String>.from(json.decode(response.body));
+//         });
+//       } else {
+//         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//           content: Text("버킷 리스트를 가져오는데 실패했습니다."),
+//         ));
+//       }
+//     } catch (e) {
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//         content: Text("에러가 발생했습니다: $e"),
+//       ));
+//     }
+//   }
 
-  Future<void> _addBucketItem(String job) async {
-    final authService = context.read<AuthService>();
-    try {
-      final response = await http.post(
-        Uri.parse('https://your-spring-server.com/api/bucket'),
-        headers: {
-          'Authorization': 'Bearer ${authService.token}',
-          'Content-Type': 'application/json',
-        },
-        body: json.encode({'job': job}),
-      );
+//   Future<void> _addBucketItem(String job) async {
+//     final authService = context.read<AuthService>();
+//     try {
+//       final response = await http.post(
+//         Uri.parse('https://your-spring-server.com/api/bucket'),
+//         headers: {
+//           'Authorization': 'Bearer ${authService.token}',
+//           'Content-Type': 'application/json',
+//         },
+//         body: json.encode({'job': job}),
+//       );
 
-      if (response.statusCode == 200) {
-        setState(() {
-          bucketList.add(job);
-          jobController.clear();
-        });
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("버킷 리스트 추가에 실패했습니다."),
-        ));
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("에러가 발생했습니다: $e"),
-      ));
-    }
-  }
+//       if (response.statusCode == 200) {
+//         setState(() {
+//           bucketList.add(job);
+//           jobController.clear();
+//         });
+//       } else {
+//         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//           content: Text("버킷 리스트 추가에 실패했습니다."),
+//         ));
+//       }
+//     } catch (e) {
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//         content: Text("에러가 발생했습니다: $e"),
+//       ));
+//     }
+//   }
 
-  Future<void> _deleteBucketItem(int index) async {
-    final authService = context.read<AuthService>();
-    try {
-      final response = await http.delete(
-        Uri.parse('https://your-spring-server.com/api/bucket/$index'),
-        headers: {
-          'Authorization': 'Bearer ${authService.token}',
-        },
-      );
+//   Future<void> _deleteBucketItem(int index) async {
+//     final authService = context.read<AuthService>();
+//     try {
+//       final response = await http.delete(
+//         Uri.parse('https://your-spring-server.com/api/bucket/$index'),
+//         headers: {
+//           'Authorization': 'Bearer ${authService.token}',
+//         },
+//       );
 
-      if (response.statusCode == 200) {
-        setState(() {
-          bucketList.removeAt(index);
-        });
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("버킷 리스트 삭제에 실패했습니다."),
-        ));
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("에러가 발생했습니다: $e"),
-      ));
-    }
-  }
+//       if (response.statusCode == 200) {
+//         setState(() {
+//           bucketList.removeAt(index);
+//         });
+//       } else {
+//         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//           content: Text("버킷 리스트 삭제에 실패했습니다."),
+//         ));
+//       }
+//     } catch (e) {
+//       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//         content: Text("에러가 발생했습니다: $e"),
+//       ));
+//     }
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("버킷 리스트"),
-        actions: [
-          TextButton(
-            child: Text("로그아웃"),
-            onPressed: () {
-              // 로그아웃
-              context.read<AuthService>().signOut();
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text("버킷 리스트"),
+//         actions: [
+//           TextButton(
+//             child: Text("로그아웃"),
+//             onPressed: () {
+//               // 로그아웃
+//               context.read<AuthService>().signOut();
 
-              // 로그인 페이지로 이동
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-              );
-            },
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          /// 입력창
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Row(
-              children: [
-                /// 텍스트 입력창
-                Expanded(
-                  child: TextField(
-                    controller: jobController,
-                    decoration: InputDecoration(
-                      hintText: "하고 싶은 일을 입력해주세요.",
-                    ),
-                  ),
-                ),
+//               // 로그인 페이지로 이동
+//               Navigator.pushReplacement(
+//                 context,
+//                 MaterialPageRoute(builder: (context) => LoginPage()),
+//               );
+//             },
+//           ),
+//         ],
+//       ),
+//       body: Column(
+//         children: [
+//           /// 입력창
+//           Padding(
+//             padding: const EdgeInsets.all(8),
+//             child: Row(
+//               children: [
+//                 /// 텍스트 입력창
+//                 Expanded(
+//                   child: TextField(
+//                     controller: jobController,
+//                     decoration: InputDecoration(
+//                       hintText: "하고 싶은 일을 입력해주세요.",
+//                     ),
+//                   ),
+//                 ),
 
-                /// 추가 버튼
-                ElevatedButton(
-                  child: Icon(Icons.add),
-                  onPressed: () {
-                    // 버킷 아이템 추가
-                    if (jobController.text.isNotEmpty) {
-                      _addBucketItem(jobController.text);
-                    }
-                  },
-                ),
-              ],
-            ),
-          ),
-          Divider(height: 1),
+//                 /// 추가 버튼
+//                 ElevatedButton(
+//                   child: Icon(Icons.add),
+//                   onPressed: () {
+//                     // 버킷 아이템 추가
+//                     if (jobController.text.isNotEmpty) {
+//                       _addBucketItem(jobController.text);
+//                     }
+//                   },
+//                 ),
+//               ],
+//             ),
+//           ),
+//           Divider(height: 1),
 
-          /// 버킷 리스트
-          Expanded(
-            child: ListView.builder(
-              itemCount: bucketList.length,
-              itemBuilder: (context, index) {
-                String job = bucketList[index];
-                return ListTile(
-                  title: Text(
-                    job,
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: Colors.black,
-                    ),
-                  ),
-                  // 삭제 아이콘 버튼
-                  trailing: IconButton(
-                    icon: Icon(CupertinoIcons.delete),
-                    onPressed: () {
-                      _deleteBucketItem(index); // 삭제 버튼 클릭 시 아이템 삭제
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//           /// 버킷 리스트
+//           Expanded(
+//             child: ListView.builder(
+//               itemCount: bucketList.length,
+//               itemBuilder: (context, index) {
+//                 String job = bucketList[index];
+//                 return ListTile(
+//                   title: Text(
+//                     job,
+//                     style: TextStyle(
+//                       fontSize: 24,
+//                       color: Colors.black,
+//                     ),
+//                   ),
+//                   // 삭제 아이콘 버튼
+//                   trailing: IconButton(
+//                     icon: Icon(CupertinoIcons.delete),
+//                     onPressed: () {
+//                       _deleteBucketItem(index); // 삭제 버튼 클릭 시 아이템 삭제
+//                     },
+//                   ),
+//                 );
+//               },
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }

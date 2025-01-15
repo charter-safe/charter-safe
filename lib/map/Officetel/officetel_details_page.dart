@@ -57,62 +57,95 @@ class DetailsPage extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Text(
-                offiNm,
-                textScaleFactor: 1.5,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Row(
+                children: [
+                  Text(
+                    '건물명 : ',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Text(
+                    offiNm,
+                    textScaleFactor: 1.5,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Text(
-                address,
-                textScaleFactor: 1.5,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Row(
+                children: [
+                  Text('주소 : '),
+                  Text(
+                    address,
+                    textScaleFactor: 1.5,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Text(
-                floor,
-                textScaleFactor: 1.5,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Row(
+                children: [
+                  Text('층 수 : '),
+                  Text(
+                    floor,
+                    textScaleFactor: 1.5,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Text(
-                buildYear,
-                textScaleFactor: 1.5,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Row(
+                children: [
+                  Text('제작 년도 : '),
+                  Text(
+                    buildYear,
+                    textScaleFactor: 1.5,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Text(
-                excluUseAr,
-                textScaleFactor: 1.5,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Row(
+                children: [
+                  Text('전용 면적 : '),
+                  Text(
+                    excluUseAr,
+                    textScaleFactor: 1.5,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Text(
-                contractTerm,
-                textScaleFactor: 1.5,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Row(
+                children: [
+                  Text('계약 기간 : '),
+                  Text(
+                    contractTerm,
+                    textScaleFactor: 1.5,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
             Container(
@@ -153,14 +186,37 @@ class DetailsPage extends StatelessWidget {
             //     textScaleFactor: 1.3,
             //   ),
             // ),
+            // bottomNavigationBar: Padding(
+            //   padding: const EdgeInsets.all(20),
+            //   child: ElevatedButton(
+            //     onPressed: () {},
+            //     child: const Text("리뷰/평가"),
+            //   ),
+            // ),
+
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20.0),
+              child: ElevatedButton.icon(
+                label: const Text('리뷰/평가',
+                    style: TextStyle(fontFamily: 'text', fontSize: 20)),
+                icon: const Icon(Icons.rate_review,
+                    size: 40, color: Colors.black),
+                onPressed: () {},
+                style: OutlinedButton.styleFrom(
+                  foregroundColor: Colors.black,
+                  backgroundColor: Colors.white,
+                  shadowColor: const Color.fromARGB(255, 174, 202, 188),
+                  elevation: 10.0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  side: const BorderSide(
+                      color: Color.fromARGB(255, 28, 100, 38), width: 4.0),
+                  minimumSize: const Size(500, 50),
+                ),
+              ),
+            ),
           ],
-        ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(20),
-        child: ElevatedButton(
-          onPressed: () {},
-          child: const Text("리뷰/평가"),
         ),
       ),
     );
