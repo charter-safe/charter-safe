@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReviewDto {
 
-    private Long host_review_no;
     @NotBlank(message = "내용을 입력해주세요")
     private String content;
     private Double rating;
@@ -25,6 +24,5 @@ public class ReviewDto {
         this.content = hostReview.getContent();
         this.rating = hostReview.getRating();
         this.likes = hostReview.getLikes();
-        this.member = hostReview.getMember();
     }
 }

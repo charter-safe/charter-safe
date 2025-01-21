@@ -39,7 +39,7 @@ public class OfficetelController {
     String t_serviceKey; // 매매 서비스키
 
     Integer current_year = LocalDate.now().getYear();
-    Integer current_month = LocalDate.now().getMonthValue() - 1;
+    String current_month = "0" + (LocalDate.now().getMonthValue());
     Integer numOfRows = 1000;
 
     List<String> LAWD_CD = List.of("11110", "11140", "11170",
@@ -60,6 +60,7 @@ public class OfficetelController {
 
         List<OfficetelCharterDto> charterList = new ArrayList<>();
         List<OfficetelTradeDto> tradeList = new ArrayList<>();
+        System.out.println(current_year + current_month);
 
         RestTemplate restTemplate1 = new RestTemplate();
         RestTemplate restTemplate2 = new RestTemplate();
