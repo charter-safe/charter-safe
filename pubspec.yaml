@@ -41,6 +41,7 @@ dependencies:
   cached_network_image: ^3.4.1
   provider: ^6.1.2
   keyboard_actions: ^4.2.0
+  carousel_slider: ^5.0.0
 
 
 dev_dependencies:
