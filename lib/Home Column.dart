@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
 import 'package:home_safe_apps/BaseAppBar.dart';
+import 'package:home_safe_apps/cardnews.dart';
 import 'package:home_safe_apps/document.dart';
 import 'package:home_safe_apps/map/change.dart';
 import 'package:home_safe_apps/review/list_screen.dart';
@@ -214,7 +215,14 @@ class HomeColumn extends StatelessWidget {
                             style: TextStyle(fontFamily: 'text', fontSize: 40)),
                         icon: const Icon(Icons.sentiment_satisfied_alt,
                             size: 40, color: Colors.black),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ),
+                          );
+                        },
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.black,
                           backgroundColor: Colors.white,

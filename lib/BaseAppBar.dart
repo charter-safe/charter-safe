@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:home_safe_apps/Home%20Column.dart';
 import 'package:home_safe_apps/Home.dart';
 import 'package:home_safe_apps/document.dart';
 import 'package:home_safe_apps/map/Apt/AptMap.dart';
 import 'package:home_safe_apps/map/Officetel/officetelMap.dart';
 import 'package:home_safe_apps/map/map.dart';
+import 'package:home_safe_apps/mypage.dart';
 
 class Baseappbar extends StatelessWidget implements PreferredSizeWidget {
   const Baseappbar({super.key});
@@ -20,6 +22,18 @@ class Baseappbar extends StatelessWidget implements PreferredSizeWidget {
           title: Image.asset('assets/logo(2).png', height: 100, width: 120),
           centerTitle: true,
           backgroundColor: Colors.green[700],
+          leading: IconButton(
+            icon: const Icon(Icons.navigate_before),
+            iconSize: 35,
+            onPressed: () {
+              Navigator.pop(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeColumn(),
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -48,7 +62,7 @@ class Baseappbar2 extends StatelessWidget implements PreferredSizeWidget {
               Navigator.pop(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyApp(),
+                  builder: (context) => HomeColumn(),
                 ),
               );
             },
@@ -224,7 +238,7 @@ class BottomAppBarWidget extends StatelessWidget
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MyApp(),
+                  builder: (context) => HomeColumn(),
                 ),
               );
             },
@@ -254,7 +268,12 @@ class BottomAppBarWidget extends StatelessWidget
           IconButton(
             icon: const Icon(Icons.person, size: 50),
             onPressed: () {
-              // Add the action for this button, or leave it as an empty function
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyPageScreen(),
+                ),
+              );
             },
           ),
         ],

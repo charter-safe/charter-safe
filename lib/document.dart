@@ -1,6 +1,7 @@
 // import 'package:bucket_list_with_firebase/Home.dart';
 import 'package:flutter/material.dart';
 import 'package:home_safe_apps/BaseAppBar.dart';
+import 'package:home_safe_apps/Home%20Column.dart';
 import 'package:home_safe_apps/Home.dart';
 import 'package:home_safe_apps/map/map.dart';
 
@@ -35,19 +36,30 @@ class _Document extends State<Documentpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Baseappbar2(),
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.navigate_before),
+          iconSize: 35,
+          color: Colors.white,
+          onPressed: () {
+            Navigator.pop(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeColumn(),
+              ),
+            );
+          },
+        ),
+        backgroundColor: Colors.green[700],
+        title: Text('서류 체크',
+            style: TextStyle(
+                color: Colors.white, fontFamily: "Test", fontSize: 27)),
+        centerTitle: true,
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 15, top: 10),
-            child: Text(
-              "서류 체크 리스트",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
-          ),
           Expanded(
-            // Wrap ListView.builder with Expanded
             child: ListView.builder(
               itemCount: _texts.length,
               itemBuilder: (context, index) {
@@ -55,7 +67,8 @@ class _Document extends State<Documentpage> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: CheckboxListTile(
-                      title: Text(_texts[index]),
+                      title: Text(_texts[index],
+                          style: TextStyle(fontFamily: "Test", fontSize: 25)),
                       value: _isChecked![index],
                       onChanged: (val) {
                         setState(

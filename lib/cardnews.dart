@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:home_safe_apps/BaseAppBar.dart';
+// import 'package:home_safe_apps/BottomAppBarWidget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,14 +29,19 @@ class _HomePageState extends State<HomePage> {
   // late 키워드 추가 (Flutter 최신 버전 호환)
   late final CarouselSliderController _controller = CarouselSliderController();
 
-  final List<String> imageList = [];
+  final List<String> imageList = [
+    "assets/svg/1.png",
+    "assets/svg/2.png",
+    "assets/svg/3.png",
+    "assets/svg/4.png",
+    "assets/svg/5.png",
+    "assets/svg/6.png",
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Carousel Slide'),
-      ),
+      appBar: Baseappbar(),
       body: Column(
         children: [
           SizedBox(
@@ -49,12 +56,20 @@ class _HomePageState extends State<HomePage> {
           Container(
             padding: const EdgeInsets.all(20),
             child: const Text(
-              "Welcome to the carousel slide app",
-              style: TextStyle(fontSize: 18),
+              "계약을 할 땐 신중하게,",
+              style: TextStyle(fontFamily: 'Test', fontSize: 30),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(0),
+            child: const Text(
+              "그리고 많이 찾아보는 것이 중요합니다.",
+              style: TextStyle(fontFamily: 'Test', fontSize: 30),
             ),
           ),
         ],
       ),
+      bottomNavigationBar: const BottomAppBarWidget(), // 여기서 적용
     );
   }
 
@@ -66,9 +81,9 @@ class _HomePageState extends State<HomePage> {
           builder: (context) {
             return SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: Image.network(
+              child: Image.asset(
                 imgLink,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
               ),
             );
           },
