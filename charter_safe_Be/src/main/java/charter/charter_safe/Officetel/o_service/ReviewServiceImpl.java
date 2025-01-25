@@ -33,10 +33,9 @@ public class ReviewServiceImpl implements ReviewService{
 
         HostReview review = HostReview.builder()
                 .content(reviewDto.getContent())
-                .rating(0.0)
-                .likes(0)
+                .rating(4.4)
+                .likes(8)
                 .officetel(officetel)
-                .member(member)
                 .build();
         reviewRepository.save(review);
         return review.getHost_review_no();
