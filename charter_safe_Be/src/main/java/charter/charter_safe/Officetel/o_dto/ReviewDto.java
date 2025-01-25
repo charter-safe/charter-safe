@@ -2,6 +2,7 @@ package charter.charter_safe.Officetel.o_dto;
 
 import charter.charter_safe.Officetel.o_domain.HostReview;
 import charter.charter_safe.Member.domain.Member;
+import charter.charter_safe.Officetel.o_domain.Officetel;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +18,6 @@ public class ReviewDto {
     private String content;
     private Double rating;
     private Integer likes;
-    private Member member;
 
     @Builder
     public ReviewDto(HostReview hostReview) {
