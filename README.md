@@ -20,8 +20,8 @@
           <br/>
           </div>
     <h2 style="border-bottom: 1px solid #21262d; color: #c9d1d9;"> 🛠️ IDE </h2> <br> 
-        <div style="margin: ; text-align: left;" "text-align: left;"> <img src="https://img.shields.io/badge/Github-181717?style=flat&logo=Github&logoColor=white">
-          <img src="(https://img.shields.io/badge/android%20studio-346ac1?style=flat&logo=android%20studio&logoColor=white">
+        <div style="margin: ; text-align: left;" "text-align: left;">
+          <img src="https://img.shields.io/badge/android%20studio-346ac1?style=flat&logo=android%20studio&logoColor=white">
           <img src="https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=flat&logo=intellij-idea&logoColor=white">
           <img src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=flat&logo=visual-studio-code&logoColor=white">
           <br/>
