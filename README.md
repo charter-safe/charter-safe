@@ -33,8 +33,8 @@
         <img src="https://github.com/user-attachments/assets/a2d4527c-d2a0-4512-a46e-89f5bdcff7d1">
     </div>
     <div style="text-align: left;">
-    <h2 style="border-bottom: 1px solid #21262d; color: #c9d1d9;"> 🧑‍💻 Contact me </h2> <br> 
+    <h2 style="border-bottom: 1px solid #21262d; color: #c9d1d9;"> 🧑‍💻 Contact me </h2>
     <div style="text-align: left;"> <a href=https://www.notion.so/SAFE-0217ee13b4e74d49aff2f456dcca37c0> 
-        
+        <div style="text-align: left;"> <a href=https://www.notion.so/SAFE-0217ee13b4e74d49aff2f456dcca37c0> <img src="https://img.shields.io/badge/Notion-000000?style=flat&logo=Notion&logoColor=white&link=https://www.notion.so/SAFE-0217ee13b4e74d49aff2f456dcca37c0"> </a>
     </div>
     
