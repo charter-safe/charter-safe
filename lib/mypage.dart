@@ -143,6 +143,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String username = "사용자";
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green[700],
@@ -154,7 +155,7 @@ class _MyPageScreenState extends State<MyPageScreen> {
             Navigator.pop(
               context,
               MaterialPageRoute(
-                builder: (context) => HomeColumn(),
+                builder: (context) => HomeColumn(username: username),
               ),
             );
           },
@@ -176,7 +177,8 @@ class _MyPageScreenState extends State<MyPageScreen> {
                     radius: 40,
                     backgroundImage: _profileImage != null
                         ? FileImage(_profileImage!)
-                        : AssetImage('assets/profile.jpg') as ImageProvider,
+                        : AssetImage('assets/default_profile.png')
+                            as ImageProvider,
                   ),
                 ),
                 SizedBox(height: 10),

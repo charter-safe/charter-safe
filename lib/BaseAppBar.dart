@@ -14,6 +14,7 @@ class Baseappbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    String username = "사용자";
     return MaterialApp(
       theme: ThemeData(useMaterial3: false),
       debugShowCheckedModeBanner: false,
@@ -29,7 +30,9 @@ class Baseappbar extends StatelessWidget implements PreferredSizeWidget {
               Navigator.pop(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeColumn(),
+                  builder: (context) => HomeColumn(
+                    username: username,
+                  ),
                 ),
               );
             },
@@ -47,6 +50,7 @@ class Baseappbar2 extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    String username = "사용자";
     return MaterialApp(
       theme: ThemeData(useMaterial3: false),
       debugShowCheckedModeBanner: false,
@@ -62,7 +66,7 @@ class Baseappbar2 extends StatelessWidget implements PreferredSizeWidget {
               Navigator.pop(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeColumn(),
+                  builder: (context) => HomeColumn(username: username),
                 ),
               );
             },
@@ -227,6 +231,7 @@ class BottomAppBarWidget extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
+    String username = "사용자";
     return BottomAppBar(
       color: Colors.green[700],
       child: Row(
@@ -238,7 +243,7 @@ class BottomAppBarWidget extends StatelessWidget
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => HomeColumn(),
+                  builder: (context) => HomeColumn(username: username),
                 ),
               );
             },

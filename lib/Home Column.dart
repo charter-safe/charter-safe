@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
-import 'package:home_safe_apps/BaseAppBar.dart';
-import 'package:home_safe_apps/cardnews.dart';
 import 'package:home_safe_apps/document.dart';
-import 'package:home_safe_apps/map/change.dart';
-import 'package:home_safe_apps/review/list_screen.dart';
-import 'map/map.dart';
+import 'package:home_safe_apps/BaseAppBar.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NaverMapSdk.instance.initialize(
-    clientId: '5qg6epilfh', // Use your Naver Map Client ID.
+    clientId: '074svwu57e', // Use your Naver Map Client ID.
     onAuthFailed: (error) {
       print("Naver Map authentication failed: $error");
     },
   );
+
   runApp(MyApp());
 }
 
@@ -24,6 +21,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  String username = "사용자";
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,14 +29,16 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: HomeColumn(),
+      home: HomeColumn(username: username),
     );
   }
 }
 
 // Main Home Column Page
 class HomeColumn extends StatelessWidget {
-  const HomeColumn({Key? key}) : super(key: key);
+  final String username; //사용자 아이디
+
+  const HomeColumn({Key? key, required this.username}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +47,29 @@ class HomeColumn extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Align(
+              alignment: Alignment.centerLeft, // 왼쪽 정렬
+              child: Text(
+                "$username님 반갑습니다:)",
+                style: TextStyle(
+                  fontFamily: 'Test',
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold, // 굵게 설정
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerLeft, // 왼쪽 정렬
+              child: Text(
+                "저희의 '전SAFE'를 이용해주셔서 감사합니다!",
+                style: TextStyle(
+                  fontFamily: 'Test',
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold, // 굵게 설정
+                ),
+              ),
+            ),
+
             Padding(
               padding: const EdgeInsets.only(bottom: 20.0),
               child: Container(
@@ -75,13 +98,13 @@ class HomeColumn extends StatelessWidget {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: const [
-                              Icon(Icons.apartment, size: 40),
+                              Icon(Icons.apartment, size: 30),
                               SizedBox(height: 8), // 아이콘과 텍스트 사이 간격
                               Text(
                                 '아파트',
                                 style: TextStyle(
                                   fontFamily: 'Test',
-                                  fontSize: 33,
+                                  fontSize: 25,
                                 ),
                               ),
                             ],
@@ -91,56 +114,39 @@ class HomeColumn extends StatelessWidget {
                     ),
                     const SizedBox(width: 10), // 버튼 간격
                     Expanded(
-                      flex: 3, // 비율 조정 가능
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 10),
-                            height: MediaQuery.of(context).size.width * 0.25,
-                            child: ElevatedButton.icon(
-                              label: const Text('주택',
-                                  style: TextStyle(
-                                      fontFamily: 'Test', fontSize: 30)),
-                              icon: const Icon(Icons.villa, size: 40),
-                              onPressed: () {},
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                backgroundColor:
-                                    const Color.fromARGB(255, 28, 100, 38),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                side: const BorderSide(
-                                    color: Colors.white, width: 4.0),
-                                minimumSize: const Size(500, 50),
-                              ),
+                      flex: 2, // 동일한 비율 적용
+                      child: Container(
+                        height: MediaQuery.of(context).size.width * 0.55,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 10),
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            backgroundColor:
+                                const Color.fromARGB(253, 28, 100, 38),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
                             ),
+                            side: const BorderSide(
+                                color: Colors.white, width: 4.0),
+                            minimumSize: const Size(500, 50),
                           ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 10),
-                            height: MediaQuery.of(context).size.width * 0.25,
-                            child: ElevatedButton.icon(
-                              label: const Text('오피스텔',
-                                  style: TextStyle(
-                                      fontFamily: 'Test', fontSize: 25)),
-                              icon: const Icon(Icons.house, size: 40),
-                              onPressed: () {},
-                              style: OutlinedButton.styleFrom(
-                                foregroundColor: Colors.white,
-                                backgroundColor:
-                                    const Color.fromARGB(255, 28, 100, 38),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: const [
+                              Icon(Icons.house, size: 30),
+                              SizedBox(height: 8), // 아이콘과 텍스트 사이 간격
+                              Text(
+                                '오피스텔',
+                                style: TextStyle(
+                                  fontFamily: 'Test',
+                                  fontSize: 25,
                                 ),
-                                side: const BorderSide(
-                                    color: Colors.white, width: 4.0),
-                                minimumSize: const Size(500, 50),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                     ),
                   ],
@@ -158,9 +164,9 @@ class HomeColumn extends StatelessWidget {
                         child: ElevatedButton.icon(
                           label: const Text('전체 지도',
                               style:
-                                  TextStyle(fontFamily: 'text', fontSize: 40)),
+                                  TextStyle(fontFamily: 'text', fontSize: 30)),
                           icon: const Icon(Icons.map,
-                              size: 40, color: Colors.black),
+                              size: 30, color: Colors.black),
                           onPressed: () {},
                           style: OutlinedButton.styleFrom(
                             foregroundColor: Colors.black,
@@ -183,9 +189,9 @@ class HomeColumn extends StatelessWidget {
                         child: ElevatedButton.icon(
                           label: const Text('필요한 서류 체크',
                               style:
-                                  TextStyle(fontFamily: 'text', fontSize: 40)),
+                                  TextStyle(fontFamily: 'text', fontSize: 30)),
                           icon: const Icon(Icons.document_scanner,
-                              size: 40, color: Colors.black),
+                              size: 30, color: Colors.black),
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -212,17 +218,10 @@ class HomeColumn extends StatelessWidget {
                       ),
                       ElevatedButton.icon(
                         label: const Text('전세사기 예방하는 방법',
-                            style: TextStyle(fontFamily: 'text', fontSize: 40)),
+                            style: TextStyle(fontFamily: 'text', fontSize: 30)),
                         icon: const Icon(Icons.sentiment_satisfied_alt,
-                            size: 40, color: Colors.black),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomePage(),
-                            ),
-                          );
-                        },
+                            size: 30, color: Colors.black),
+                        onPressed: () {},
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.black,
                           backgroundColor: Colors.white,

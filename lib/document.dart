@@ -35,6 +35,7 @@ class _Document extends State<Documentpage> {
 
   @override
   Widget build(BuildContext context) {
+    String username = "사용자";
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -45,7 +46,7 @@ class _Document extends State<Documentpage> {
             Navigator.pop(
               context,
               MaterialPageRoute(
-                builder: (context) => HomeColumn(),
+                builder: (context) => HomeColumn(username: username),
               ),
             );
           },
