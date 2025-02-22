@@ -1,5 +1,7 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_naver_map/flutter_naver_map.dart';
+import 'package:home_safe_apps/cardnews.dart';
 import 'package:home_safe_apps/document.dart';
 import 'package:home_safe_apps/BaseAppBar.dart';
 
@@ -22,6 +24,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String username = "사용자";
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,11 +37,55 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-// Main Home Column Page
-class HomeColumn extends StatelessWidget {
-  final String username; //사용자 아이디
+class HomeColumn extends StatefulWidget {
+  final String username; // 사용자 아이디
 
   const HomeColumn({Key? key, required this.username}) : super(key: key);
+
+  @override
+  State<HomeColumn> createState() => _HomeColumnState();
+}
+
+class _HomeColumnState extends State<HomeColumn> {
+  final List<String> imageList = [
+    "assets/svg/슬라이드1.JPG",
+    "assets/svg/슬라이드2.JPG",
+    "assets/svg/슬라이드3.JPG",
+    "assets/svg/슬라이드4.JPG",
+    "assets/svg/슬라이드5.JPG",
+  ];
+
+  final PageController _pageController = PageController();
+  int _currentIndex = 0;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startAutoSlide();
+  }
+
+  void _startAutoSlide() {
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (_currentIndex < imageList.length - 1) {
+        _currentIndex++;
+      } else {
+        _currentIndex = 0;
+      }
+      _pageController.animateToPage(
+        _currentIndex,
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +97,7 @@ class HomeColumn extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft, // 왼쪽 정렬
               child: Text(
-                "$username님 반갑습니다:)",
+                "${widget.username}님 반갑습니다:)",
                 style: TextStyle(
                   fontFamily: 'Test',
                   fontSize: 25,
@@ -221,7 +268,14 @@ class HomeColumn extends StatelessWidget {
                             style: TextStyle(fontFamily: 'text', fontSize: 30)),
                         icon: const Icon(Icons.sentiment_satisfied_alt,
                             size: 30, color: Colors.black),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ),
+                          );
+                        },
                         style: OutlinedButton.styleFrom(
                           foregroundColor: Colors.black,
                           backgroundColor: Colors.white,
@@ -238,6 +292,20 @@ class HomeColumn extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            // 카드 뉴스 슬라이드 추가
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: SizedBox(
+                height: 200,
+                child: PageView.builder(
+                  controller: _pageController,
+                  itemCount: imageList.length,
+                  itemBuilder: (context, index) {
+                    return Image.asset(imageList[index], fit: BoxFit.contain);
+                  },
+                ),
+              ),
             ),
           ],
         ),

@@ -1,126 +1,4 @@
-// import 'package:bucket_list_with_firebase/auth_service.dart';
-// import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-
-// class SignUpPage extends StatefulWidget {
-//   const SignUpPage({Key? key}) : super(key: key);
-
-//   @override
-//   _SignUpPageState createState() => _SignUpPageState();
-// }
-
-// class _SignUpPageState extends State<SignUpPage> {
-//   TextEditingController emailController = TextEditingController();
-//   TextEditingController passwordController = TextEditingController();
-//   TextEditingController passwordCheckController = TextEditingController();
-//   TextEditingController nameController = TextEditingController();
-//   TextEditingController numberController = TextEditingController();
-//   TextEditingController addressController = TextEditingController();
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text("회원가입")),
-//       body: Padding(
-//         padding: const EdgeInsets.all(20),
-//         child: Column(
-//           children: [
-//             Padding(
-//               padding: const EdgeInsets.only(top: 15),
-//               child: TextField(
-//                 controller: emailController,
-//                 decoration: InputDecoration(
-//                   border: OutlineInputBorder(),
-//                   labelText: '이메일',
-//                 ),
-//               ),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.only(top: 15),
-//               child: TextField(
-//                   controller: passwordController,
-//                   obscureText: true,
-//                   decoration: InputDecoration(
-//                     border: OutlineInputBorder(),
-//                     labelText: '비밀번호',
-//                   )),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.only(top: 15),
-//               child: TextField(
-//                   controller: passwordCheckController,
-//                   obscureText: true,
-//                   decoration: InputDecoration(
-//                     border: OutlineInputBorder(),
-//                     labelText: '비밀번호 확인',
-//                   )),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.only(top: 15),
-//               child: TextField(
-//                   controller: nameController,
-//                   decoration: InputDecoration(
-//                     border: OutlineInputBorder(),
-//                     labelText: '이름',
-//                   )),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.only(top: 15),
-//               child: TextField(
-//                   controller: numberController,
-//                   decoration: InputDecoration(
-//                     border: OutlineInputBorder(),
-//                     labelText: '전화번호',
-//                   )),
-//             ),
-//             Padding(
-//               padding: const EdgeInsets.only(top: 15),
-//               child: TextField(
-//                   controller: addressController,
-//                   decoration: InputDecoration(
-//                     border: OutlineInputBorder(),
-//                     labelText: '주소',
-//                   )),
-//             ),
-//             SizedBox(height: 20),
-//             ElevatedButton(
-//               child: Text("가입"),
-//               onPressed: () {
-//                 // 회원가입 로직 구현
-//                 context.read<AuthService>().signUp(
-//                       email: emailController.text,
-//                       password: passwordController.text,
-//                       passwordcheck: passwordCheckController.text,
-//                       name: nameController.text,
-//                       number: numberController.text,
-//                       address: addressController.text,
-//                       onSuccess: () {
-//                         // 회원가입 성공 처리
-//                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-//                           content: Text("회원가입 성공"),
-//                         ));
-
-//                         // 로그인 페이지로 이동
-//                         Navigator.pop(context);
-//                       },
-//                       onError: (err) {
-//                         // 회원가입 실패 처리
-//                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-//                           content: Text("회원가입 실패: $err"),
-//                         ));
-//                       },
-//                     );
-//               },
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'service.dart';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -130,11 +8,12 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: '회원가입',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: const RegisterPage(),
       debugShowCheckedModeBanner: false,
@@ -145,137 +24,168 @@ class MyApp extends StatelessWidget {
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
+  @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  // TextEditingController 선언
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController passwordcheckController = TextEditingController();
+  TextEditingController passwordCheckController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController phonenumberController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController yearController = TextEditingController();
   TextEditingController birthdayController = TextEditingController();
 
+  // FocusNode 선언
+  FocusNode emailFocusNode = FocusNode();
+  FocusNode passwordFocusNode = FocusNode();
+  FocusNode passwordCheckFocusNode = FocusNode();
+  FocusNode nameFocusNode = FocusNode();
+  FocusNode yearFocusNode = FocusNode();
+  FocusNode birthdayFocusNode = FocusNode();
+  FocusNode phoneNumberFocusNode = FocusNode();
+  FocusNode addressFocusNode = FocusNode();
+
   Service service = Service();
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('회원가입 화면'),
+        title: const Text('회원가입', style: TextStyle(fontSize: 22)),
+        centerTitle: true,
+        backgroundColor: Colors.green[700],
+        elevation: 3,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
       body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           child: Column(
-        children: <Widget>[
-          Center(
-            child: SizedBox(
-              height: 50,
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            width: 250,
-            child: TextField(
-              controller: emailController,
-              decoration: InputDecoration(hintText: "이메일"),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: 250,
-            child: TextField(
-              controller: passwordController,
-              decoration: InputDecoration(hintText: "비밀번호"),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: 250,
-            child: TextField(
-              controller: passwordcheckController,
-              decoration: InputDecoration(hintText: "비밀번호 중복확인"),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: 250,
-            child: TextField(
-              controller: yearController,
-              decoration: InputDecoration(hintText: "생년"),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: 250,
-            child: TextField(
-              controller: birthdayController,
-              decoration: InputDecoration(hintText: "월일"),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: 250,
-            child: TextField(
-              controller: nameController,
-              decoration: InputDecoration(hintText: "이름"),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: 250,
-            child: TextField(
-              controller: phonenumberController,
-              decoration: InputDecoration(hintText: "전화번호"),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: 250,
-            child: TextField(
-              controller: addressController,
-              decoration: InputDecoration(hintText: "주소"),
-            ),
-          ),
-          SizedBox(
-            height: 80,
-          ),
-          SizedBox(
-            width: 250,
-            child: ElevatedButton(
-              child: const Text('전송'),
-              onPressed: () {
-                service.saveUser(
+            children: <Widget>[
+              const SizedBox(height: 10),
+              Text(
+                "회원 정보를 입력하세요",
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green[800]),
+              ),
+              const SizedBox(height: 20),
+              Card(
+                elevation: 3,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      _buildTextField(
+                          emailController, "이메일", Icons.email, emailFocusNode,
+                          nextFocusNode: passwordFocusNode),
+                      _buildTextField(passwordController, "비밀번호", Icons.lock,
+                          passwordFocusNode,
+                          obscureText: true,
+                          nextFocusNode: passwordCheckFocusNode),
+                      _buildTextField(passwordCheckController, "비밀번호 확인",
+                          Icons.lock, passwordCheckFocusNode,
+                          obscureText: true, nextFocusNode: nameFocusNode),
+                      _buildTextField(
+                          nameController, "이름", Icons.person, nameFocusNode,
+                          nextFocusNode: yearFocusNode),
+                      _buildTextField(yearController, "생년",
+                          Icons.calendar_today, yearFocusNode,
+                          nextFocusNode: birthdayFocusNode),
+                      _buildTextField(birthdayController, "월일", Icons.cake,
+                          birthdayFocusNode,
+                          nextFocusNode: phoneNumberFocusNode),
+                      _buildTextField(phoneNumberController, "전화번호",
+                          Icons.phone, phoneNumberFocusNode,
+                          nextFocusNode: addressFocusNode),
+                      _buildTextField(
+                          addressController, "주소", Icons.home, addressFocusNode,
+                          action: TextInputAction.done),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 30),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.green[700],
+                  minimumSize: const Size(250, 50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: const Text(
+                  '가입 완료',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+                onPressed: () {
+                  service.saveUser(
                     emailController.text,
                     passwordController.text,
-                    passwordcheckController.text,
+                    passwordCheckController.text,
                     nameController.text,
-                    phonenumberController.text,
+                    phoneNumberController.text,
                     addressController.text,
                     yearController.text,
-                    birthdayController.text);
-                Navigator.pop(context);
-              },
-            ),
-          )
-        ],
-      )),
+                    birthdayController.text,
+                  );
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // TextField 위젯 생성
+  Widget _buildTextField(
+    TextEditingController controller,
+    String hint,
+    IconData icon,
+    FocusNode currentFocusNode, {
+    bool obscureText = false,
+    TextInputAction action = TextInputAction.next,
+    FocusNode? nextFocusNode,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: TextField(
+        controller: controller,
+        obscureText: obscureText,
+        textInputAction: action,
+        focusNode: currentFocusNode,
+        decoration: InputDecoration(
+          prefixIcon: Icon(icon, color: Colors.green),
+          hintText: hint,
+          hintStyle: const TextStyle(color: Colors.grey),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Colors.green),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Colors.green, width: 2),
+          ),
+        ),
+        onSubmitted: (value) {
+          if (nextFocusNode != null) {
+            FocusScope.of(context).requestFocus(nextFocusNode); // 다음 필드로 포커스 이동
+          }
+        },
+      ),
     );
   }
 }
