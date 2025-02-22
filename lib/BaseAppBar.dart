@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:home_safe_apps/Home%20Column.dart';
-import 'package:home_safe_apps/Home.dart';
 import 'package:home_safe_apps/document.dart';
 import 'package:home_safe_apps/map/Apt/AptMap.dart';
 import 'package:home_safe_apps/map/Officetel/officetelMap.dart';
@@ -265,7 +264,7 @@ class BottomAppBarWidget extends StatelessWidget
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const Documentpage(),
+                  builder: (context) => const DocumentPage(),
                 ),
               );
             },

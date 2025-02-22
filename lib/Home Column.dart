@@ -243,7 +243,7 @@ class _HomeColumnState extends State<HomeColumn> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const Documentpage(),
+                                builder: (context) => const DocumentPage(),
                               ),
                             );
                           },
@@ -295,14 +295,14 @@ class _HomeColumnState extends State<HomeColumn> {
             ),
             // 카드 뉴스 슬라이드 추가
             Padding(
-              padding: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.only(top: 10.0),
               child: SizedBox(
-                height: 200,
+                height: 500,
                 child: PageView.builder(
                   controller: _pageController,
                   itemCount: imageList.length,
                   itemBuilder: (context, index) {
-                    return Image.asset(imageList[index], fit: BoxFit.contain);
+                    return Image.asset(imageList[index], fit: BoxFit.fitWidth);
                   },
                 ),
               ),
