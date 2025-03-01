@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:home_safe_apps/Home%20Column.dart';
+import 'package:home_safe_apps/login/find_id.dart';
+import 'package:home_safe_apps/login/find_pw.dart';
+import 'package:home_safe_apps/login/member.dart';
 import 'package:home_safe_apps/login/signuppage.dart';
 import 'package:provider/provider.dart';
 import 'package:home_safe_apps/login/auth_service.dart';
@@ -44,257 +47,214 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  // TextEditingController passwordcheckController = TextEditingController();
-  // TextEditingController nameController = TextEditingController();
-  // TextEditingController numberController = TextEditingController();
-  // TextEditingController addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthService>(
       builder: (context, authService, child) {
         return Scaffold(
-          // appBar: PreferredSize(
-          //   preferredSize: Size.fromHeight(200),
-          //   child: Padding(
-          //     padding: const EdgeInsets.only(top: 30.0),
-          //     child: AppBar(
-          //       title:
-          //           Image.asset('assets/logo(2).png', width: 500, height: 100),
-          //       backgroundColor: Color.fromARGB(255, 28, 100, 38),
-          //     ),
-          //   ),
-          // ),
           resizeToAvoidBottomInset: true,
           body: SingleChildScrollView(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                // Logo
                 Padding(
                   padding: const EdgeInsets.only(top: 30, left: 25),
                   child: Container(
-                      child: Image.asset('assets/logo(5).png',
-                          fit: BoxFit.fitHeight),
-                      width: 100,
-                      height: 250
-                      // color: Color.fromARGB(255, 28, 100, 38),
-                      ),
-                ),
-
-                //이메일
-                // TextField(
-                //   controller: emailController,
-                //   decoration: InputDecoration(hintText: "이메일"),
-                // ),
-                TextField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: '이메일',
+                    child: Image.asset('assets/logo(5).png',
+                        fit: BoxFit.fitHeight),
+                    width: 100,
+                    height: 250,
                   ),
-                  // style: TextStyle(
-                  //     fontFamily: 'Jalnan2TTF',
-                  //     fontSize: 20,
-                  //     fontWeight: FontWeight.bold),
                 ),
 
-                /// 비밀번호
-                // TextField(
-                //   controller: passwordController,
-                //   obscureText: true, // 비밀번호 안보이게
-                //   decoration: InputDecoration(hintText: "비밀번호"),
-                // ),
-                // SizedBox(height: 32),
+                // 이메일 텍스트 필드
                 Padding(
-                  padding: const EdgeInsets.only(top: 5),
+                  padding: const EdgeInsets.only(top: 20),
                   child: TextField(
-                      controller: passwordController,
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: '비밀번호',
-                      )),
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      labelText: '이메일',
+                      labelStyle: TextStyle(color: Colors.grey),
+                      border: OutlineInputBorder(),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
+                    ),
+                  ),
                 ),
 
-                /// 로그인 버튼
+                // 비밀번호 텍스트 필드
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: TextField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      labelText: '비밀번호',
+                      labelStyle: TextStyle(color: Colors.grey),
+                      border: OutlineInputBorder(),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.green),
+                      ),
+                    ),
+                  ),
+                ),
+
+                // 로그인 버튼
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: ElevatedButton(
-                    child: Text("로그인", style: TextStyle(fontSize: 21)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          Color.fromARGB(255, 12, 59, 14), // 초록색 버튼
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    child: Text("로그인",
+                        style: TextStyle(fontSize: 18, color: Colors.white)),
                     onPressed: () {
-                      // 로그인
                       authService.signIn(
                         email: emailController.text,
                         password: passwordController.text,
                         onSuccess: () {
-                          // 로그인 성공
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("로그인 성공"),
-                          ));
-
-                          // HomePage로 이동
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("로그인 성공")),
+                          );
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeColumn(
-                                      username: "a",
-                                    )),
+                                builder: (context) =>
+                                    HomeColumn(username: "a")),
                           );
                         },
                         onError: (err) {
-                          // 에러 발생
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(err),
-                          ));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(err)),
+                          );
                         },
                       );
                     },
                   ),
                 ),
 
-                /// 회원가입 버튼
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      child: Text("회원가입", style: TextStyle(fontSize: 15)),
-                      onPressed: () {
-                        Navigator.push(
+                // 회원가입 버튼
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        child: Text("회원가입",
+                            style:
+                                TextStyle(fontSize: 15, color: Colors.black)),
+                        onPressed: () {
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const RegisterPage()));
-                        //   // 회원가입
-                        //   // authService.signUp(
-                        //   //   email: emailController.text,
-                        //   //   password: passwordController.text,
-                        //   //   passwordcheck: passwordcheckController.text,
-                        //   //   name: nameController.text,
-                        //   //   number: numberController.text,
-                        //   //   address: addressController.text,
-                        //   onSuccess:
-                        //   () {
-                        //     // 회원가입 성공
-                        //     print("회원가입 성공");
-                        //   };
-                        //   onError:
-                        //   (err) {
-                        //     // 에러 발생
-                        //     print("회원가입 실패 : $err");
-                        //   };
-                      },
-                    ),
-                    TextButton(
-                      child: Text("아이디 찾기", style: TextStyle(fontSize: 15)),
-                      onPressed: () {
-                        // 아이디찾기
-                        // authService.signUp(
-                        //   email: emailController.text,
-                        //   password: passwordController.text,
-                        //   onSuccess: () {
-                        //     // 아이디 찾기 성공
-                        //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        //       content: Text("아이디 찾기 성공"),
-                        //     ));
-                        //   },
-                        //   onError: (err) {
-                        //     // 에러 발생
-                        //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        //       content: Text(err),
-                        //     ));
-                        //   },
-                        // );
-                      },
-                    ),
-                    TextButton(
-                      child: Text("비밀번호 찾기", style: TextStyle(fontSize: 15)),
-                      onPressed: () {
-                        // 비밀번호 찾기
-                        // authService.signUp(
-                        //   email: emailController.text,
-                        //   password: passwordController.text,
-                        //   onSuccess: () {
-                        //     // 비밀번호 찾기 성공
-                        //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        //       content: Text("비밀번호 찾기 성공"),
-                        //     ));
-                        //   },
-                        //   onError: (err) {
-                        //     // 에러 발생
-                        //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        //       content: Text(err),
-                        //     ));
-                        //   },
-                        // );
-                      },
-                    ),
-                  ],
+                                builder: (context) => SignupPage()),
+                          );
+                        },
+                      ),
+                      TextButton(
+                        child: Text("아이디 찾기",
+                            style:
+                                TextStyle(fontSize: 15, color: Colors.black)),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const FindIdPage()),
+                          );
+                        },
+                      ),
+                      TextButton(
+                        child: Text("비밀번호 찾기",
+                            style:
+                                TextStyle(fontSize: 15, color: Colors.black)),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const FindPasswordPage()),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
+
+                // Google 로그인 버튼
                 Padding(
-                  padding: const EdgeInsets.only(top: 5),
+                  padding: const EdgeInsets.only(top: 20),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
+                      backgroundColor:
+                          Color.fromARGB(255, 14, 40, 96), // 구글 로그인 버튼 색
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                     ),
                     child: Text("Google로 로그인",
-                        style: TextStyle(fontSize: 21, color: Colors.white)),
+                        style: TextStyle(fontSize: 18, color: Colors.white)),
                     onPressed: () {
-                      // 로그인
                       authService.signIn(
                         email: emailController.text,
                         password: passwordController.text,
                         onSuccess: () {
-                          // 로그인 성공
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("로그인 성공"),
-                          ));
-
-                          // HomePage로 이동
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("로그인 성공")),
+                          );
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => MyApp()),
                           );
                         },
                         onError: (err) {
-                          // 에러 발생
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(err),
-                          ));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(err)),
+                          );
                         },
                       );
                     },
                   ),
                 ),
+
+                // Naver 로그인 버튼
                 Padding(
-                  padding: const EdgeInsets.only(top: 5),
+                  padding: const EdgeInsets.only(top: 20),
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
+                      backgroundColor: Colors.green, // 네이버 로그인 버튼 색
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
                     ),
                     child: Text("Naver로 로그인",
-                        style: TextStyle(fontSize: 21, color: Colors.white)),
+                        style: TextStyle(fontSize: 18, color: Colors.white)),
                     onPressed: () {
-                      // 로그인
                       authService.signIn(
                         email: emailController.text,
                         password: passwordController.text,
                         onSuccess: () {
-                          // 로그인 성공
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("로그인 성공"),
-                          ));
-
-                          // HomePage로 이동
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("로그인 성공")),
+                          );
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => MyApp()),
                           );
                         },
                         onError: (err) {
-                          // 에러 발생
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(err),
-                          ));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(err)),
+                          );
                         },
                       );
                     },
@@ -304,7 +264,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         );
-        // );
       },
     );
   }
