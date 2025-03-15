@@ -13,7 +13,7 @@
   ![이미지](이미지)
 
 - 그 매물의 거주자들의 평점 및 리뷰를 확인해보세요  
-  ![이미지](이미지)
+  ![Image](https://github.com/user-attachments/assets/c84802ba-4ea3-427f-a96c-2aa865eacde5)
 
 - 전세 사기 예방법을 알아보세요  
   ![Image](https://github.com/user-attachments/assets/550b23ed-4082-4117-ae19-2ad9659693bd)
