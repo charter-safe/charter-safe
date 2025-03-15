@@ -1,6 +1,6 @@
-<div align="center">
-  ![전Safe](https://capsule-render.vercel.app/api?type=rect&color=gradient&height=120&text=전Safe&animation=fadeIn&fontColor=ffffff&fontSize=70)
-</div>
+<div align= "center">
+    <img src="https://capsule-render.vercel.app/api?type=rect&color=gradient&height=120&text=전Safe&animation=fadeIn&fontColor=ffffff&fontSize=70" />
+    </div>
 
 ## 전세사기 예방 애플리케이션
 - 젊은 청춘들의 꿈을 빼앗는 전세사기를 예방하기 위해 만든 애플리케이션
