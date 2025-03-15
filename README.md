@@ -6,17 +6,17 @@
 - 젊은 청춘들의 꿈을 빼앗는 전세사기를 예방하기 위해 만든 애플리케이션
 
 ## 🔎 주요 기능
-- 지도를 통해 원하는 지역의 전세 매물을 찾아보세요  
-  ![Image](https://github.com/user-attachments/assets/e9e18cf0-a75b-4b1e-8892-0bda90340013)
+- 지도를 통해 원하는 지역의 전세 매물을 찾아보세요
+  ![Image](https://github.com/user-attachments/assets/5e09a65e-af3d-48ff-ac26-806e6ca7c1ea)
 
 - 각 매물의 전세가격, 전세가율 등 여러 정보를 알 수 있어요  
-  ![Image](https://github.com/user-attachments/assets/fc60fb7d-7f16-47da-8dc4-b57f27c2c202)
+  ![Image](https://github.com/user-attachments/assets/de6ee7f4-6553-4093-b093-d975b0c72dda)
 
 - 그 매물의 거주자들의 평점 및 리뷰를 확인해보세요  
-  ![Image](https://github.com/user-attachments/assets/c84802ba-4ea3-427f-a96c-2aa865eacde5)
+  ![Image](https://github.com/user-attachments/assets/249c5806-3be9-4736-bc58-3c2016c2f2e1)
 
 - 전세 사기 예방법을 알아보세요  
-  ![Image](https://github.com/user-attachments/assets/550b23ed-4082-4117-ae19-2ad9659693bd)
+  ![Image](https://github.com/user-attachments/assets/d1bd00e4-b0d6-4dd4-b0e1-8d4d80988019)
 
 ## 💥 기술적 도전
 ### 프론트엔드
