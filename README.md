@@ -10,7 +10,7 @@
   ![Image](https://github.com/user-attachments/assets/e9e18cf0-a75b-4b1e-8892-0bda90340013)
 
 - 각 매물의 전세가격, 전세가율 등 여러 정보를 알 수 있어요  
-  ![이미지](이미지)
+  ![Image](https://github.com/user-attachments/assets/fc60fb7d-7f16-47da-8dc4-b57f27c2c202)
 
 - 그 매물의 거주자들의 평점 및 리뷰를 확인해보세요  
   ![Image](https://github.com/user-attachments/assets/c84802ba-4ea3-427f-a96c-2aa865eacde5)
