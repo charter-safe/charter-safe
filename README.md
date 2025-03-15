@@ -19,6 +19,18 @@
   ![이미지](이미지)
 
 ## 💥 기술적 도전
+### 프론트엔드
+| 기능 | 상세 내용 |
+|---|---|
+|| •  <br> •  <br> •  |
+|| •  <br> •  <br> • |
+|| •  <br> •  <br> • 
+### 백엔드
+| 기능 | 상세 내용 |
+|---|---|
+|개인 데이터 접근 제어| • JWT 인증을 통해 로그인용 액세스 / 리프레시 토큰을 발급하고 저장 <br> • `Spring Security`를 사용하여 보안 강화<br> • `OAuth2.0`을 사용하여 소셜 로그인 구현|
+|CI/CD 파이프라인 구축| •  `Github Actions`를 사용한 CI 파이프라인 구축<br> • EC2, S3, CodeDeploy를 이용한 지속적 배포|
+|검색 기능 구현| • `ElasticSearch`를 이용한 검색 엔진 구현
 
 ## 🛠️ Tech Stacks
 ![Github](https://img.shields.io/badge/Github-181717?style=flat&logo=Github&logoColor=white)
